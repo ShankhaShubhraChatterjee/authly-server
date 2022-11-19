@@ -1,0 +1,31 @@
+extends ../templates/base.pug
+block title 
+    title Login
+block content
+    form.container-fluid.mt-3.w-75.w-sm-50.p-0
+        // Email input
+        .form-outline.mb-4
+            header.fs-1.text-center.mb-2 Login
+            input#form2Example1.form-control(type='email')
+            label.form-label(for='form2Example1') Email address
+        // Password input
+        .form-outline.mb-4
+            input#form2Example2.form-control(type='password')
+            label.form-label(for='form2Example2') Password
+        // Submit button
+        button.btn.btn-primary.btn-block.mb-4(type='button') Sign in
+        // 2 column grid layout for inline styling
+        .row.mb-4
+            .col.d-flex.justify-content-center
+                // Checkbox
+                .form-check
+                    input#form2Example31.form-check-input(type='checkbox' value='' checked='')
+                    label.form-check-label(for='form2Example31')  Remember me 
+            .col
+                // Simple link
+                a(href='#!') Forgot password?
+        // Register buttons
+        .text-center
+            p
+                | Not a member? 
+                a(href='#!') Register

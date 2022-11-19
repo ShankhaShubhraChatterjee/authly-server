@@ -3,6 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+body,html {
+  background-color: rgba(0,0,0,0.9);
+}
 .navbar {
   display: flex;
   justify-content: space-evenly;
@@ -45,4 +48,18 @@ h1 {
 .nav-item:hover {
     transition: background-color, 300ms ease-in-out;
     background-color: gray;
+}
+h3 {
+  text-align: center;
+}
+.info__section {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 75%;
+  transform: translate(-50%, -50%);
+  background:linear-gradient(45deg, rgba(0,0,0,0.8), aliceblue);
+  padding: 10px;
+  border-radius: 10px;
 }

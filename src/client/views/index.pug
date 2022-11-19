@@ -1,5 +1,12 @@
 extends templates/base.pug
+
 block title 
     title HomePage
 block content
+    - var name = name;
+    - var age  = age;
     h1 Main Page
+    .info__section
+        h3 User Details
+        h4.name Name: #{name}
+        h4.age  Age: #{age}

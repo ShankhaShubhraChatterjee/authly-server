@@ -5,7 +5,6 @@ const path 	  = require('path');
 require("dotenv").config();
 const express = require('express');
 const cors = require('cors');
-const { Client } = require("pg");
 
 // Module Implementation
 const app = express();
@@ -24,18 +23,18 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, process.env.VIEWS_DIR));
 app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
-app.use(cors());
 app.use(express.static(path.join(__dirname, process.env.STATIC_DIR)));
 app.use((req, res, next) => {
     console.log(`Method:${req.method} | Url:${req.url}`);
     next();
 })
+app.use(cors());
+
 app.use("/", homeRoute);
 app.use("/login", loginRoute);
 app.use("/signup", signupRoute);
 app.use("/account", accountRoute);
 
 app.listen(process.env.APP_PORT, () => {
-    db();
     console.log(`Server Running On ${process.env.APP_URL}:${process.env.APP_PORT}`);
 })

@@ -1,0 +1,146 @@
+$hover-bg-color:rgba(128, 128, 128, 0.356);
+.navbar {
+    position: fixed!important;
+    top:0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    background: rgb(51, 45, 45);
+}
+
+.header {
+    font-size: 1.5em;
+    color: white;
+    margin-left: 10px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+#website-title {
+    font-family: "Tangerine", cursive;
+    display: flex;
+    align-items: center;
+}
+
+.list {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    margin: 0;
+    margin-right: 90px;
+    padding: 0;
+    opacity: 1;
+    transition: opacity, height 200ms ease-in-out;
+}
+
+.link {
+    text-decoration: none;
+    font-size: 1.1em;
+    color: rgba(3, 180, 250, 0.562) !important;
+    border-radius: 10px;
+}
+
+.link:hover {
+    transition: background-color, 200ms ease-in-out;
+    background-color: $hover-bg-color;
+}
+
+.nav-item {
+    text-decoration: none;
+    background-color: none;
+    margin: 5px;
+    transition: background-color, 200ms ease-in-out;
+
+    a {
+        display: inline-block;
+        padding: 10px;
+    }
+}
+
+#theme-icon {
+    position: absolute;
+    top: 7px;
+    right: 50px;
+    display: inline-block;
+    margin-top: 2.5px;
+    padding: 0;
+    color: white;
+    font-size: 2em;
+    cursor: pointer;
+    text-shadow: 0px 0px 20px none;
+    transition: text-shadow, 200ms ease-in-out;
+
+    &:hover {
+        text-shadow: 0 0 20px aliceblue;
+        transition: text-shadow, 200ms ease-in-out;
+    }
+}
+#menu {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 2em;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+        background-color: $hover-bg-color;
+    }
+}
+.display {
+    opacity: 0;
+    height:auto;
+    transition: opacity, height 200ms ease-in-out;
+}
+.animate {
+    animation-name: animate;
+    animation-duration: 0.3s;
+}
+
+@keyframes animate {
+    0% {
+        transform:scale(0);
+    }
+    50% {
+        transform:scale(1.5);
+    }
+    100% {
+        transform:scale(1.0s);
+    }
+}
+
+@media screen and (max-width:600px) {
+    #menu {
+        display: inline-block;
+    }
+    #theme-icon {
+        position: absolute;
+        top: -1px;
+        right: 60px;
+    }
+    .navbar {
+        justify-content: center;
+    }
+    .list {
+        margin: 0;
+        margin-top: 5px;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+    .nav-item {
+        margin: 0;
+        width: 100%;
+        a {
+            width:95%;
+        }
+    }
+}

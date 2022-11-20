@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./src/app.js",
     "serve": "nodemon ./src/app.js",
-    "scss": "sass --watch src/client/assets/scss/main.scss src/client/assets/css/main.css"
+    "watch": "sass --watch src/client/assets/scss/main.scss src/client/assets/css/main.css"
   },
   "keywords": [],
   "author": "",

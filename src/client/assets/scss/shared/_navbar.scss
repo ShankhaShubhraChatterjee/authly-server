@@ -14,6 +14,10 @@ $hover-bg-color:rgba(128, 128, 128, 0.356);
     color: white;
     margin-left: 10px;
     text-align: center;
+    a {
+        text-decoration: none;
+        color: white;
+    }
 }
 
 h1 {
@@ -33,7 +37,7 @@ h1 {
     justify-content: space-evenly;
     list-style-type: none;
     margin: 0;
-    margin-right: 90px;
+    margin-right: 100px;
     padding: 0;
     opacity: 1;
     transition: opacity, height 200ms ease-in-out;
@@ -62,23 +66,40 @@ h1 {
         padding: 10px;
     }
 }
-
-#theme-icon {
+.utilities {
     position: absolute;
-    top: 7px;
-    right: 50px;
-    display: inline-block;
-    margin-top: 2.5px;
-    padding: 0;
-    color: white;
-    font-size: 2em;
-    cursor: pointer;
-    text-shadow: 0px 0px 20px none;
-    transition: text-shadow, 200ms ease-in-out;
-
-    &:hover {
-        text-shadow: 0 0 20px aliceblue;
+    top: 10px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    a {
+        img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-left: 10px;
+            transition: box-shadow 200ms ease;
+            box-shadow:0 0 0 transparent;
+        }
+        img:hover {
+            transition: box-shadow 200ms ease;
+            box-shadow:0 0 15px aliceblue;
+        }
+    }
+    #theme-icon {
+        display: inline-block;
+        padding: 0;
+        color: white;
+        font-size: 2em;
+        cursor: pointer;
+        text-shadow: 0px 0px 20px transparent;
         transition: text-shadow, 200ms ease-in-out;
+    
+        &:hover {
+            text-shadow: 0 0 20px aliceblue;
+            transition: text-shadow, 200ms ease-in-out;
+        }
     }
 }
 #menu {
@@ -90,8 +111,11 @@ h1 {
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    text-shadow: 0 0 0 transparent;
+    transition: text-shadow, 200ms ease-in-out;
     &:hover {
-        background-color: $hover-bg-color;
+        text-shadow: 0 0 20px aliceblue;
+        transition: text-shadow, 200ms ease-in-out;
     }
 }
 .display {
@@ -120,10 +144,11 @@ h1 {
     #menu {
         display: inline-block;
     }
-    #theme-icon {
+    .utilities {
         position: absolute;
         top: -1px;
         right: 60px;
+        margin-top: 2.5px;
     }
     .navbar {
         justify-content: center;

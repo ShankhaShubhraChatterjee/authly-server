@@ -1,3 +1,17 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.container {
+  margin-top: 60px;
+}
+
 .navbar {
   position: fixed !important;
   top: 0;
@@ -13,6 +27,10 @@
   color: white;
   margin-left: 10px;
   text-align: center;
+}
+.header a {
+  text-decoration: none;
+  color: white;
 }
 
 h1 {
@@ -32,7 +50,7 @@ h1 {
   justify-content: space-evenly;
   list-style-type: none;
   margin: 0;
-  margin-right: 90px;
+  margin-right: 100px;
   padding: 0;
   opacity: 1;
   transition: opacity, height 200ms ease-in-out;
@@ -61,20 +79,36 @@ h1 {
   padding: 10px;
 }
 
-#theme-icon {
+.utilities {
   position: absolute;
-  top: 7px;
-  right: 50px;
+  top: 10px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+}
+.utilities a img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-left: 10px;
+  transition: box-shadow 200ms ease;
+  box-shadow: 0 0 0 transparent;
+}
+.utilities a img:hover {
+  transition: box-shadow 200ms ease;
+  box-shadow: 0 0 15px aliceblue;
+}
+.utilities #theme-icon {
   display: inline-block;
-  margin-top: 2.5px;
   padding: 0;
   color: white;
   font-size: 2em;
   cursor: pointer;
-  text-shadow: 0px 0px 20px none;
+  text-shadow: 0px 0px 20px transparent;
   transition: text-shadow, 200ms ease-in-out;
 }
-#theme-icon:hover {
+.utilities #theme-icon:hover {
   text-shadow: 0 0 20px aliceblue;
   transition: text-shadow, 200ms ease-in-out;
 }
@@ -88,9 +122,12 @@ h1 {
   padding: 5px 10px 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  text-shadow: 0 0 0 transparent;
+  transition: text-shadow, 200ms ease-in-out;
 }
 #menu:hover {
-  background-color: rgba(128, 128, 128, 0.356);
+  text-shadow: 0 0 20px aliceblue;
+  transition: text-shadow, 200ms ease-in-out;
 }
 
 .display {
@@ -119,10 +156,11 @@ h1 {
   #menu {
     display: inline-block;
   }
-  #theme-icon {
+  .utilities {
     position: absolute;
     top: -1px;
     right: 60px;
+    margin-top: 2.5px;
   }
   .navbar {
     justify-content: center;
@@ -143,20 +181,6 @@ h1 {
     width: 95%;
   }
 }
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-.container {
-  margin-top: 60px;
-}
-
 h3 {
   text-align: center;
 }

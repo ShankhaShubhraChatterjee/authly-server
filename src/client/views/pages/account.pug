@@ -6,13 +6,32 @@ block content
         .container-fluid.py-5
             .row.gx-3.w-full
                 .col-lg-6
-                    .mb-6.m-2.text-center.p-4.border.border-secondary.rounded-2
-                            img.rounded-circle.img-fluid(src='https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' alt='avatar' style='width: 150px; ')
-                            h5.my-3 John Smith
-                            p.text-muted.mb-1 Full Stack Developer
-                            p.text-muted.mb-4 Bay Area, San Francisco, CA
+                    .mb-6.m-2.text-center.p-5.border.rounded-2
+                        .profile_container
+                            img#profile_pic.rounded-circle.img-fluid(src='https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' alt='avatar' style='width: 150px; ')
+                        h5.my-3 John Smith
+                        p.text-muted.mb-1 Full Stack Developer
+                        p.text-muted.mb-4 Bay Area, San Francisco, CA
+
+                    .mb-6.m-2.border.rounded-2
+                            ul
+                                li.d-flex.justify-content-between.align-items-center.p-3
+                                    i.fas.fa-globe.fa-lg.text-warning
+                                    p.mb-0 https://mdbootstrap.com
+                                li.d-flex.justify-content-between.align-items-center.p-3
+                                    i.fab.fa-github.fa-lg(style='color: #333333;')
+                                    p.mb-0 mdbootstrap
+                                li.d-flex.justify-content-between.align-items-center.p-3
+                                    i.fab.fa-twitter.fa-lg(style='color: #55acee;')
+                                    p.mb-0 @mdbootstrap
+                                li.d-flex.justify-content-between.align-items-center.p-3
+                                    i.fab.fa-instagram.fa-lg(style='color: #ac2bac;')
+                                    p.mb-0 mdbootstrap
+                                li.d-flex.justify-content-between.align-items-center.p-3
+                                    i.fab.fa-facebook-f.fa-lg(style='color: #3b5998;')
+                                    p.mb-0 mdbootstrap
                 .col-lg-6
-                    .mb-6.m-2.p-4.border.border-secondary.rounded-2
+                    .mb-6.m-2.p-5.border.rounded-2
                         .row.align-items-center
                             .col-sm-3.d-flex.align-items-center
                                 i.bi.bi-person.fs-3.p-1

@@ -1,5 +1,5 @@
 extends ../templates/base.pug
-block title 
+block title
     title Login
 block content
     form.container-fluid.mt-3.w-75.w-sm-50.p-0
@@ -19,13 +19,17 @@ block content
             .col.d-flex.justify-content-center
                 // Checkbox
                 .form-check
-                    input#form2Example31.form-check-input(type='checkbox' value='' checked='')
-                    label.form-check-label(for='form2Example31')  Remember me 
+                    input#form2Example31.form-check-input(
+                        type='checkbox',
+                        value='',
+                        checked=''
+                    )
+                    label.form-check-label(for='form2Example31') Remember me
             .col
                 // Simple link
                 a(href='#!') Forgot password?
         // Register buttons
         .text-center
             p
-                | Not a member? 
+                | Not a member?
                 a(href='#!') Register

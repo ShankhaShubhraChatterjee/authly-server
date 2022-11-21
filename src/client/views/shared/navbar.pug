@@ -1,22 +1,22 @@
 .navbar_container
     nav.navbar
-        - var isLoggedIn = false;
-        header.header#header
-            a(href="/")
+        - var isLoggedIn = false
+        header#header.header
+            a(href='/')
                 i.bi.bi-cup-hot-fill.me-1.text-white
-                |Espresso
+                | Espresso
         .utilities
-            i.bi.bi-moon#theme-icon
-            a(href="/account")
-                img(src="images/user.png", alt="Profile Picture")
-        ul.list#navbar
+            i#theme-icon.bi.bi-moon
+            a(href='/account')
+                img(src='images/user.png', alt='Profile Picture')
+        ul#navbar.list
             li.nav-item.nav-item-1
-                a.link(href="/") HOME
+                a.link(href='/') HOME
             li.nav-item.nav-item-2
-                a.link(href="/login") LOGIN
+                a.link(href='/login') LOGIN
             li.nav-item.nav-item-3
-                a.link(href="/signup") REGISTER
+                a.link(href='/signup') REGISTER
             if isLoggedIn
                 li.nav-item.nav-item-4
-                    a.link(hred="/account") Account
-        i.fa-solid.fa-bars.text-white.menu#menu
+                    a.link(hred='/account') Account
+        i#menu.fa-solid.fa-bars.text-white.menu

@@ -1,16 +1,16 @@
 extends templates/base.pug
 
-block title 
+block title
     title HomePage
 block content
-    - var name = name;
-    - var email  = email;
+    - var name = name
+    - var email = email
     h1 Main Page
     .info-container
         .info-section
             h3 User Details
-            h4.name Name: #{name}
-            h4.age  Email: #{email}
-            form(action="post" method="POST")
-                input(type="number" placeholder="Type A Number" name="num")
-                input(type="submit" value="OK")
+            h4.name Name: #{ name }
+            h4.age Email: #{ email }
+            form(action='post', method='POST')
+                input(type='number', placeholder='Type A Number', name='num')
+                input(type='submit', value='OK')

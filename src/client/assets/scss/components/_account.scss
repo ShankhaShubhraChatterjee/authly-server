@@ -1,0 +1,22 @@
+.profile_container {
+    position: relative;
+    width: 150px!important;
+    img {
+        margin: 0!important;
+    }
+    label {
+        background-color: gray;
+        border-radius: 50%;
+        padding: 1.5px 5px 1.5px 5px;
+        color: white;
+        position: absolute;
+        top: 100px;
+        left:95px;
+        font-size: 1.1em;
+        cursor: pointer;
+    }
+    input {
+        background-color: red;
+        cursor: pointer;
+    }
+}

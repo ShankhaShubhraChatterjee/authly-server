@@ -7,6 +7,7 @@ $hover-bg-color:rgba(128, 128, 128, 0.356);
     align-items: center;
     width: 100%;
     background: rgb(51, 45, 45);
+    z-index: 1;
 }
 
 .header {
@@ -74,8 +75,8 @@ h1 {
     align-items: center;
     a {
         img {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             object-fit: cover;
             border-radius: 50%;
             margin-left: 10px;

@@ -20,6 +20,7 @@ body {
   align-items: center;
   width: 100%;
   background: rgb(51, 45, 45);
+  z-index: 1;
 }
 
 .header {
@@ -87,8 +88,8 @@ h1 {
   align-items: center;
 }
 .utilities a img {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   object-fit: cover;
   border-radius: 50%;
   margin-left: 10px;
@@ -181,6 +182,29 @@ h1 {
     width: 95%;
   }
 }
+.profile_container {
+  position: relative;
+  width: 150px !important;
+}
+.profile_container img {
+  margin: 0 !important;
+}
+.profile_container label {
+  background-color: gray;
+  border-radius: 50%;
+  padding: 1.5px 5px 1.5px 5px;
+  color: white;
+  position: absolute;
+  top: 100px;
+  left: 95px;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+.profile_container input {
+  background-color: red;
+  cursor: pointer;
+}
+
 h3 {
   text-align: center;
 }

@@ -6,10 +6,24 @@
   "scripts": {
     "start": "node ./src/app.js",
     "serve": "nodemon ./src/app.js",
-    "watch": "sass --watch src/client/assets/scss/main.scss src/client/assets/css/main.css"
+    "watch": "sass --watch src/client/assets/scss/main.scss src/client/assets/css/main.css",
+    "scss": "sass src/client/assets/scss/main.scss src/client/assets/css/main.css",
+    "pcss": "postcss src/client/assets/css/*.css -o build/css/main.min.css",
+    "stylelint": "stylelint src/client/assets/scss/**/*.scss --config --fix",
+    "prettier:scss": "prettier --write src/client/assets/scss/**",
+    "prettier:js": "prettier --write src/client/assets/js/**",
+    "babel": "babel src/client/assets/js/ -d build/js/",
+    "uglify": "uglifyjs src/client/assets/js/main.js --mangle --compress --source-map --output build/js/main.min.js",
+    "clean": "trash build/css/main.css build/css/main.css.map build/js/main.js build/main.js.map",
+    "lint:scss": "yarn stylelint",
+    "lint:js": "eslint src/client/assets/js/**/*.js",
+    "lint:pug": "pug-lint -c .pug-lintrc -r src/client/views/**/*.pug",
+    "lint": "yarn clean",
+    "build:css": "yarn lint:scss & yarn prettier:scss & yarn scss & yarn pcss & yarn clean",
+    "build:js": "yarn lint:js & yarn prettier:js & yarn babel & yarn uglify & yarn clean"
   },
   "keywords": [],
-  "author": "",
+  "author": "Foss",
   "license": "ISC",
   "dependencies": {
     "cloudinary": "^1.32.0",
@@ -20,8 +34,33 @@
     "pg": "^8.8.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "@gabegabegabe/pug-lint-config": "^1.1.0",
+    "autoprefixer": "^10.4.13",
+    "concurrently": "^7.6.0",
+    "cssnano": "^5.1.14",
+    "cssnano-preset-default": "^5.2.13",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "imagemin-cli": "^7.0.0",
     "nodemon": "^2.0.20",
+    "postcss": "^8.4.19",
+    "postcss-cli": "^10.0.0",
+    "postcss-scss": "^4.0.5",
+    "postcss-sorting": "^7.0.1",
+    "prettier": "^2.7.1",
+    "prettier-config-standard": "^5.0.0",
     "pug": "^3.0.2",
-    "sass": "^1.56.1"
+    "pug-cli": "^1.0.0-alpha6",
+    "pug-lint": "^2.6.0",
+    "sass": "^1.56.1",
+    "stylelint": "^14.15.0",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-order": "^5.0.0",
+    "trash-cli": "^5.0.0",
+    "uglify-js": "^3.17.4"
   }
 }

@@ -1,20 +1,21 @@
 @use 'modules/global';
 @use 'shared/navbar';
 @use 'components/account';
+
 h3 {
   text-align: center;
 }
 
-.info__container {
-  display: flex;
+.info-container {
   align-items: center;
+  display: flex;
   justify-content: center;
 }
 
-.info__section {
-  color: white;
-  width: 75%;
-  background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), aliceblue);
-  padding: 10px;
+.info-section {
+  background: linear-gradient(45deg, rgb(0 0 0 / 80%), aliceblue);
   border-radius: 10px;
+  color: white;
+  padding: 10px;
+  width: 75%;
 }

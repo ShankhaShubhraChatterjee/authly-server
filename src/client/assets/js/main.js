@@ -15,14 +15,15 @@ themeBtn.addEventListener('click', () => {
   console.log('Working')
 })
 menu.addEventListener('click', () => {
-  navbar.classList.toggle('display')
-  if (navbar.classList.contains('display')) {
-    setTimeout(() => {
-      navbar.style.display = 'none'
-    })
-  } else {
-    setTimeout(() => {
-      navbar.style.display = 'flex'
-    })
-  }
+    navbar.classList.toggle('display')
+    if(navbar.classList.contains('display')){
+      setTimeout(() => {
+        navbar.style.height = "0";
+      }, 200);
+    }
+    else {
+      setTimeout(() => {
+        navbar.style.height = "auto";
+      }, 200);
+    }
 })

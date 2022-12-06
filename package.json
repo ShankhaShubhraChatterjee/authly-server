@@ -1,11 +1,11 @@
 {
-    "name": "restapi",
+    "name": "authly",
     "version": "1.0.0",
     "description": "Full Featured Web Application on Pug, Express, Node, PostgreSQL",
     "main": "gulpfile.js",
     "scripts": {
         "start": "node ./src/app.js",
-        "serve": "nodemon ./src/app.js",
+        "dev": "nodemon ./src/app.js",
         "watch": "sass --watch src/client/assets/scss/main.scss src/client/assets/css/main.css",
         "scss": "sass src/client/assets/scss/main.scss src/client/assets/css/main.css",
         "pcss": "postcss src/client/assets/css/*.css -o build/css/main.min.css",

@@ -13,7 +13,6 @@ $hover-bg-color: rgb(128 128 128 / 35.6%);
   font-size: 1.5em;
   margin-left: 10px;
   text-align: center;
-
   a {
     color: white;
     text-decoration: none;
@@ -31,22 +30,25 @@ h1 {
 }
 
 .list {
+  background: rgb(51 45 45);
   display: flex;
   list-style-type: none;
   margin: 0;
   margin-right: 100px;
   padding: 0;
-  transform: scaleY(1);
-  transition: transform, visibility 200ms ease-in-out;
-  visibility: visible;
+  opacity: 1;
+  transition:opacity 200ms ease-in-out;
 }
-
+.display {
+  display: none;
+  opacity:0!important;
+  transition:opacity , height 200ms ease-in-out;
+}
 .link {
   border-radius: 10px;
   color: rgb(3 180 250 / 56.2%) !important;
   font-size: 1.1em;
   text-decoration: none;
-
   &:hover {
     background-color: $hover-bg-color;
     transition: background-color, 200ms ease-in-out;
@@ -58,7 +60,6 @@ h1 {
   margin: 5px;
   text-decoration: none;
   transition: background-color, 200ms ease-in-out;
-
   a {
     display: inline-block;
     padding: 10px;
@@ -70,8 +71,6 @@ h1 {
   display: flex;
   position: absolute;
   right: 12px;
-  top: 10px;
-
   a {
     img {
       border-radius: 50%;
@@ -81,7 +80,6 @@ h1 {
       object-fit: cover;
       transition: box-shadow 200ms ease;
       width: 35px;
-
       &:hover {
         box-shadow: 0 0 15px aliceblue;
         transition: box-shadow 200ms ease;
@@ -97,7 +95,6 @@ h1 {
     padding: 0;
     text-shadow: 0 0 20px transparent;
     transition: text-shadow, 200ms ease-in-out;
-
     &:hover {
       text-shadow: 0 0 20px aliceblue;
       transition: text-shadow, 200ms ease-in-out;
@@ -116,17 +113,10 @@ h1 {
   text-shadow: 0 0 0 transparent;
   top: 5px;
   transition: text-shadow, 200ms ease-in-out;
-
   &:hover {
     text-shadow: 0 0 20px aliceblue;
     transition: text-shadow, 200ms ease-in-out;
   }
-}
-
-.display {
-  transform: scaleY(0) !important;
-  transition: transform, visibility 200ms ease-in-out;
-  visibility: hidden !important;
 }
 
 .animate {
@@ -162,6 +152,8 @@ h1 {
 
   .navbar {
     justify-content: center;
+    height: 50px;
+    transition: height 200ms ease-in-out;
   }
 
   .list {
@@ -170,16 +162,13 @@ h1 {
     margin: 0;
     margin-top: 5px;
     text-align: center;
-    transform: scaleY(1);
-    transition: transform, visibility 200ms ease-in-out;
-    visibility: visible;
     width: 100%;
+    padding-bottom: 5px;
   }
 
   .nav-item {
     margin: 0;
     width: 100%;
-
     a {
       width: 95%;
     }

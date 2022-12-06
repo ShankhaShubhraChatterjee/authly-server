@@ -42,14 +42,19 @@ h1 {
 }
 
 .list {
+  background: rgb(51, 45, 45);
   display: flex;
   list-style-type: none;
   margin: 0;
   margin-right: 100px;
   padding: 0;
-  transform: scaleY(1);
-  transition: transform, visibility 200ms ease-in-out;
-  visibility: visible;
+  opacity: 1;
+  transition: opacity 200ms ease-in-out;
+}
+
+.display {
+  opacity: 0 !important;
+  transition: opacity, height 200ms ease-in-out;
 }
 
 .link {
@@ -79,7 +84,6 @@ h1 {
   display: flex;
   position: absolute;
   right: 12px;
-  top: 10px;
 }
 .utilities a img {
   border-radius: 50%;
@@ -125,12 +129,6 @@ h1 {
   transition: text-shadow, 200ms ease-in-out;
 }
 
-.display {
-  transform: scaleY(0) !important;
-  transition: transform, visibility 200ms ease-in-out;
-  visibility: hidden !important;
-}
-
 .animate {
   animation-duration: 0.3s;
   animation-name: animate;
@@ -159,6 +157,8 @@ h1 {
   }
   .navbar {
     justify-content: center;
+    height: 50px;
+    transition: height 200ms ease-in-out;
   }
   .list {
     flex-direction: column;
@@ -166,10 +166,10 @@ h1 {
     margin: 0;
     margin-top: 5px;
     text-align: center;
-    transform: scaleY(1);
-    transition: transform, visibility 200ms ease-in-out;
+    transition: visibility 200ms ease-in-out;
     visibility: visible;
     width: 100%;
+    padding-bottom: 5px;
   }
   .nav-item {
     margin: 0;

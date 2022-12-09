@@ -13,20 +13,18 @@
     transform: translate(-50%, 0%);
 }
 .control {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.is-active {
-    width: 100%;
-    display: flex!important;
-    flex-direction: row;
-    align-items: center;
-    justify-content:center;
-}
-.navbar-end {
     width: inherit;
     display: inherit;
     align-items: center;
     justify-content: space-evenly;
+}
+@media only screen and (max-width: 1030px){
+    .control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        a {
+            width: 100%;
+        }
+    }
 }

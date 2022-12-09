@@ -1,22 +1,32 @@
-.navbar_container
-    nav.navbar
-        - var isLoggedIn = false
-        header#header.header
-            a(href='/')
-                i.bi.bi-cup-hot-fill.me-1.text-white
-                | Espresso
-        .utilities
-            i#theme-icon.bi.bi-moon
-            a(href='/account')
-                img(src='images/user.png', alt='Profile Picture')
-        ul#navbar.list
-            li.nav-item.nav-item-1
-                a.link(href='/') HOME
-            li.nav-item.nav-item-2
-                a.link(href='/login') LOGIN
-            li.nav-item.nav-item-3
-                a.link(href='/signup') REGISTER
-            if isLoggedIn
-                li.nav-item.nav-item-4
-                    a.link(hred='/account') Account
-        i#menu.fa-solid.fa-bars.text-white.menu
+nav.navbar.is-white.has-shadow
+    // logo / brand
+    .navbar-brand
+        a.navbar-item#title
+            img#logo(src='./img/authly.png', alt='Authly Logo')
+            h1.is-size-4 Authly
+        a#burger.navbar-burger
+            span
+            span
+            span
+
+    a.nav-item.profile(href="#")
+            img#profile(src="./img/user.png", alt="Profile Placeholder Image") 
+
+    #nav-links.navbar-menu.has-text-centered
+        // right links
+        .navbar-end
+            p.control
+                a.button.is-danger(href='/')
+                    span.icon
+                        i.fa-solid.fa-home
+                    span Home
+            p.control
+                a.button.is-primary(href='/login')
+                    span.icon
+                        i.fa-solid.fa-arrow-right-to-bracket
+                    span Login
+            p.control
+                a.button.is-primary(href='/signup')
+                    span.icon
+                        i.fa-solid.fa-user
+                    span Register

@@ -1,29 +1,15 @@
-const themeBtn = document.getElementById('theme-icon')
-const menu = document.getElementById('menu')
-const navbar = document.getElementById('navbar')
+const menu = document.getElementById("burger");
+const list = document.getElementById("nav-links");
 
-themeBtn.addEventListener('click', () => {
-  if (themeBtn.className === 'bi bi-moon') {
-    themeBtn.className = 'bi bi-sun'
-  } else {
-    themeBtn.className = 'bi bi-moon'
-  }
-  themeBtn.classList.add('animate')
-  setTimeout(() => {
-    themeBtn.classList.remove('animate')
-  }, 300)
-  console.log('Working')
-})
 menu.addEventListener('click', () => {
-    navbar.classList.toggle('display')
-    if(navbar.classList.contains('display')){
-      setTimeout(() => {
-        navbar.style.height = "0";
-      }, 200);
+    if(menu.classList.contains('is-active'))
+    {
+        menu.classList.remove('is-active');
+        list.classList.remove('is-active');
     }
-    else {
-      setTimeout(() => {
-        navbar.style.height = "auto";
-      }, 200);
+    else
+    {
+        menu.classList.add('is-active');
+        list.classList.add('is-active');
     }
 })

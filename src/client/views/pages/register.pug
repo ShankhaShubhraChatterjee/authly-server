@@ -2,42 +2,11 @@ extends ../templates/base.pug
 block title
     title Register
 block content
-    form.container.mt-2.w-75
-        // Name input
-        .form-outline.mb-4
-            header.fs-1.text-center.mb-1 Register
-            input#form2Example1.form-control(type='text')
-            label.form-label(for='form2Example1') Name
-        // Email input
-        .form-outline.mb-4
-            input#form2Example1.form-control(type='email')
-            label.form-label(for='form2Example1') Email address
-        // Password input
-        .form-outline.mb-4
-            input#form2Example2.form-control(type='password')
-            label.form-label(for='form2Example2') Password
-        // Password Repeat
-        .form-outline.mb-4
-            input#form2Example2.form-control(type='password')
-            label.form-label(for='form2Example2') Repeat Password
-        // Submit button
-        button.btn.btn-primary.btn-block.mb-4(type='button') Register
-        // 2 column grid layout for inline styling
-        .row.mb-4
-            .col.d-flex.justify-content-center
-                // Checkbox
-                .form-check
-                    input#form2Example31.form-check-input(
-                        type='checkbox',
-                        value='',
-                        checked=''
-                    )
-                    label.form-check-label(for='form2Example31') Remember Me
-            .col
-                // Simple link
-                a(href='#!') Forgot Password?
-        // Register buttons
-        .text-center
-            p
-                | Not a member?
-                a(href='#!') Register
+    .field
+        label.label Name
+    .control
+        input.input(type='text' placeholder='e.g Alex Smith')
+    .field
+        label.label Email
+    .control
+        input.input(type='email' placeholder='e.g. alexsmith@gmail.com')

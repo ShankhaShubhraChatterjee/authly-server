@@ -1,21 +1,4 @@
 @use 'modules/global';
 @use 'shared/navbar';
+@use 'components/login';
 @use 'components/account';
-
-h3 {
-  text-align: center;
-}
-
-.info-container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
-.info-section {
-  background: linear-gradient(45deg, rgb(0 0 0 / 80%), aliceblue);
-  border-radius: 10px;
-  color: white;
-  padding: 10px;
-  width: 75%;
-}

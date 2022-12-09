@@ -1,0 +1,1 @@
+{"mappings":"AAAAA,QAAQC,IAAI","sources":["src/client/assets/js/main.js"],"sourcesContent":["console.log(\"Changed\")"],"names":["console","log"],"version":3,"file":"main.js.map"}

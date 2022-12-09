@@ -4,7 +4,7 @@ const client = require('./../db/db')
 const router = express.Router()
 const regex = new RegExp()
 router.get('/', (req, res) => {
-    res.render('index.pug')
+    res.render('pages/index.pug')
 })
 router.post('/:id', async (req, res) => {
     const info = req.params.id

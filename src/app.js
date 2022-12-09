@@ -24,6 +24,7 @@ app.set('views', path.join(__dirname, process.env.VIEWS_DIR))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, process.env.STATIC_DIR)))
+app.use(express.static(path.join(__dirname, process.env.PUBLIC_DIR)))
 app.use((req, res, next) => {
     console.log(`Method:${req.method} | Url:${req.url}`)
     next()

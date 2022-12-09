@@ -2,7 +2,7 @@ extends ../templates/base.pug
 block title
     title Login
 block content
-    .login-form-container
+    .form-container
         .field 
             h1.is-size-1 Login
         .field
@@ -19,14 +19,16 @@ block content
                     i.bi.bi-key
                 span.icon.is-small.is-right
                     i.fas.fa-eye-slash(style='cursor: pointer; z-index: 2')
-        .field
+        .field.has-text-centered
+            label.checkbox(style="margin-top:5px;")
+                input(type='checkbox')
+                |  Remember Me
             .control
-                label.checkbox
-                    input(type='checkbox')
-                    |
-                    | I Agree To
-                    |
-                    a(href='#') Terms & Conditions
+                span 
+                    p
+                        | First Time Here ? 
+                        a(href="/signup") 
+                            | Register 
         .field.is-grouped
             .control
                 button.button.is-link Login

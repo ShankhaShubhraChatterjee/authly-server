@@ -1,4 +1,6 @@
 @use 'modules/global';
 @use 'shared/navbar';
+@use 'components/forms';
 @use 'components/login';
+@use 'components/register';
 @use 'components/account';

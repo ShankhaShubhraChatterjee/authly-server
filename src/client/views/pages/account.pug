@@ -1,15 +1,36 @@
 extends ../templates/base.pug
-block title 
-    title Account 
+block title
+    title Account
 
-block content 
+block content
+    - var fname = 'John Doe'
+    - var uname = 'johndoe123'
+    - var email = 'johndoe@email.com'
     .account-container 
-        h1.text-center Your Account
+        |
+        h1.text-center.is-size-1 Your Account
         .account-sections
-            .profile-container.account-section-cell
-                .profile-container-profile-pic 
-                    img(src="./img/user.png", alt="Placeholder For Profile Pic")
-            .info-container.account-section-cell
-                h2 Info Details 
-            .extra-container.account-section-cell
-                h2 Extra Details 
+            .profile-info-container.account-section-cell
+                h2.is-size-3 Your Profile
+                .profile-info-container-pic
+                    .profile-section
+                        img(src='./img/user.png', alt='Account Profile Picture')
+                        label(for='profile-pic-input')
+                            i.bi.bi-camera
+                        input#profile-pic-input.profile-pic-input(
+                        type='file',
+                        name='profile-picture'
+                    )
+                .profile-info.is-size-5
+                    .fname
+                        h3 Name
+                        p #{ fname }
+                    .uname
+                        h3 Username
+                        p #{ uname }
+                    .email
+                        h3 Email
+                        p #{ email }
+
+            .update-info-container.account-section-cell
+                h2.is-size-3 Update Your Info

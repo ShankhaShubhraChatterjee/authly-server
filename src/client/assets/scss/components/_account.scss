@@ -1,25 +1,90 @@
 .account-container {
-  margin-top: 60px;
+	max-width: 100%!important;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 60px;
+	display: flex;
+	align-items: center;
+
 }
+
 .account-sections {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-columns: minmax(250px, auto);
-  row-gap: 10px;
-  column-gap: 10px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-columns: minmax(250px, auto);
+	row-gap: 10px;
+	column-gap: 10px;
 }
+
 .account-section-cell {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  background-color: gray;
+	position: relative;
+	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.1);
+	border: 1px solid yellowgreen;
 }
-.profile-container {
-  img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
+
+.profile-info-container {
+	width: 100%;
+	padding: 0 40px 0 40px;
+	.profile-info {
+		.uname,
+		.fname,
+		.email {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			h3 {
+				text-align: left;
+			}
+
+			p {
+				text-align: right;
+			}
+		}
+	}
+}
+
+.profile-info-container-pic {
+	text-align: center;
+	margin-top: 5px;
+	border-radius: 50%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	.profile-section {
+		position: relative;
+		width: 150px;
+		height: 150px;
+		img {
+			width: 150px;
+			height: 150px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+		#profile-pic-input {
+			display: none;
+		}
+		label {
+			cursor: pointer;
+			position: absolute;
+			bottom: 17px;
+			right: 17px;
+			border-radius: 50%;
+			padding:0px 5px 2px 5px;
+			i {
+				font-size: 1.2em;
+				color: white;
+			}
+			background: black;
+		}
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.account-sections {
+		grid-template-columns: repeat(1, 1fr) !important;
+	}
 }

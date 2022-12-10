@@ -9,24 +9,24 @@ nav.navbar.is-white.has-shadow.is-fixed-top
             span
             span
 
-    a.nav-item.profile(href="#")
+    a.nav-item.profile(href="/account")
             img#profile(src="./img/user.png", alt="Profile Placeholder Image") 
 
     #nav-links.navbar-menu.has-text-centered
         // right links
         .navbar-end
-            p.control.mx-1.has-text-white
-                a.button.has-background-info(href='/')
-                    span.icon
+            p.control.mx-1.has-text-primary-light
+                a.button.has-background-black(href='/')
+                    span.icon.has-text-primary-light
                         i.fa-solid.fa-home
-                    span Home
+                    span.has-text-primary-light Home
             p.control.mx-1
-                a.button.has-background-info(href='/login')
-                    span.icon
+                a.button.has-background-black(href='/login')
+                    span.icon.has-text-primary-light
                         i.fa-solid.fa-arrow-right-to-bracket
-                    span Login
+                    span.has-text-primary-light Login
             p.control.mx-1
-                a.button.has-background-info(href='/signup')
-                    span.icon
+                a.button.has-background-black(href='/signup')
+                    span.icon.has-text-primary-light
                         i.fa-solid.fa-user
-                    span Register
+                    span.has-text-primary-light Register

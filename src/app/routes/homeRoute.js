@@ -1,21 +1,8 @@
 require('dotenv').config()
 const express = require('express')
-const client = require('./../db/db')
+const homeController = require('./../controllers/homeController');
 const router = express.Router()
 const regex = new RegExp()
-router.get('/', (req, res) => {
-    res.render('pages/index.pug')
-})
-router.post('/:id', async (req, res) => {
-    const info = req.params.id
-    res.sendStatus(200)
-    client.query('SELECT * FROM users', (err, data) => {
-        if (err) console.log(err)
-        else {
-            console.log(data.rows[0].email)
-        }
-    })
-    console.log(info)
-    res.end()
-})
+router.get('/', homeController.getHomePage);
+router.post('/:id', homeController.postDataFromHome);
 module.exports = router

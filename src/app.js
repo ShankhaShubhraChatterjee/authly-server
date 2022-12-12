@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 app.use(cors())
 
 router.use('/', homeRoute)
-router.use('/create', signupRoute)
+router.use('/signup', signupRoute)
 router.use('/account', accountRoute)
 
 app.use('/', router)

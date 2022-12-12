@@ -1,6 +1,6 @@
 extends ../templates/base.pug
 block title
-    title Login
+    title Create Account
 block content
     .form-container
         .field 
@@ -8,13 +8,13 @@ block content
         .field
             label.label Fullname
             .control.has-icons-left.has-icons-right
-                input.input.is-link(type='email', placeholder='Fullname')
+                input.input.is-link(type='text', placeholder='Fullname')
                 span.icon.is-small.is-left
                     i.fas.fa-signature
         .field
             label.label Username
             .control.has-icons-left.has-icons-right
-                input.input.is-link(type='email', placeholder='Username')
+                input.input.is-link(type='text', placeholder='Username')
                 span.icon.is-small.is-left
                     i.fas.fa-circle-user
         .field
@@ -54,4 +54,4 @@ block content
                             | Reset
         .field.is-grouped
             .control
-                button.button.is-link Login
+                input(type="submit", value="Create Account").button.is-link

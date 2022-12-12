@@ -2,56 +2,62 @@ extends ../templates/base.pug
 block title
     title Create Account
 block content
-    .form-container
+    form.form-container(action='create', method='POST')
         .field 
             h1.is-size-1 Register
         .field
             label.label Fullname
             .control.has-icons-left.has-icons-right
-                input.input.is-link(type='text', placeholder='Fullname')
+                input.input.is-link(type='text', placeholder='Fullname', name="signup_fullname")
                 span.icon.is-small.is-left
                     i.fas.fa-signature
         .field
             label.label Username
             .control.has-icons-left.has-icons-right
-                input.input.is-link(type='text', placeholder='Username')
+                input.input.is-link(type='text', placeholder='Username',name="signup_username")
                 span.icon.is-small.is-left
                     i.fas.fa-circle-user
         .field
             label.label Email
             .control.has-icons-left.has-icons-right
-                input.input.is-link(type='email', placeholder='Email')
+                input.input.is-link(type='email', placeholder='Email',name="signup_email")
                 span.icon.is-small.is-left
                     i.fas.fa-envelope
         .field
             label.label Password
             .control.has-icons-left.has-icons-right
-                input.input.is-link(type='password', placeholder='Password')
+                input.input.is-link(type='password', placeholder='Password',name="signup_password")
                 span.icon.is-small.is-left
                     i.bi.bi-key
                 span.icon.is-small.is-right
                     i.fas.fa-eye-slash(style='cursor: pointer; z-index: 2')
         .field
             .control.form-utilities
-                label.checkbox(style="margin-top:10px;")
+                label.checkbox(style='margin-top: 10px')
                     input(type='checkbox')
                     |
                     | I Agree To
                     |
                     a(href='#') Terms & Conditions
 
-                label.checkbox(style="text-align:left!important;margin-top:5px;")
+                label.checkbox(
+                    style='text-align: left !important; margin-top: 5px'
+                )
                     input(type='checkbox')
-                    |  Remember Me
+                    |
+                    | Remember Me
                 span 
+                    |
                     p
-                        | Already An User ? 
-                        a(href="/login") 
-                            | Login 
+                        | Already An User ?
+                        a(href='/login') 
+                            |
+                            | Login
                     p
-                        | Forgot Password ? 
-                        a(href="/forgot-password-01523") 
+                        | Forgot Password ?
+                        a(href='/forgot-password-01523') 
+                            |
                             | Reset
         .field.is-grouped
             .control
-                input(type="submit", value="Create Account").button.is-link
+                input.button.is-link(type='submit', value='Create Account')

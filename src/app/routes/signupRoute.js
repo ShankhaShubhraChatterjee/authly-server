@@ -8,8 +8,9 @@ const signupController = require('./../controllers/signupController')
 router.get('/', signupController.signupPage)
 router.post(
     '/', 
-    // body('signup_fullname').not().isEmpty().trim().escape(),
-    // body('signup_email').isEmail().normalizeEmail(), 
+    body('signup_fullname').not().isEmpty().trim().escape(),
+    body('signup_email').isEmail().normalizeEmail(),
+    body('signup_password').isLength({ min: 5 }),
     signupController.signupHandle)
 
 module.exports = router

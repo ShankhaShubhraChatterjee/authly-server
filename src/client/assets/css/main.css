@@ -71,7 +71,6 @@ footer {
   text-align: center;
   width: 100%;
   background-color: #fff;
-  border-top: 1px solid gray;
   -webkit-box-pack: center;
   -moz-box-pack: center;
   -webkit-justify-content: center;
@@ -80,10 +79,13 @@ footer {
   -moz-box-align: center;
   -webkit-align-items: center;
   align-items: center;
+  margin-top: 15px;
   display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
   display: flex;
+  -webkit-box-shadow: 0 -5px 10px #a9a9a9;
+  box-shadow: 0 -5px 10px #a9a9a9;
 }
 
 footer h3 {
@@ -203,10 +205,14 @@ footer h3 i {
 
 .account-section-cell {
   background-color: rgba(255, 255, 255, .1);
-  border: 1px solid #9acd32;
+  border: 5px solid #ff4500;
   -webkit-border-radius: 10px;
   border-radius: 10px;
   position: relative;
+}
+
+.account-section-cell h2 {
+  text-align: center;
 }
 
 .profile-info-container {
@@ -284,8 +290,48 @@ footer h3 i {
   font-size: 1.2em;
 }
 
+.update-info-container {
+  text-align: center;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.update-info-container input {
+  margin: 5px 0;
+}
+
+.update-info-container .update-info {
+  width: 90%;
+}
+
+.update-info-container .update-info h3 {
+  margin: 5px 0;
+}
+
+.update-info-container .update-info .account-submit-section {
+  width: 100%;
+  text-align: center;
+}
+
 @media only screen and (max-width: 800px) {
   .account-sections {
+    width: 95%;
     grid-template-columns: repeat(1, 1fr) !important;
   }
 }

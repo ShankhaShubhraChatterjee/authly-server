@@ -7,7 +7,6 @@
 	margin-top: 60px;
 	display: flex;
 	align-items: center;
-
 }
 
 .account-sections {
@@ -23,7 +22,10 @@
 	position: relative;
 	border-radius: 10px;
 	background-color: rgba(255, 255, 255, 0.1);
-	border: 1px solid yellowgreen;
+	border: 5px solid orangered;
+	h2 {
+		text-align: center;
+	}
 }
 
 .profile-info-container {
@@ -82,9 +84,30 @@
 		}
 	}
 }
+.update-info-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	input {
+		margin: 5px 0 5px 0;
+	}
+	.update-info {
+		width: 90%;
+		h3 {
+			margin: 5px 0 5px 0;
+		}
+		.account-submit-section {
+			width: 100%;
+			text-align: center;
+		}
+	}
+}
 
 @media only screen and (max-width: 800px) {
 	.account-sections {
 		grid-template-columns: repeat(1, 1fr) !important;
+		width: 95%;
 	}
 }

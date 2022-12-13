@@ -8,22 +8,24 @@ block content
         .field
             label.label Fullname
             .control.has-icons-left.has-icons-right
-                input.input.is-link(type='text', placeholder='Fullname', name="signup_fullname")
+                input#signup-fname.input.is-link(type='text', placeholder='Fullname', name="signup_fullname")
                 span.icon.is-small.is-left
                     i.fas.fa-signature
-            span.is-size-6.has-text-danger= error
+            span.is-size-6.has-text-danger= fnameError
         .field
             label.label Username
             .control.has-icons-left.has-icons-right
-                input.input.is-link(type='text', placeholder='Username',name="signup_username")
+                input#signup-uname.input.is-link(type='text', placeholder='Username',name="signup_username")
                 span.icon.is-small.is-left
                     i.fas.fa-circle-user
+            span.is-size-6.has-text-danger= unameError
         .field
             label.label Email
             .control.has-icons-left.has-icons-right
-                input.input.is-link(type='email', placeholder='Email',name="signup_email")
+                input#signup-email.input.is-link(type='email', placeholder='Email',name="signup_email")
                 span.icon.is-small.is-left
                     i.fas.fa-envelope
+            span.is-size-6.has-text-danger= emailError
         .field
             label.label Password
             .control.has-icons-left.has-icons-right
@@ -32,6 +34,7 @@ block content
                     i.bi.bi-key
                 span.icon.is-small.is-right
                     i.fas.fa-eye-slash(style='cursor: pointer; z-index: 2')
+            span.is-size-6.has-text-danger= pcodeError
         .field
             .control.form-utilities
                 label.checkbox(style='margin-top: 10px')
@@ -61,4 +64,4 @@ block content
                             | Reset
         .field.is-grouped
             .control
-                input.button.is-link(type='submit', value='Create Account')
+                input#signup-submit.button.is-link(type='submit', value='Create Account')

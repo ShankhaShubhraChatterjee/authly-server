@@ -8,19 +8,22 @@ block content
     - var email = 'johndoe@email.com'
     .account-container 
         |
-        h1.text-center.is-size-1 Your Account
+        h1.has-text-centered.is-size-1 Your Account
         .account-sections
             .profile-info-container.account-section-cell
                 h2.is-size-3 Your Profile
                 .profile-info-container-pic
                     .profile-section
-                        img(src='./img/user.png', alt='Account Profile Picture')
+                        img(
+                            src='./img/user.png',
+                            alt='Account Profile Picture'
+                        )
                         label(for='profile-pic-input')
                             i.bi.bi-camera
                         input#profile-pic-input.profile-pic-input(
-                        type='file',
-                        name='profile-picture'
-                    )
+                            type='file',
+                            name='profile-picture'
+                        )
                 .profile-info.is-size-5
                     .fname
                         h3 Name
@@ -34,3 +37,46 @@ block content
 
             .update-info-container.account-section-cell
                 h2.is-size-3 Update Your Info
+                .update-info
+                    h3.is-size-5 Change Details
+                    input.input(
+                        type='text',
+                        name='update_name',
+                        placeholder='Update Your Name'
+                    )
+                    input.input(
+                        type='text',
+                        name='update_name',
+                        placeholder='Update Your Username'
+                    )
+                    input.input(
+                        type='email',
+                        name='update_name',
+                        placeholder='Update Your Email'
+                    )
+                    h3.is-size-5 Change Password
+
+                    input.input(
+                        type='password',
+                        name='update_current_password',
+                        placeholder='Type Current Password'
+                    )
+
+                    input.input(
+                        type='password',
+                        name='update_new_password',
+                        placeholder='Type New Password'
+                    )
+
+                    input.input(
+                        type='password',
+                        name='update_confirm_password',
+                        placeholder='Confirm New Password'
+                    )
+                    .account-submit-section
+                        hr
+                        input.button.has-background-info.has-text-white(
+                            type='submit',
+                            name='account_submit_button',
+                            value="Update Info"
+                        )

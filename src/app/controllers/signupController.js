@@ -1,12 +1,21 @@
 const client = require('./../db/db')
+const { body, validationResult } = require('express-validator')
 
-var error = "";
+var fnameError = "";
+var unameError = "";
+var emailError = "";
+var pcodeError = "";
 
 const signupPage = async (req, res) => {
-    res.render('pages/signup.pug', {error : error})
+    res.render('pages/signup.pug', {
+        fnameError : fnameError,
+        unameError: unameError,
+        emailError: emailError,
+        pcodeError : pcodeError
+    })
 }
 
-const signupHandle = (req ,res) => {
+const signupHandle = (req, res) => {
     let fname = req.body.signup_fullname;
     let uname = req.body.signup_username;
     let email = req.body.signup_email;
@@ -30,16 +39,23 @@ const signupHandle = (req ,res) => {
     let userValues = [fname, uname, email, pcode];
     if(!validateFname){
         console.log("name not valid");
-        error = "name not valid";
+        fnameError = "name not valid";
+        res.redirect("/signup");
     }
-    else if (!validateUname && !unameIsUnique){
+    else if (!validateUname){
         console.log("username not valid");
+        unameError = "username not valid";
+        res.redirect("/signup");
     }
     else if (!validateEmail){
         console.log("email not valid");
+        emailError = "email not valid";
+        res.redirect("/signup");
     }
     else if (!validatePcode){
         console.log("password not valid");
+        pcodeError = "password not valid";
+        res.redirect("/signup");
     }
     else {
         client.query(createUserQuery, userValues, (err, data) => {

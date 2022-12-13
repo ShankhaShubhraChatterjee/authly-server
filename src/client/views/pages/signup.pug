@@ -8,21 +8,22 @@ block content
         .field
             label.label Fullname
             .control.has-icons-left.has-icons-right
-                input#signup-fname.input.is-link(type='text', placeholder='Fullname', name="signup_fullname")
+                input#signup-fname.input.is-link(type='text', placeholder='Fullname', name="signup_fullname", value="")
                 span.icon.is-small.is-left
                     i.fas.fa-signature
             span.is-size-6.has-text-danger= fnameError
         .field
             label.label Username
             .control.has-icons-left.has-icons-right
-                input#signup-uname.input.is-link(type='text', placeholder='Username',name="signup_username")
+                input#signup-uname.input.is-link(type='text', placeholder='Username',name="signup_username", value="")
                 span.icon.is-small.is-left
                     i.fas.fa-circle-user
             span.is-size-6.has-text-danger= unameError
+            span.is-size-6.has-text-danger= userExistsError
         .field
             label.label Email
             .control.has-icons-left.has-icons-right
-                input#signup-email.input.is-link(type='email', placeholder='Email',name="signup_email")
+                input#signup-email.input.is-link(type='email', placeholder='Email',name="signup_email", value="")
                 span.icon.is-small.is-left
                     i.fas.fa-envelope
             span.is-size-6.has-text-danger= emailError
@@ -65,3 +66,29 @@ block content
         .field.is-grouped
             .control
                 input#signup-submit.button.is-link(type='submit', value='Create Account')
+    script(type="text/javascript").
+        const signupFname = document.getElementById('signup-fname')
+        const signupUname = document.getElementById('signup-uname')
+        const signupEmail = document.getElementById('signup-email')
+
+        const signinEmail = document.getElementById('signin-email')
+
+        const signupSubmit = document.getElementById('signup-submit')
+
+        signupSubmit.addEventListener('click', () => {
+            localStorage.setItem('signup-fname', signupFname.value)
+            localStorage.setItem('signup-uname', signupUname.value)
+            localStorage.setItem('signup-email', signupEmail.value)
+            console.log('Click Executed')
+        })
+
+        window.addEventListener('load', () => {
+            signupFname.value = localStorage.getItem('signup-fname')
+            signupUname.value = localStorage.getItem('signup-uname')
+            signupEmail.value = localStorage.getItem('signup-email')
+        })
+        setTimeout(() => {
+            localStorage.setItem('signup-fname', "")
+            localStorage.setItem('signup-uname', "")
+            localStorage.setItem('signup-email', "")
+        }, 300000);

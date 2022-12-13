@@ -5,6 +5,8 @@ const path = require('path')
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
+const { v5: uuidv5 } = require("uuid")
+const session = require('express-session')
 // Module Implementation
 const app = express()
 const router = express.Router()
@@ -21,6 +23,15 @@ app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, process.env.VIEWS_DIR))
 app.use(express.static(path.join(__dirname, process.env.PUBLIC_DIR)))
 app.use(express.static(path.join(__dirname, process.env.STATIC_DIR)))
+app.use(session({
+    genid: function(req) {
+        return uuidv5('Authly', process.env.UUID_NAMESPACE);
+    },
+    secret: process.env.SESSION_SECRET,
+    resave:true,
+    saveUninitialized:true,
+    cookie: { secure:true }
+}))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use((req, res, next) => {
@@ -43,5 +54,8 @@ app.listen(process.env.APP_PORT, () => {
     )
     if(db){
         console.log("Database Connection Successfully Established");
+    }
+    else {
+        console.log("Error Establish Connection To DataBase")
     }
 })

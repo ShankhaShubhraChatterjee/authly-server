@@ -9,7 +9,8 @@
         "js": "parcel build src/client/assets/js/*.js --dist-dir src/app/ui/assets/js/ --public-url ./ --cache-dir tmp/.parcel-cache",
         "images": "parcel build src/client/assets/img/*.{jpg,png,svg,webp,avif,gif} --dist-dir src/app/ui/assets/img/ --public-url ./ --cache-dir tmp/.parcel-cache --reporter parcel-reporter-static-files-copy",
         "dev:client": "parcel watch src/client/assets/scss/main.scss --dist-dir src/client/assets/css/ --cache-dir tmp/.parcel-cache --no-content-hash",
-        "build": "yarn scss & yarn js & yarn images"
+        "build": "yarn scss & yarn js & yarn images",
+        "test": "jest"
     },
     "keywords": [
         "Authly",
@@ -30,9 +31,11 @@
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
+        "express-session": "^1.17.3",
         "express-validator": "^6.14.2",
         "passport": "^0.6.0",
-        "pg": "^8.8.0"
+        "pg": "^8.8.0",
+        "uuid": "^9.0.0"
     },
     "devDependencies": {
         "@babel/cli": "^7.19.3",
@@ -48,6 +51,7 @@
         "cssnano-preset-default": "^5.2.13",
         "eslint": "^8.29.0",
         "eslint-config-prettier": "^8.5.0",
+        "jest": "^29.3.1",
         "nodemon": "^2.0.20",
         "parcel": "^2.8.1",
         "parcel-reporter-static-files-copy": "^1.4.0",

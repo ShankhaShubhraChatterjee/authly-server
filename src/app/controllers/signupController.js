@@ -1,7 +1,9 @@
 const client = require('./../db/db')
 
+var error = "";
+
 const signupPage = async (req, res) => {
-    res.render('pages/signup.pug')
+    res.render('pages/signup.pug', {error : error})
 }
 
 const signupHandle = (req ,res) => {
@@ -28,6 +30,7 @@ const signupHandle = (req ,res) => {
     let userValues = [fname, uname, email, pcode];
     if(!validateFname){
         console.log("name not valid");
+        error = "name not valid";
     }
     else if (!validateUname && !unameIsUnique){
         console.log("username not valid");

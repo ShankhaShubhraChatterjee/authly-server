@@ -19,8 +19,8 @@ const accountRoute = require('./app/routes/accountRoute')
 // Global Config
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, process.env.VIEWS_DIR))
-app.use(express.static(path.join(__dirname, process.env.STATIC_DIR)))
 app.use(express.static(path.join(__dirname, process.env.PUBLIC_DIR)))
+app.use(express.static(path.join(__dirname, process.env.STATIC_DIR)))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use((req, res, next) => {
@@ -34,9 +34,14 @@ router.use('/signup', signupRoute)
 router.use('/account', accountRoute)
 
 app.use('/', router)
-
+app.use("*", (req, res) => {
+    res.render('pages/notfound.pug')
+})
 app.listen(process.env.APP_PORT, () => {
     console.log(
         `Server Running On ${process.env.APP_URL}:${process.env.APP_PORT}`
     )
+    if(db){
+        console.log("Database Connection Successfully Established");
+    }
 })

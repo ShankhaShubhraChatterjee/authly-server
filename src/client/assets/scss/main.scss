@@ -3,9 +3,10 @@
 @use 'shared/navbar';
 @use 'shared/footer';
 @use 'components/forms';
-@use 'components/login';
-@use 'components/register';
+@use 'components/signin';
+@use 'components/signup';
 @use 'components/account';
+@use 'components/notfound';
 
 .container {
     min-height: 100vh;

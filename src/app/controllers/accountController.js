@@ -1,8 +1,11 @@
-
 const accountPage = (req, res) => {
-    res.render('pages/account.pug')
+        if(!req.session.authenticated){
+            res.render("pages/forbidden.pug")
+        }
+        else {
+            res.render('pages/account.pug', {uname: req.session.user.uname})
+        }
 }
-
 module.exports = {
     accountPage
 }

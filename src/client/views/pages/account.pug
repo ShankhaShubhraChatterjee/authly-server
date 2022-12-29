@@ -4,7 +4,7 @@ block title
 
 block content
     - var fname = 'John Doe'
-    - var uname = 'johndoe123'
+    //- - var uname = 'johndoe123'
     - var email = 'johndoe@email.com'
     .account-container 
         |
@@ -34,6 +34,11 @@ block content
                     .email
                         h3 Email
                         p #{ email }
+                    input.button.my-2.has-background-danger.has-text-white(
+                        type='submit',
+                        name='account_logout_button',
+                        value="Log Out"
+                    )
 
             .update-info-container.account-section-cell
                 h2.is-size-3 Update Your Info

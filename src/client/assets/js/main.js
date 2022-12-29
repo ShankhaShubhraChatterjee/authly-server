@@ -1,7 +1,7 @@
 const menu = document.getElementById('burger')
 const list = document.getElementById('nav-links')
 
-menu.addEventListener('click', () => {
+const handleNavbar = () => {
     if (menu.classList.contains('is-active')) {
         menu.classList.remove('is-active')
         list.classList.remove('is-active')
@@ -9,4 +9,5 @@ menu.addEventListener('click', () => {
         menu.classList.add('is-active')
         list.classList.add('is-active')
     }
-})
+}
+menu.addEventListener('click', handleNavbar)

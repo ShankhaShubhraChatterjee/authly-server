@@ -5,57 +5,38 @@ const path = require('path')
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
-const { v5: uuidv5 } = require("uuid")
 const session = require('express-session')
+
 // Module Implementation
 const app = express()
 const router = express.Router()
-// Database Connection
-const db = require('./app/db/db')
 
-// Routes Imports
-const homeRoute = require('./app/routes/homeRoute')
-const signupRoute = require('./app/routes/signupRoute')
-const accountRoute = require('./app/routes/accountRoute')
+// Utilities
+const server = require('./app/utils/server')
+const { sessionOptions } = require('./app/utils/session');
+const { routes } = require('./app/utils/route');
 
 // Global Config
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, process.env.VIEWS_DIR))
 app.use(express.static(path.join(__dirname, process.env.PUBLIC_DIR)))
 app.use(express.static(path.join(__dirname, process.env.STATIC_DIR)))
-app.use(session({
-    genid: function(req) {
-        return uuidv5('Authly', process.env.UUID_NAMESPACE);
-    },
-    secret: process.env.SESSION_SECRET,
-    resave:true,
-    saveUninitialized:true,
-    cookie: { secure:true }
-}))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(session(sessionOptions))
 app.use((req, res, next) => {
     console.log(`Method:${req.method} | Url:${req.url}`)
     next()
 })
 app.use(cors())
 
-router.use('/', homeRoute)
-router.use('/signup', signupRoute)
-router.use('/account', accountRoute)
+router.use('/', routes.homeRoute)
+router.use('/signin', routes.signinRoute)
+router.use('/signup', routes.signupRoute)
+router.use('/account', routes.accountRoute)
 
-app.use('/', router)
-app.use("*", (req, res) => {
+app.use(router)
+app.use("*", (_, res) => {
     res.render('pages/notfound.pug')
 })
-app.listen(process.env.APP_PORT, () => {
-    console.log(
-        `Server Running On ${process.env.APP_URL}:${process.env.APP_PORT}`
-    )
-    if(db){
-        console.log("Database Connection Successfully Established");
-    }
-    else {
-        console.log("Error Establish Connection To DataBase")
-    }
-})
+app.listen(process.env.APP_PORT, server);

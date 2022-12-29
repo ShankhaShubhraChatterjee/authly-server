@@ -1,5 +1,84 @@
 .index-page-container {
-  margin-top: 50px;
+  margin-top: 60px;
+}
+
+.index {
+  text-align: center;
+  grid-template-columns: 4fr 2fr;
+  -webkit-align-content: center;
+  align-content: center;
+  gap: 10px;
+  display: grid;
+}
+
+.index-header, index-content {
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.index-content > img {
+  width: 300px;
+}
+
+.index-content {
+  text-align: center;
+}
+
+.index-get-started button {
+  background: none;
+  border: none;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.index-get-started button a {
+  width: 100%;
+  color: #fff;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .9);
+  border: 1px solid #ff4500;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: Verdana, monospace;
+  font-size: 1.5em;
+  -webkit-transition: -webkit-box-shadow .2s ease-in-out, box-shadow .2s ease-in-out;
+  -moz-transition: -webkit-box-shadow .2s ease-in-out, box-shadow .2s ease-in-out;
+  transition: -webkit-box-shadow .2s ease-in-out, box-shadow .2s ease-in-out;
+  display: inline-block;
+  -webkit-box-shadow: 0 0 5px #ff4500;
+  box-shadow: 0 0 5px #ff4500;
+}
+
+.index-get-started button a:hover {
+  -webkit-transition: -webkit-box-shadow .2s ease-in-out, box-shadow .2s ease-in-out;
+  -moz-transition: -webkit-box-shadow .2s ease-in-out, box-shadow .2s ease-in-out;
+  transition: -webkit-box-shadow .2s ease-in-out, box-shadow .2s ease-in-out;
+  -webkit-box-shadow: 0 0 10px #ff4500;
+  box-shadow: 0 0 10px #ff4500;
+}
+
+@media only screen and (max-width: 950px) {
+  .index {
+    grid-template-columns: 1fr;
+  }
 }
 
 * {
@@ -172,6 +251,15 @@ footer h3 i {
   display: flex;
 }
 
+.eye {
+  background: none;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
 .account-container {
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
@@ -334,6 +422,10 @@ footer h3 i {
     width: 95%;
     grid-template-columns: repeat(1, 1fr) !important;
   }
+}
+
+html {
+  background-color: rgba(255, 255, 255, .7);
 }
 
 .container {

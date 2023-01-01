@@ -11,7 +11,7 @@
         "dev:client": "parcel watch src/client/assets/scss/main.scss --dist-dir src/client/assets/css/ --cache-dir tmp/.parcel-cache --no-content-hash",
         "build": "yarn scss & yarn js & yarn images",
         "test": "jest",
-        "e2e" : ""
+        "e2e": ""
     },
     "keywords": [
         "Authly",
@@ -45,13 +45,14 @@
         "@babel/preset-env": "^7.20.2",
         "@fullhuman/postcss-purgecss": "^5.0.0",
         "@parcel/config-default": "^2.8.2",
+        "@parcel/core": "^2.8.1",
         "@parcel/transformer-pug": "^2.8.2",
         "@parcel/transformer-sass": "2.8.2",
         "@prettier/plugin-pug": "^2.3.0",
         "autoprefixer": "^10.4.13",
         "cssnano": "^5.1.14",
         "cssnano-preset-default": "^5.2.13",
-        "eslint": "^8.30.0",
+        "eslint": "^8.31.0",
         "eslint-config-prettier": "^8.5.0",
         "jest": "^29.3.1",
         "jest-environment-jsdom": "^29.3.1",
@@ -65,7 +66,7 @@
         "prettier-config-standard": "^5.0.0",
         "pug": "^3.0.2",
         "sass": "^1.57.1",
-        "stylelint": "^14.16.0",
+        "stylelint": "^14.16.1",
         "stylelint-config-standard": "^29.0.0",
         "stylelint-order": "^5.0.0"
     }

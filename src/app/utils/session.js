@@ -1,7 +1,9 @@
+// src/app/utils/session.js
 require('dotenv').config()
-const { v5: uuidv5 } = require("uuid")
+
 const session = require('express-session');
 const { client } = require('./db');
+const { v5: uuidv5 } = require("uuid")
 const pgStore = require('connect-pg-simple')(session)
 
 const sessionOptions = {
@@ -9,7 +11,7 @@ const sessionOptions = {
         return uuidv5('Authly', process.env.UUID_NAMESPACE);
     },
     secret: process.env.SESSION_SECRET,
-	cookie: { maxAge: 1000 * 60 * 5, secure:false},
+	cookie: { maxAge: 1000 * 60 * 2, secure:process.env.SECURE_COOKIE },
 	resave:false,
 	saveUninitialized:false,
     store: new pgStore({

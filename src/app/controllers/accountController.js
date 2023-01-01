@@ -1,5 +1,5 @@
 const accountPage = (req, res) => {
-        if(!req.session.authenticated){
+        if(!req.session.auth){
             res.render("pages/forbidden.pug")
         }
         else {

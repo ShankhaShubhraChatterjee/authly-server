@@ -1,7 +1,7 @@
 nav.navbar.is-white.has-shadow.is-fixed-top
     // logo / brand
     .navbar-brand
-        a.navbar-item#title
+        a(href="/").navbar-item#title
             img#logo(style="margin: 0 10px 0 0!important;" ,src='./img/authly.png', alt='Authly Logo')
             h1.is-size-4 Authly
         a#burger.navbar-burger
@@ -21,12 +21,18 @@ nav.navbar.is-white.has-shadow.is-fixed-top
                         i.fa-solid.fa-home
                     span.has-text-primary-light Home
             p.control.mx-1
-                a.button.has-background-black(href='/signin')
-                    span.icon.has-text-primary-light
-                        i.fa-solid.fa-arrow-right-to-bracket
-                    span.has-text-primary-light Signin
+                if auth
+                    a.button.has-background-black(href='/signout')
+                        span.icon.has-text-primary-light
+                            i.fa-solid.fa-arrow-right-to-bracket
+                        span.has-text-primary-light Sign Out
+                else 
+                    a.button.has-background-black(href='/signin')
+                        span.icon.has-text-primary-light
+                            i.fa-solid.fa-arrow-right-to-bracket
+                        span.has-text-primary-light Sign In
             p.control.mx-1
                 a.button.has-background-black(href='/signup')
                     span.icon.has-text-primary-light
                         i.fa-solid.fa-user
-                    span.has-text-primary-light Signup
+                    span.has-text-primary-light Sign Up

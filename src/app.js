@@ -34,13 +34,13 @@ app.use((req, res, next) => {
 app.use(cors())
 
 router.use('/', routes.homeRoute)
-// router.use('/signin', routes.signinRoute)
-// router.use('/signup', routes.signupRoute)
-// router.get("/signout", (req, res) => {
-//     req.session.auth = false;
-//     res.sendStatus(200);
-// })
-// router.use('/account', routes.accountRoute)
+router.use('/signin', routes.signinRoute)
+router.use('/signup', routes.signupRoute)
+router.get("/signout", (req, res) => {
+    req.session.auth = false;
+    res.sendStatus(200);
+})
+router.use('/account', routes.accountRoute)
 
 app.use("/384534983hg89h34g349", (req, res) => {
     console.log(req.session.auth)

@@ -3,9 +3,6 @@ block title
     title Account
 
 block content
-    - var fname = 'John Doe'
-    //- - var uname = 'johndoe123'
-    - var email = 'johndoe@email.com'
     .account-container 
         |
         h1.has-text-centered.is-size-1 Your Account
@@ -27,18 +24,17 @@ block content
                 .profile-info.is-size-5
                     .fname
                         h3 Name
-                        p #{ fname }
+                        p #{userinfo.fname}
                     .uname
                         h3 Username
-                        p #{ uname }
+                        p #{userinfo.uname}
                     .email
                         h3 Email
-                        p #{ email }
-                    input.button.my-2.has-background-danger.has-text-white(
+                        p #{userinfo.email}
+                    a.button.my-2.has-background-danger.has-text-white(
                         type='submit',
-                        name='account_logout_button',
-                        value="Log Out"
-                    )
+                        name='account_logout_button'
+                    ) Log Out
 
             .update-info-container.account-section-cell
                 h2.is-size-3 Update Your Info

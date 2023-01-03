@@ -3,14 +3,17 @@ const { client } = require('../utils/db')
 var userExistsError, provideUname, providePassword
 const signinPage = (req, res) => {
     console.log(req.session.auth)
-    if(req.session.authenticated){
-        res.redirect("/account");
+    if (req.session.auth) {
+        res.redirect('/account')
+        res.end()
+    } else {
+        res.render('pages/signin.pug', {
+            provideUname: provideUname,
+            userExistsError: userExistsError,
+            providePassword: providePassword,
+        })
+        res.end()
     }
-    res.render('pages/signin.pug', {
-        provideUname: provideUname,
-        userExistsError: userExistsError,
-        providePassword: providePassword,
-    })
 }
 
 const handleSignin = async (req, res) => {
@@ -39,7 +42,7 @@ const handleSignin = async (req, res) => {
     //         }
     //     }
     // )
-    req.session.auth = true;
+    req.session.auth = true
     res.end()
 }
 

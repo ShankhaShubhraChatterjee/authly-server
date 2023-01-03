@@ -3,16 +3,15 @@ const { client } = require('../src/app/utils/db')
 const signin = require('./../src/app/controllers/signinController');
 const signup = require('./../src/app/controllers/signupController');
 
+let username = "foss0123";
+
 // test Database Query 
-test('Query Username', () => {
-    client.query(`SELECT * FROM users`, (err, data) => {
+test('Query Username', async () => {
+    client.query(`SELECT uname FROM users WHERE uname='${username}';`, (err, data) => {
         if (err) {
             console.error(err)
-        } else {
-            JSON.stringify(data)
         }
-        expect(data.rows).toBeDefined()
-
+        expect(data.rows[0].uname).toBe(username)
         client.end();
     })
 })

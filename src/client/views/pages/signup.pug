@@ -2,106 +2,113 @@ extends ../templates/base.pug
 block title
     title Create Account
 block content
-    form.form-container(action='signup', method='POST' style='margin-top:30px;')
+    form.form-container(
+        action='signup',
+        method='POST'
+    )
         .field 
+            |
             h1.is-size-1 Sign Up
         .field
             label.label Fullname
             .control.has-icons-left.has-icons-right
-                input#signup-fname.input.is-link(type='text', placeholder='Fullname', name="signup_fullname")
+                input#signup-fname.input.is-link(
+                    type='text',
+                    placeholder='Fullname',
+                    name='signup_fullname'
+                )
                 span.icon.is-small.is-left
                     i.fas.fa-signature
-            span.span-error.is-size-6.has-text-grey= fnameError
+            span.span-error.is-size-6.has-text-grey #{ errors.fnameError }
         .field
             label.label Username
             .control.has-icons-left.has-icons-right
-                input#signup-uname.input.is-link(type='text', placeholder='Username',name="signup_username")
+                input#signup-uname.input.is-link(
+                    type='text',
+                    placeholder='Username',
+                    name='signup_username'
+                )
                 span.icon.is-small.is-left
                     i.fas.fa-circle-user
-            span.is-size-6.has-text-grey= unameError
+            span.is-size-6.has-text-grey #{ errors.unameError }
         .field
             label.label Email
             .control.has-icons-left.has-icons-right
-                input#signup-email.input.is-link(type='email', placeholder='Email',name="signup_email")
+                input#signup-email.input.is-link(
+                    type='email',
+                    placeholder='Email',
+                    name='signup_email'
+                )
                 span.icon.is-small.is-left
                     i.fas.fa-envelope
-            span.span-error.is-size-6.has-text-grey= emailError
+            span.is-size-6.has-text-grey #{ errors.emailError }
         .field
             label.label Password
             .control.has-icons-left.has-icons-right
-                input.password-field.input.is-link(type='password', placeholder='Password',name="signup_password")
+                input.password-field.input.is-link(
+                    type='password',
+                    placeholder='Password',
+                    name='signup_password'
+                )
                 span.icon.is-small.is-left
                     i.bi.bi-key
                 span.eye.is-small.is-right
-                    i#signup-eye.eye-icon.fas.fa-eye-slash(style='cursor: pointer; z-index: 1')
-            span.span-error.is-size-6.has-text-grey= pcodeError
+                    i#signup-eye.eye-icon.fas.fa-eye-slash(
+                        style='cursor: pointer; z-index: 1'
+                    )
+            span.span-error.is-size-6.has-text-grey #{ errors.pcodeError }
         .field
             .control.form-utilities
-                label.checkbox(style='margin-top: 10px')
-                    input(type='checkbox')
-                    |
-                    | I Agree To
-                    |
-                    a(href='#') Terms & Conditions
-
-                label.checkbox(
-                    style="position: relative;margin-top: 5px;left: -56px;"
-                )
-                    input(type='checkbox')
-                    |
-                    | Remember Me
                 span 
-                    |
                     p
                         | Already An User ?
                         a(href='/signin') 
-                            |
                             | Login
                     p
                         | Forgot Password ?
                         a(href='/forgot-password') 
-                            |
                             | Reset
         .field.is-grouped
             .control
-                input#signup-submit.button.is-link(type='submit', value='Create Account')
-    script(type="text/javascript").
-        const signupFname = document.getElementById('signup-fname')
-        const signupUname = document.getElementById('signup-uname')
-        const signupEmail = document.getElementById('signup-email')
+                input#signup-submit.button.is-link(
+                    type='submit',
+                    value='Create Account'
+                )
+    script(type='text/javascript').
+        const signupFname = document.getElementById('signup-fname');
+        const signupUname = document.getElementById('signup-uname');
+        const signupEmail = document.getElementById('signup-email');
 
-        const signupSubmit = document.getElementById('signup-submit')
-        const signupEye = document.getElementById('signup-eye')
-        const pcode = document.getElementsByClassName('password-field')[0]
+        const signupSubmit = document.getElementById('signup-submit');
+        const signupEye = document.getElementById('signup-eye');
+        const pcode = document.getElementsByClassName('password-field')[0];
 
         const storeRegisterInputValues = () => {
-            localStorage.setItem('signup-fname', signupFname.value)
-            localStorage.setItem('signup-uname', signupUname.value)
-            localStorage.setItem('signup-email', signupEmail.value)
-            console.log('Click Executed')
-        }
+            localStorage.setItem('signup-fname', signupFname.value);
+            localStorage.setItem('signup-uname', signupUname.value);
+            localStorage.setItem('signup-email', signupEmail.value);
+            console.log('Click Executed');
+        };
         const restoreRegisterInputValues = () => {
-            signupFname.value = localStorage.getItem('signup-fname')
-            signupUname.value = localStorage.getItem('signup-uname')
-            signupEmail.value = localStorage.getItem('signup-email')
-        }
+            signupFname.value = localStorage.getItem('signup-fname');
+            signupUname.value = localStorage.getItem('signup-uname');
+            signupEmail.value = localStorage.getItem('signup-email');
+        };
         const clearRegisterInputValues = () => {
-            localStorage.setItem('signup-fname', "")
-            localStorage.setItem('signup-uname', "")
-            localStorage.setItem('signup-email', "")
-        }
+            localStorage.setItem('signup-fname', '');
+            localStorage.setItem('signup-uname', '');
+            localStorage.setItem('signup-email', '');
+        };
         const showHidePassword = () => {
             if (pcode.type === 'password') {
-                signupEye.className = 'eye-icon fas fa-eye-slash'
-                pcode.type = 'text'
+                signupEye.className = 'eye-icon fas fa-eye-slash';
+                pcode.type = 'text';
             } else {
-                signupEye.className = 'eye-icon fas fa-eye'
-                pcode.type = 'password'
+                signupEye.className = 'eye-icon fas fa-eye';
+                pcode.type = 'password';
             }
-        }
-        signupSubmit.addEventListener('click', storeRegisterInputValues)
-        signupEye.addEventListener('click', showHidePassword)
-        window.addEventListener('load', restoreRegisterInputValues)
+        };
+        signupSubmit.addEventListener('click', storeRegisterInputValues);
+        signupEye.addEventListener('click', showHidePassword);
+        window.addEventListener('load', restoreRegisterInputValues);
         setTimeout(clearRegisterInputValues, 300000);
-
-        

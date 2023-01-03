@@ -11,7 +11,7 @@ const sessionOptions = {
         return uuidv5('Authly', process.env.UUID_NAMESPACE);
     },
     secret: process.env.SESSION_SECRET,
-	cookie: { maxAge: 1000 * 60 * 2, secure:false },
+	cookie: { maxAge: 1000 * 60 * 1, secure:false },
 	resave:false,
 	saveUninitialized:false,
     store: new pgStore({

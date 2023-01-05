@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.88% </span>
+                <span class="strong">25.92% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/68</span>
+                <span class='fraction'>21/81</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.88% </span>
+                <span class="strong">25.92% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/68</span>
+                <span class='fraction'>21/81</span>
             </div>
         
             
@@ -131,7 +131,20 @@
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -153,13 +166,26 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -208,6 +234,7 @@ const {
     validateUserInputs,
     checkForEmptyValue,
     checkUserExistance,
+    outputErrors,
 } = require('./../utils/validate')
 var errors = {
     fnameError: '',
@@ -215,16 +242,9 @@ var errors = {
     emailError: '',
     pcodeError: '',
 }
-let userValidated = false
 const sendSignUpPage = <span class="fstat-no" title="function not covered" >(req, res) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    // if(req.session.auth){</span>
-<span class="cstat-no" title="statement not covered" >    //     res.redirect("/account");</span>
-<span class="cstat-no" title="statement not covered" >    // }</span>
-<span class="cstat-no" title="statement not covered" >    // else {</span>
-<span class="cstat-no" title="statement not covered" >    //     res.render('pages/signup.pug')</span>
-<span class="cstat-no" title="statement not covered" >    // }</span>
 <span class="cstat-no" title="statement not covered" >    res.render('pages/signup.pug', { errors: errors })</span>
-<span class="cstat-no" title="statement not covered" >    console.log(req.session.user)</span>
+<span class="cstat-no" title="statement not covered" >    console.log(req.session.auth)</span>
 <span class="cstat-no" title="statement not covered" >    res.end()</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 const createUser = <span class="fstat-no" title="function not covered" >async (req, res) =&gt; {</span>
@@ -235,34 +255,53 @@ const createUser = <span class="fstat-no" title="function not covered" >async (r
 <span class="cstat-no" title="statement not covered" >        pcode: req.body.signup_password,</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    if (</span>
-<span class="cstat-no" title="statement not covered" >        !validateUserInputs(regex.fname.test(user.fname), 'Name', errors.fnameError),</span>
-<span class="cstat-no" title="statement not covered" >        !validateUserInputs(regex.uname.test(user.uname), 'Username', errors.unameError),</span>
-<span class="cstat-no" title="statement not covered" >        !validateUserInputs(regex.email.test(user.email), 'Email', errors.emailError),</span>
-<span class="cstat-no" title="statement not covered" >        !validateUserInputs(regex.pcode.test(user.pcode), 'Password', errors.pcodeError),</span>
-<span class="cstat-no" title="statement not covered" >        !checkUserExistance(user.uname)</span>
+<span class="cstat-no" title="statement not covered" >        !regex.fname.test(user.fname) ||</span>
+<span class="cstat-no" title="statement not covered" >        !regex.uname.test(user.uname) ||</span>
+<span class="cstat-no" title="statement not covered" >        !regex.email.test(user.email) ||</span>
+<span class="cstat-no" title="statement not covered" >        !regex.pcode.test(user.pcode)</span>
 <span class="cstat-no" title="statement not covered" >    ) {</span>
-<span class="cstat-no" title="statement not covered" >        if(!validateUserInputs(regex.fname.test(user.fname), 'Name', errors.fnameError)){</span>
-<span class="cstat-no" title="statement not covered" >            errors.fnameError = "Name Not Valid"</span>
+<span class="cstat-no" title="statement not covered" >        if (regex.fname.test(user.fname)) {</span>
+<span class="cstat-no" title="statement not covered" >            errors.fnameError = 'Name Valid'</span>
+<span class="cstat-no" title="statement not covered" >        } else {</span>
+<span class="cstat-no" title="statement not covered" >            errors.fnameError = 'Name Not Valid'</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        if(!validateUserInputs(regex.uname.test(user.uname), 'Username', errors.unameError)){</span>
-<span class="cstat-no" title="statement not covered" >            errors.unameError = "Username Not Valid"</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        if (regex.uname.test(user.uname)) {</span>
+<span class="cstat-no" title="statement not covered" >            errors.unameError = 'Username Valid'</span>
+<span class="cstat-no" title="statement not covered" >        } else {</span>
+<span class="cstat-no" title="statement not covered" >            errors.unameError = 'Username Not Valid'</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        if(!validateUserInputs(regex.email.test(user.email), 'Email', errors.emailError)){</span>
-<span class="cstat-no" title="statement not covered" >            errors.emailError = "Email Not Valid"</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        if (regex.email.test(user.email)) {</span>
+<span class="cstat-no" title="statement not covered" >            errors.emailError = 'Email Valid'</span>
+<span class="cstat-no" title="statement not covered" >        } else {</span>
+<span class="cstat-no" title="statement not covered" >            errors.emailError = 'Email Not Valid'</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        if(!validateUserInputs(regex.pcode.test(user.pcode), 'Password', errors.pcodeError)){</span>
-<span class="cstat-no" title="statement not covered" >            errors.pcodeError = "Password Not Valid"</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        if(!checkUserExistance(user.uname)){</span>
-<span class="cstat-no" title="statement not covered" >            errors.unameError = "User Exists"</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        if (regex.pcode.test(user.pcode)) {</span>
+<span class="cstat-no" title="statement not covered" >            errors.pcodeError = 'Password Valid'</span>
+<span class="cstat-no" title="statement not covered" >        } else {</span>
+<span class="cstat-no" title="statement not covered" >            errors.pcodeError = 'Password Not Valid'</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >        res.redirect('/signup')</span>
-<span class="cstat-no" title="statement not covered" >        res.end()</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    else {</span>
-<span class="cstat-no" title="statement not covered" >        console.log("Success Validating User")</span>
-<span class="cstat-no" title="statement not covered" >        res.redirect("/account")</span>
-<span class="cstat-no" title="statement not covered" >        res.end()</span>
+<span class="cstat-no" title="statement not covered" >        if (</span>
+<span class="cstat-no" title="statement not covered" >            (regex.fname.test(user.fname),</span>
+<span class="cstat-no" title="statement not covered" >            regex.uname.test(user.uname),</span>
+<span class="cstat-no" title="statement not covered" >            regex.email.test(user.email),</span>
+<span class="cstat-no" title="statement not covered" >            regex.pcode.test(user.pcode))</span>
+<span class="cstat-no" title="statement not covered" >        ) {</span>
+<span class="cstat-no" title="statement not covered" >            req.session.auth = true;</span>
+<span class="cstat-no" title="statement not covered" >            req.session.user = user;</span>
+<span class="cstat-no" title="statement not covered" >            res.redirect("/account")</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >            res.end()</span>
+<span class="cstat-no" title="statement not covered" >    } else {</span>
+<span class="cstat-no" title="statement not covered" >        req.session.auth = true</span>
+<span class="cstat-no" title="statement not covered" >        req.session.user = user</span>
+<span class="cstat-no" title="statement not covered" >        setTimeout(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            res.redirect('/account')</span>
+<span class="cstat-no" title="statement not covered" >            res.end()</span>
+<span class="cstat-no" title="statement not covered" >        }, 1500)</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
@@ -274,7 +313,7 @@ module.exports = { sendSignUpPage, createUser }
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-01-02T17:16:40.981Z
+                at 2023-01-03T10:00:49.217Z
             </div>
         <script src="../prettify.js"></script>
         <script>

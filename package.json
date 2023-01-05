@@ -27,6 +27,7 @@
         "distDir": "src/app/ui"
     },
     "dependencies": {
+        "bcrypt": "^5.1.0",
         "connect-pg-simple": "^8.0.0",
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",

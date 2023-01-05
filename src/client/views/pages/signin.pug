@@ -12,7 +12,7 @@ block content
                 input.input.is-link(type='text', placeholder='Username' name="signin_username")
                 span.icon.is-small.is-left
                     i.fas.fa-user-circle
-            p.has-text-danger= provideUname
+            p.has-text-danger= error.unameError
         .field
             label.label Password
             .control.has-icons-left.has-icons-right
@@ -21,7 +21,7 @@ block content
                     i.bi.bi-key
                 span.eye.is-small.is-right
                     i#login-eye.eye-icon.fas.fa-eye-slash(style='cursor: pointer; z-index: 1')
-            p.has-text-danger= providePassword
+            p.has-text-danger= error.pcodeError
         .field.is-grouped
             .control
                 button.button.is-link Login

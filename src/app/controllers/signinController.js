@@ -1,52 +1,80 @@
-const { client } = require('../utils/db')
+const { regex } = require('./../utils/regex')
+const { client } = require('./../utils/db')
 
-var userExistsError, provideUname, providePassword
-const signinPage = (req, res) => {
-    console.log(req.session.auth)
-    if (req.session.auth) {
-        res.redirect('/account')
-        res.end()
-    } else {
-        res.render('pages/signin.pug', {
-            provideUname: provideUname,
-            userExistsError: userExistsError,
-            providePassword: providePassword,
-        })
-        res.end()
-    }
+var errors = {
+    unameError: '',
+    pcodeError: '',
+    userExists: '',
 }
 
-const handleSignin = async (req, res) => {
-    let uname = req.body.signin_username
-    let pcode = req.body.signin_password
-
-    if (!uname) {
-        provideUname = 'Please Provide Username'
-        console.log(provideUname)
-    }
-    if (!pcode) {
-        providePassword = 'Please Provide Password'
-        console.log(providePassword)
-    }
-    // client.query(
-    //     `SELECT * FROM users WHERE uname='${req.body.signin_username}' AND passcode='${req.body.signin_password}'`,
-    //     (err, data) => {
-    //         if (err) console.log(err)
-    //         if (data.rows[0]) {
-    //             console.log(data.rows[0])
-    //             req.session.authenticated = true
-    //             console.log(req.session.authenticated)
-    //         } else {
-    //             userExistsError = 'User Doesnt Exist'
-    //             console.log(userExistsError)
-    //         }
-    //     }
-    // )
-    req.session.auth = true
+const sendSigninPage = (req, res) => {
+    res.render('login.ejs', { error: errors })
     res.end()
 }
 
+const handleSignIn = async (req, res) => {
+    let user = {
+        uname: req.body.signin_username,
+        pcode: req.body.signin_password,
+    }
+
+    if ((!regex.uname.test(user.uname), !regex.uname.test(user.pcode))) {
+        if (regex.uname.test(user.uname)) {
+            errors.unameError = 'OK'
+        } else {
+            errors.unameError = 'Invalid Username'
+        }
+        if (regex.pcode.test(user.pcode)) {
+            errors.pcodeError = 'OK'
+        } else {
+            errors.pcodeError = 'Invalid Password'
+        }
+        res.redirect('/signin')
+        res.end()
+    } else {
+        client.query(
+            'SELECT * FROM users WHERE uname=$1',
+            [user.uname],
+            (err, data) => {
+                if (err) console.error(err)
+                else {
+                    if (data.rows.length === 0) {
+                        console.log('User Doesnt Exist')
+                        errors.userExists = 'User Doesnt Exist'
+                        res.redirect('/signin')
+                        res.end()
+                    } else {
+                        bcrypt.compare(
+                            user.pcode,
+                            data.rows[0].passcode,
+                            (err, password) => {
+                                if (err) console.log(err)
+                                else {
+                                    if (!password) {
+                                        errors.pcodeError = 'Wrong Password'
+                                        console.log(errors.pcodeError)
+                                        res.redirect('/signin')
+                                        res.end()
+                                    } else {
+                                        console.log('User Exists')
+                                        console.log(
+                                            `${data.rows[0].uname} - ${data.rows[0].passcode}`
+                                        )
+                                        req.session.user = data.rows[0]
+                                        res.redirect('/')
+                                        res.end()
+                                    }
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        )
+    }
+}
+
 module.exports = {
-    handleSignin,
-    signinPage,
+    sendSigninPage,
+    handleSignIn,
 }

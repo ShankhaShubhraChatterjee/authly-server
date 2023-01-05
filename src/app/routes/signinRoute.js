@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const { body } = require('express-validator');
+const { body } = require('express-validator')
 
 const signinController = require('./../controllers/signinController')
 
-router.get("/", signinController.signinPage);
+router.get('/', signinController.sendSigninPage)
 router.post(
-    "/", 
+    '/',
     body('signin_username').not().isEmpty().trim().escape(),
-    body('signin_password').not().isEmpty().isLength({ min:5 }),
-    signinController.handleSignin);
+    body('signin_password').not().isEmpty().isLength({ min: 5 }),
+    signinController.handleSignin
+)
 
-module.exports = router;
+module.exports = router

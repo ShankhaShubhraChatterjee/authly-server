@@ -4,4 +4,4 @@ yarn.lock
 .vscode
 build
 tmp
-./coverage
+/coverage

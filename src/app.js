@@ -39,7 +39,9 @@ router.use('/signin', routes.signinRoute)
 router.use('/signup', routes.signupRoute)
 router.get("/signout", (req, res) => {
     req.session.auth = false;
-    res.sendStatus(200);
+    req.session.destroy();
+    res.redirect("/");
+    res.end()
 })
 router.use('/account', routes.accountRoute)
 

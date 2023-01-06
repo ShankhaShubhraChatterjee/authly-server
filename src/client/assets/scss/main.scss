@@ -11,11 +11,19 @@
 html {
     background-color: rgba(255,255,255,0.7);
 }
+body {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ align-items: center;
+}
+html, body, .container {
+    height: 100%;
+}
 .container {
     margin-top: 50px;
-    min-height: 100vh;
-    
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 }

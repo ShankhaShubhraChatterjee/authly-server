@@ -3,17 +3,14 @@
 const { client } = require('../utils/db')
 const regex = require('./../utils/regex')
 const query = require('./../utils/query')
-const {
-    validateUserInputs,
-    checkForEmptyValue,
-    checkUserExistance,
-    outputErrors,
-} = require('./../utils/validate')
+const { userExistsInDb } = require('./../utils/validate')
+const bcrypt = require('bcrypt')
 var errors = {
     fnameError: '',
     unameError: '',
     emailError: '',
     pcodeError: '',
+    userExists: ''
 }
 const sendSignUpPage = (req, res) => {
     res.render('pages/signup.pug', { errors: errors })
@@ -21,17 +18,21 @@ const sendSignUpPage = (req, res) => {
     res.end()
 }
 const createUser = async (req, res) => {
+    
     let user = {
         fname: req.body.signup_fullname,
         uname: req.body.signup_username,
         email: req.body.signup_email,
         pcode: req.body.signup_password,
     }
+    let userExists = await userExistsInDb(user.uname)
+
     if (
         !regex.fname.test(user.fname) ||
         !regex.uname.test(user.uname) ||
         !regex.email.test(user.email) ||
-        !regex.pcode.test(user.pcode)
+        !regex.pcode.test(user.pcode) ||
+        userExists
     ) {
         if (regex.fname.test(user.fname)) {
             errors.fnameError = 'Name Valid'
@@ -44,7 +45,11 @@ const createUser = async (req, res) => {
         } else {
             errors.unameError = 'Username Not Valid'
         }
-
+        if (userExists) {
+            errors.unameError = 'Username Already Taken'
+        } else {
+            errors.unameError = 'Username Available'
+        }
         if (regex.email.test(user.email)) {
             errors.emailError = 'Email Valid'
         } else {
@@ -57,20 +62,35 @@ const createUser = async (req, res) => {
             errors.pcodeError = 'Password Not Valid'
         }
         res.redirect('/signup')
+        res.end()
+    } else {
         if (
             (regex.fname.test(user.fname),
             regex.uname.test(user.uname),
             regex.email.test(user.email),
-            regex.pcode.test(user.pcode))
+            regex.pcode.test(user.pcode),
+            !userExists)
         ) {
-            req.session.auth = true;
-            req.session.user = user;
-            res.redirect("/account")
+            req.session.auth = true
+            req.session.user = user
+            let salt = await bcrypt.genSalt()
+            let hashedPassword = await bcrypt.hash(user.pcode, salt)
+            bcrypt.compare(user.pcode, hashedPassword, (err, result) => {
+                if (err) console.error(err)
+                else {
+                    client.query(
+                        'INSERT INTO users(fname, uname, email, passcode) VALUES($1, $2, $3, $4)',
+                        [user.fname, user.uname, user.email, hashedPassword],
+                        (err, data) => {
+                            if (err) console.error(err)
+                            else {
+                                console.log('Success')
+                            }
+                        }
+                    )
+                }
+            })
         }
-            res.end()
-    } else {
-        req.session.auth = true
-        req.session.user = user
         setTimeout(() => {
             res.redirect('/account')
             res.end()

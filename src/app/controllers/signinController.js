@@ -1,5 +1,6 @@
 const { regex } = require('./../utils/regex')
 const { client } = require('./../utils/db')
+const bcrypt = require('bcrypt')
 
 var errors = {
     unameError: '',
@@ -8,11 +9,18 @@ var errors = {
 }
 
 const sendSigninPage = (req, res) => {
-    res.render('login.ejs', { error: errors })
-    res.end()
+	if(req.session.auth){
+		res.redirect("/account")
+		res.end()
+	}
+	else {
+		res.render('pages/signin.pug', { error: errors })
+    	res.end()
+	}
+    
 }
 
-const handleSignIn = async (req, res) => {
+const handleSignin = async (req, res) => {
     let user = {
         uname: req.body.signin_username,
         pcode: req.body.signin_password,
@@ -76,5 +84,5 @@ const handleSignIn = async (req, res) => {
 
 module.exports = {
     sendSigninPage,
-    handleSignIn,
+    handleSignin,
 }

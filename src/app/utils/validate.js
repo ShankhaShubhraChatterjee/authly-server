@@ -1,32 +1,24 @@
 const { client } = require('./db')
-const checkUserExistance = (username) => {
-    client.query(
-        `SELECT uname FROM users WHERE uname=$1`,
-        [username],
-        (err, data) => {
-            if (err) console.error(err)
-            else {
-                let user = data.rows
-                if (!user) {
-                    return true
-                } else {
-                    return false
-                }
-            }
-        }
-    )
-}
-const checkForEmptyValue = (entry, type) => {
-    if (!entry || entry.length <= 1) {
-        console.log(`${type} Can't Be Empty`)
-        return false
-    } else {
-        console.log('OK')
-        return true
-    }
+
+
+function userExistsInDb(username) {
+	return client
+		.query("SELECT uname FROM users WHERE uname=$1", [username])
+		.then(function (data) {
+			if (data.rows.length === 0) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		})
+		.catch((err) => {
+			console.error(err)
+		})
 }
 
+
+
 module.exports = {
-    checkForEmptyValue,
-    checkUserExistance,
+    userExistsInDb
 }

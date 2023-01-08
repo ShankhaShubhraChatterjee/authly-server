@@ -19,6 +19,7 @@ block content
                             i.bi.bi-camera
                         input#profile-pic-input.profile-pic-input(
                             type='file',
+                            accept='.jpg,.jpeg,.png,.svg,.bmp,.gif,.avif',
                             name='profile-picture'
                         )
                 .profile-info.is-size-5
@@ -31,10 +32,16 @@ block content
                     .email
                         h3 Email
                         p #{userinfo.email}
-                    a.button.my-2.has-background-danger.has-text-white(
-                        type='submit',
-                        name='account_logout_button'
-                    ) Log Out
+                    
+                    .account-page-btn-container.is-flex.flex-direction-row.is-justify-content-space-between.is-align-items-center
+                        a.button.my-2.has-background-warning.has-text-white(
+                            href='/user/logout',
+                            name='account_logout_button'
+                        ) Log Out
+                        a.button.my-2.has-background-danger.has-text-white(
+                            href='/user/delete-account',
+                            name='account_delete_button'
+                        ) Delete Account
 
             .update-info-container.account-section-cell
                 h2.is-size-3 Update Your Info
@@ -42,17 +49,17 @@ block content
                     h3.is-size-5 Change Details
                     input.input(
                         type='text',
-                        name='update_name',
+                        name='update_fname',
                         placeholder='Update Your Name'
                     )
                     input.input(
                         type='text',
-                        name='update_name',
+                        name='update_uname',
                         placeholder='Update Your Username'
                     )
                     input.input(
                         type='email',
-                        name='update_name',
+                        name='update_email',
                         placeholder='Update Your Email'
                     )
                     h3.is-size-5 Change Password

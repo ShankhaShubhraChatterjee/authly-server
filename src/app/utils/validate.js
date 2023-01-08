@@ -17,8 +17,6 @@ function userExistsInDb(username) {
 		})
 }
 
-
-
 module.exports = {
     userExistsInDb
 }

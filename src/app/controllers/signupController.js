@@ -1,8 +1,7 @@
 // src/app/controllers/signupController.js
 
 const { client } = require('../utils/db')
-const regex = require('./../utils/regex')
-const query = require('./../utils/query')
+const { regex } = require('./../utils/regex')
 const { userExistsInDb } = require('./../utils/validate')
 const bcrypt = require('bcrypt')
 var errors = {

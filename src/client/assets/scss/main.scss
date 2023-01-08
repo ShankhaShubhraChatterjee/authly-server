@@ -9,15 +9,14 @@
 @use 'components/notfound';
 
 html {
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255, 255, 255, 0.7);
+    height: 100%;
 }
 body {
- display: flex;
- flex-direction: column;
- justify-content: space-between;
- align-items: center;
-}
-html, body, .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     height: 100%;
 }
 .container {
@@ -26,4 +25,5 @@ html, body, .container {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 95%;
 }

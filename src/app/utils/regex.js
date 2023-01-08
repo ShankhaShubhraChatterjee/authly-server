@@ -5,4 +5,4 @@ var regex = {
     pcode : new RegExp(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-\#\$\.\%\&\*])(?=.*[a-zA-Z]).{8,16}$/gm)
 }
 
-module.exports = regex;
+module.exports = { regex };

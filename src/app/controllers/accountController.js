@@ -8,40 +8,106 @@ const accountErrors = {
     pcodeError: '',
     pcodeMatch: '',
 }
+const getData = async () => {
+    return client.query('SELECT * FROM users WHERE uname=$1', ["fossy0123"], (err ,data) => {
+        if(err) console.error(err)
+        else {return data.rows[0].fname}
+    })
+}
 const sendAccountPage = async (req, res) => {
     // if (!req.session.auth) {
-    //     res.render('pages/forbidden.pug')
+    //     res.redirect('forbidden')
     // } else {
     // let fname = req.session.user.fname || null;
     // let uname = req.session.user.uname || null;
     // let email = req.session.user.email || null;
-    let fname,
-        email,
-        uname = null
+    // let avtar = req.session.user.email || null;
+    let fetch = await getData();
+    console.log(fetch)
+    let fname, email, uname, avtar = null
+    fname = "Foster Z"
     res.render('pages/account.pug', {
         userinfo: {
             fname: fname,
             uname: uname,
             email: email,
+            avtar: avtar
         },
         errors: accountErrors,
     })
 }
-const handleAccountUpdates = (req, res) => {
+const handleAccountUpdates = async (req, res) => {
     const updates = {
         fname: req.body.update_fname,
         uname: req.body.update_uname,
         email: req.body.update_email,
+        avtar: req.body.update_avtar
     }
     if(regex.fname.test(updates.fname)){
         console.log("Updating Full Name")
+        client.query(
+            'UPDATE users SET fname=$1 WHERE uname=$2',
+            [updates.fname, "fossy0123"],
+            (err, data) => {
+                if(err) console.error(err)
+                else {
+                    console.log("Updated Successfully")
+                }
+            }
+        )
+    }
+    else {
+        if(updates.fname.length === 0){
+            console.log("Full Name Input Empty, Ignoring Update")
+        }
+        else {
+            console.log("")
+        }
     }
     if(regex.uname.test(updates.uname)){
-        console.log("Updating Full Name")
+        console.log("Updating User Name")
+        client.query(
+            'UPDATE users SET uname WHERE uname=$1',
+            [updates.uname],
+            (err, data) => {
+                if(err) console.error(err)
+                else {
+                    console.log("Updated Successfully")
+                }
+            }
+        )
     }
-    if(regex.fname.test(updates.fname)){
-        console.log("Updating Full Name")
+    else {
+        if(updates.uname.length === 0){
+            console.log("Username Input Empty, Ignoring Update")
+        }
+        else {
+            console.log("")
+        }
     }
+    if(regex.fname.test(updates.email)){
+        console.log("Updating Email")
+        client.query(
+            'UPDATE users SET email WHERE email=$1',
+            [updates.email],
+            (err, data) => {
+                if(err) console.error(err)
+                else {
+                    console.log("Updated Successfully")
+                }
+            }
+        )
+    }
+    else {
+        if(updates.email.length === 0){
+            console.log("Email Input Empty, Ignoring Update")
+        }
+        else {
+            console.log("")
+        }
+    }
+    res.redirect("/account")
+    res.end()
 }
 const handlePasswordUpdates = (req, res) => {
     const passcode = {

@@ -43,9 +43,11 @@ router.get("/signout", (req, res) => {
     res.redirect("/");
     res.end()
 })
+router
 router.use('/account', routes.accountRoute)
-let auth = true;
+
 app.use("/384534983hg89h34g349", (req, res) => {
+    let auth = req.session.auth;
     res.render('templates/base.pug', { auth: auth })
 })
 

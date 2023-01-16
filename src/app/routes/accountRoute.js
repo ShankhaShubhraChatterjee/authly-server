@@ -11,7 +11,7 @@ const {
 
 router.get('/', sendAccountPage)
 router.post('/user/update', handleAccountUpdates)
-router.post('/user/delete-account', handleAccountDeletion)
+router.post('/', handleAccountDeletion)
 router.post('/user/logout', handleAccountLogOut)
 
 module.exports = router

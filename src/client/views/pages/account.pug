@@ -52,16 +52,19 @@ block content
                         name='update_fname',
                         placeholder='Update Your Name'
                     )
+                    p #{errors.fnameError}
                     input.input(
                         type='text',
                         name='update_uname',
                         placeholder='Update Your Username'
                     )
+                    p #{errors.unameError}
                     input.input(
                         type='email',
                         name='update_email',
                         placeholder='Update Your Email'
                     )
+                    p #{errors.emailError}
                     h3.is-size-5 Change Password
 
                     input.input(
@@ -69,7 +72,7 @@ block content
                         name='update_current_password',
                         placeholder='Type Current Password'
                     )
-
+                    p #{errors.emailError}
                     input.input(
                         type='password',
                         name='update_new_password',

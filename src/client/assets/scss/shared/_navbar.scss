@@ -1,28 +1,33 @@
 #profile {
-    width: 40px;
     height: 40px;
+    width: 40px;
 }
+
 #title {
-    display: flex;
     align-items: center;
+    display: flex;
 }
+
 .profile {
+    left: 50%;
     position: absolute;
     top: 6px;
-    left: 50%;
     transform: translate(-50%, 0%);
 }
+
 .control {
-    width: inherit;
-    display: inherit;
     align-items: center;
+    display: inherit;
     justify-content: space-evenly;
+    width: inherit;
 }
-@media only screen and (max-width: 1030px){
+
+@media only screen and (max-width: 1030px) {
     .control {
-        display: flex;
         align-items: center;
+        display: flex;
         justify-content: center;
+
         a {
             width: 100%;
         }

@@ -99,36 +99,7 @@ const handleAccountUpdates = async (req, res) => {
     res.redirect('/account')
     res.end()
 }
-const handlePasswordUpdates = async (req, res) => {
-    const passcode = {
-        currentPassword: req.body.current_password,
-        newPassword: req.body.new_password,
-        confirmPassword: req.body.confim_password,
-    }
-    client.query(
-        'SELECT passcode FROM users WHERE uname=$1',
-        ['fossy0123'],
-        (err, data) => {
-            if (err) console.error(err)
-            else {
-                let password = data.rows[0]
-                bcrypt.compare(
-                    passcode.currentPassword,
-                    password,
-                    (err, pcode) => {
-                        if (err) console.error(err)
-                        else {
-                            if (!pcode) {
-                                accountErrors.pcodeMatch = 'Incorrect Password'
-                                res.redirect('/')
-                            }
-                        }
-                    }
-                )
-            }
-        }
-    )
-}
+
 const handleAccountLogOut = async (req, res) => {
     await req.session.destroy()
     await res.redirect('/')

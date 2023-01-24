@@ -1,17 +1,20 @@
 .form-utilities {
     display: flex;
     flex-direction: column;
+
     label {
         margin-bottom: 5px;
     }
+
     span {
-        width: 100%;
-        display: flex;
         align-items: center;
+        display: flex;
         flex-direction: inherit;
         justify-content: space-between;
+        width: 100%;
+
         p {
-            margin: 5px 0 5px 0;
+            margin: 5px 0;
         }
     }
 }

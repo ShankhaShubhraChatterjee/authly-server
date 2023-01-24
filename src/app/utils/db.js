@@ -8,4 +8,4 @@ const client = new Pool({
     port: process.env.DB_PORT,
 })
 
-module.exports = { client } 
+module.exports = { client }

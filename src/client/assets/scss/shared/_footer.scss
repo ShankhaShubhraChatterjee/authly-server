@@ -1,19 +1,21 @@
 footer {
-    text-align: center;
-    width: 100%;
-    display: flex;
     align-items: center;
-    justify-content: center;
     background-color: white;
     box-shadow: 0 -5px 10px darkgray;
+    display: flex;
+    justify-content: center;
     margin-top: 15px;
+    text-align: center;
+    width: 100%;
+
     h3 {
-        padding: 10px;
-        display: flex;
         align-items: center;
-        justify-content: center;
-        font-weight: 900;
+        display: flex;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 900;
+        justify-content: center;
+        padding: 10px;
+
         i {
             margin-right: 5px;
         }

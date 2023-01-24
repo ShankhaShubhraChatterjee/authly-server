@@ -2,11 +2,11 @@ extends ../templates/base.pug
 block title
     title Create Account
 block content
-    form.form-container(
-        action='signup',
-        method='POST'
-    )
+    form.form-container(action='signup', method='POST')
         .field 
+            |
+            |
+            |
             |
             h1.is-size-1 Sign Up
         .field
@@ -59,14 +59,20 @@ block content
             span.span-error.is-size-6.has-text-grey #{ errors.pcodeError }
         .field
             .control.form-utilities
-                span 
+                span
                     p
                         | Already An User ?
                         a(href='/signin') 
+                            |
+                            |
+                            |
                             | Login
                     p
                         | Forgot Password ?
                         a(href='/forgot-password') 
+                            |
+                            |
+                            |
                             | Reset
         .field.is-grouped
             .control
@@ -75,40 +81,40 @@ block content
                     value='Create Account'
                 )
     script(type='text/javascript').
-        const signupFname = document.getElementById('signup-fname');
-        const signupUname = document.getElementById('signup-uname');
-        const signupEmail = document.getElementById('signup-email');
+        const signupFname = document.getElementById('signup-fname')
+        const signupUname = document.getElementById('signup-uname')
+        const signupEmail = document.getElementById('signup-email')
 
-        const signupSubmit = document.getElementById('signup-submit');
-        const signupEye = document.getElementById('signup-eye');
-        const pcode = document.getElementsByClassName('password-field')[0];
+        const signupSubmit = document.getElementById('signup-submit')
+        const signupEye = document.getElementById('signup-eye')
+        const pcode = document.getElementsByClassName('password-field')[0]
 
         const storeRegisterInputValues = () => {
-            localStorage.setItem('signup-fname', signupFname.value);
-            localStorage.setItem('signup-uname', signupUname.value);
-            localStorage.setItem('signup-email', signupEmail.value);
-            console.log('Click Executed');
-        };
+            localStorage.setItem('signup-fname', signupFname.value)
+            localStorage.setItem('signup-uname', signupUname.value)
+            localStorage.setItem('signup-email', signupEmail.value)
+            console.log('Click Executed')
+        }
         const restoreRegisterInputValues = () => {
-            signupFname.value = localStorage.getItem('signup-fname');
-            signupUname.value = localStorage.getItem('signup-uname');
-            signupEmail.value = localStorage.getItem('signup-email');
-        };
+            signupFname.value = localStorage.getItem('signup-fname')
+            signupUname.value = localStorage.getItem('signup-uname')
+            signupEmail.value = localStorage.getItem('signup-email')
+        }
         const clearRegisterInputValues = () => {
-            localStorage.setItem('signup-fname', '');
-            localStorage.setItem('signup-uname', '');
-            localStorage.setItem('signup-email', '');
-        };
+            localStorage.setItem('signup-fname', '')
+            localStorage.setItem('signup-uname', '')
+            localStorage.setItem('signup-email', '')
+        }
         const showHidePassword = () => {
             if (pcode.type === 'password') {
-                signupEye.className = 'eye-icon fas fa-eye-slash';
-                pcode.type = 'text';
+                signupEye.className = 'eye-icon fas fa-eye-slash'
+                pcode.type = 'text'
             } else {
-                signupEye.className = 'eye-icon fas fa-eye';
-                pcode.type = 'password';
+                signupEye.className = 'eye-icon fas fa-eye'
+                pcode.type = 'password'
             }
-        };
-        signupSubmit.addEventListener('click', storeRegisterInputValues);
-        signupEye.addEventListener('click', showHidePassword);
-        window.addEventListener('load', restoreRegisterInputValues);
-        setTimeout(clearRegisterInputValues, 300000);
+        }
+        signupSubmit.addEventListener('click', storeRegisterInputValues)
+        signupEye.addEventListener('click', showHidePassword)
+        window.addEventListener('load', restoreRegisterInputValues)
+        setTimeout(clearRegisterInputValues, 300000)

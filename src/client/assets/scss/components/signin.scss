@@ -1,14 +1,15 @@
 .form-container {
-    width: 100%;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    width: 100%;
 }
+
 .eye {
-    position: absolute;
-    top:8px;
-    right: 10px;
     background: none;
     border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 8px;
 }

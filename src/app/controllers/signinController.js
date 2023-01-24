@@ -9,15 +9,13 @@ var errors = {
 }
 
 const sendSigninPage = (req, res) => {
-	if(req.session.auth){
-		res.redirect("/account")
-		res.end()
-	}
-	else {
-		res.render('pages/signin.pug', { error: errors })
-    	res.end()
-	}
-    
+    if (req.session.auth) {
+        res.redirect('/account')
+        res.end()
+    } else {
+        res.render('pages/signin.pug', { error: errors })
+        res.end()
+    }
 }
 
 const handleSignin = async (req, res) => {

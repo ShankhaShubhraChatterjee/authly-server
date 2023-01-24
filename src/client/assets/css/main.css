@@ -33,9 +33,9 @@
 }
 
 .index-get-started button a {
-  width: 100%;
   color: #fff;
   height: 100%;
+  width: 100%;
   background-color: #000000e6;
   border: 1px solid #ff4500;
   border-radius: 5px;
@@ -65,8 +65,8 @@
 }
 
 #profile {
-  width: 40px;
   height: 40px;
+  width: 40px;
 }
 
 #title {
@@ -82,8 +82,8 @@
 }
 
 .control {
-  width: inherit;
   display: inherit;
+  width: inherit;
   justify-content: space-evenly;
   align-items: center;
 }
@@ -134,8 +134,8 @@ footer h3 i {
 }
 
 .form-utilities span {
-  width: 100%;
   flex-direction: inherit;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   display: flex;
@@ -189,6 +189,31 @@ footer h3 i {
   text-align: center;
 }
 
+.update-info-container {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.update-info-container input {
+  margin: 5px 0;
+}
+
+.update-info-container .update-info {
+  width: 90%;
+}
+
+.update-info-container .update-info h3 {
+  margin: 5px 0;
+}
+
+.update-info-container .update-info .account-submit-section {
+  text-align: center;
+  width: 100%;
+}
+
 .profile-info-container {
   width: 100%;
   padding: 0 40px;
@@ -217,15 +242,15 @@ footer h3 i {
 }
 
 .profile-info-container-pic .profile-section {
-  width: 150px;
   height: 150px;
+  width: 150px;
   position: relative;
 }
 
 .profile-info-container-pic .profile-section img {
-  width: 150px;
   height: 150px;
   object-fit: cover;
+  width: 150px;
   border-radius: 50%;
 }
 
@@ -246,31 +271,6 @@ footer h3 i {
 .profile-info-container-pic .profile-section label i {
   color: #fff;
   font-size: 1.2em;
-}
-
-.update-info-container {
-  text-align: center;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.update-info-container input {
-  margin: 5px 0;
-}
-
-.update-info-container .update-info {
-  width: 90%;
-}
-
-.update-info-container .update-info h3 {
-  margin: 5px 0;
-}
-
-.update-info-container .update-info .account-submit-section {
-  width: 100%;
-  text-align: center;
 }
 
 @media only screen and (max-width: 800px) {

@@ -1,16 +1,20 @@
 nav.navbar.is-white.has-shadow.is-fixed-top
     // logo / brand
     .navbar-brand
-        a(href="/").navbar-item#title
-            img#logo(style="margin: 0 10px 0 0!important;" ,src='./img/authly.png', alt='Authly Logo')
+        a#title.navbar-item(href='/')
+            img#logo(
+                style='margin: 0 10px 0 0 !important',
+                src='./img/authly.png',
+                alt='Authly Logo'
+            )
             h1.is-size-4 Authly
         a#burger.navbar-burger
             span
             span
             span
 
-    a.nav-item.profile(href="/account")
-            img#profile(src="./img/user.png", alt="Profile Placeholder Image") 
+    a.nav-item.profile(href='/account')
+        img#profile(src='./img/user.png', alt='Profile Placeholder Image') 
 
     #nav-links.navbar-menu.has-text-centered
         // right links
@@ -26,7 +30,7 @@ nav.navbar.is-white.has-shadow.is-fixed-top
                         span.icon.has-text-primary-light
                             i.fa-solid.fa-arrow-right-to-bracket
                         span.has-text-primary-light Sign Out
-                else 
+                else
                     a.button.has-background-black(href='/signin')
                         span.icon.has-text-primary-light
                             i.fa-solid.fa-arrow-right-to-bracket

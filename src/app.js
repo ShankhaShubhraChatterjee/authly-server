@@ -7,14 +7,14 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const session = require('express-session')
-const { v5: uuidv5 } = require("uuid")
+const { v5: uuidv5 } = require('uuid')
 const pgStore = require('connect-pg-simple')(session)
-const { client } = require('./app/utils/db');
+const { client } = require('./app/utils/db')
 
 // Utilities
 const server = require('./app/utils/server')
-const { sessionOptions } = require('./app/utils/session');
-const { routes } = require('./app/utils/route');
+const { sessionOptions } = require('./app/utils/session')
+const { routes } = require('./app/utils/route')
 
 // Module Implementation
 const app = express()
@@ -37,22 +37,22 @@ app.use((req, res, next) => {
 router.use('/', routes.homeRoute)
 router.use('/signin', routes.signinRoute)
 router.use('/signup', routes.signupRoute)
-router.get("/signout", (req, res) => {
-    req.session.auth = false;
-    req.session.destroy();
-    res.redirect("/");
+router.get('/signout', (req, res) => {
+    req.session.auth = false
+    req.session.destroy()
+    res.redirect('/')
     res.end()
 })
 router
 router.use('/account', routes.accountRoute)
 
-app.use("/384534983hg89h34g349", (req, res) => {
-    let auth = req.session.auth;
+app.use('/384534983hg89h34g349', (req, res) => {
+    let auth = req.session.auth
     res.render('templates/base.pug', { auth: auth })
 })
 
 app.use(router)
-app.use("*", (_, res) => {
+app.use('*', (_, res) => {
     res.render('pages/notfound.pug')
 })
-app.listen(process.env.APP_PORT, server);
+app.listen(process.env.APP_PORT, server)

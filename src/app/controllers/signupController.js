@@ -9,7 +9,7 @@ var errors = {
     unameError: '',
     emailError: '',
     pcodeError: '',
-    userExists: ''
+    userExists: '',
 }
 const sendSignUpPage = (req, res) => {
     res.render('pages/signup.pug', { errors: errors })
@@ -17,7 +17,6 @@ const sendSignUpPage = (req, res) => {
     res.end()
 }
 const createUser = async (req, res) => {
-    
     let user = {
         fname: req.body.signup_fullname,
         uname: req.body.signup_username,

@@ -2,40 +2,54 @@ extends ../templates/base.pug
 block title
     title Signin
 block content
-    form(action="", method="POST").form-container
+    form.form-container(action='', method='POST')
         .field 
+            |
+            |
+            |
             h1.is-size-1 Sign In
             //- p.has-text-danger= userExistsError
         .field
             label.label Username
             .control.has-icons-left.has-icons-right
-                input.input.is-link(type='text', placeholder='Username' name="signin_username")
+                input.input.is-link(
+                    type='text',
+                    placeholder='Username',
+                    name='signin_username'
+                )
                 span.icon.is-small.is-left
                     i.fas.fa-user-circle
             p.has-text-danger= error.unameError
+            p.has-text-danger= error.userExists
         .field
             label.label Password
             .control.has-icons-left.has-icons-right
-                input.password-field.input.is-link(type='password', placeholder='Password', name="signin_password")
+                input.password-field.input.is-link(
+                    type='password',
+                    placeholder='Password',
+                    name='signin_password'
+                )
                 span.icon.is-small.is-left
                     i.bi.bi-key
                 span.eye.is-small.is-right
-                    i#login-eye.eye-icon.fas.fa-eye-slash(style='cursor: pointer; z-index: 1')
+                    i#login-eye.eye-icon.fas.fa-eye-slash(
+                        style='cursor: pointer; z-index: 1'
+                    )
             p.has-text-danger= error.pcodeError
         .field.is-grouped
             .control
                 button.button.is-link Login
         .field.has-text-centered
-            label.checkbox(style="margin-top:5px;")
-                input(type='checkbox')
-                |  Remember Me
             .control
-                span 
+                span
                     p
-                        | First Time Here ? 
-                        a(href="/signup") 
-                            | Register 
-    script(type="text/javascript").
+                        | First Time Here ?
+                        a(href='/signup') 
+                            |
+                            |
+                            |
+                            | Register
+    script(type='text/javascript').
         const loginEye = document.getElementById('login-eye')
         const pcode = document.getElementsByClassName('password-field')[0]
 
@@ -49,4 +63,3 @@ block content
             }
         }
         loginEye.addEventListener('click', showHidePassword)
-        

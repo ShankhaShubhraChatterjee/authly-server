@@ -1,112 +1,123 @@
 .account-container {
-	max-width: 100%!important;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin-top: 60px;
-	display: flex;
-	align-items: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 60px;
+    max-width: 100% !important;
 }
 
 .account-sections {
-	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-auto-columns: minmax(250px, auto);
-	row-gap: 10px;
-	column-gap: 10px;
+    column-gap: 10px;
+    display: grid;
+    grid-auto-columns: minmax(250px, auto);
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 10px;
+    width: 100%;
 }
 
 .account-section-cell {
-	position: relative;
-	border-radius: 10px;
-	background-color: rgba(255, 255, 255, 0.1);
-	border: 5px solid orangered;
-	h2 {
-		text-align: center;
-	}
+    background-color: rgb(255 255 255 / 10%);
+    border: 5px solid orangered;
+    border-radius: 10px;
+    position: relative;
+
+    h2 {
+        text-align: center;
+    }
+}
+
+.update-info-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    input {
+        margin: 5px 0;
+    }
+
+    .update-info {
+        width: 90%;
+
+        h3 {
+            margin: 5px 0;
+        }
+
+        .account-submit-section {
+            text-align: center;
+            width: 100%;
+        }
+    }
 }
 
 .profile-info-container {
-	width: 100%;
-	padding: 0 40px 0 40px;
-	.profile-info {
-		.uname,
-		.fname,
-		.email {
-			display: flex;
-			justify-content: space-between;
-			h3 {
-				text-align: left;
-			}
+    padding: 0 40px;
+    width: 100%;
 
-			p {
-				text-align: right;
-			}
-		}
-	}
+    .profile-info {
+        .uname,
+        .fname,
+        .email {
+            display: flex;
+            justify-content: space-between;
+
+            h3 {
+                text-align: left;
+            }
+
+            p {
+                text-align: right;
+            }
+        }
+    }
 }
 
 .profile-info-container-pic {
-	text-align: center;
-	margin-top: 5px;
-	border-radius: 50%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	.profile-section {
-		position: relative;
-		width: 150px;
-		height: 150px;
-		img {
-			width: 150px;
-			height: 150px;
-			object-fit: cover;
-			border-radius: 50%;
-		}
-		#profile-pic-input {
-			display: none;
-		}
-		label {
-			cursor: pointer;
-			position: absolute;
-			bottom: 17px;
-			right: 17px;
-			border-radius: 50%;
-			padding:0px 5px 2px 5px;
-			i {
-				font-size: 1.2em;
-				color: white;
-			}
-			background: black;
-		}
-	}
-}
-.update-info-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	input {
-		margin: 5px 0 5px 0;
-	}
-	.update-info {
-		width: 90%;
-		h3 {
-			margin: 5px 0 5px 0;
-		}
-		.account-submit-section {
-			width: 100%;
-			text-align: center;
-		}
-	}
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
+
+    .profile-section {
+        height: 150px;
+        position: relative;
+        width: 150px;
+
+        img {
+            border-radius: 50%;
+            height: 150px;
+            object-fit: cover;
+            width: 150px;
+        }
+
+        #profile-pic-input {
+            display: none;
+        }
+
+        label {
+            background: black;
+            border-radius: 50%;
+            bottom: 17px;
+            cursor: pointer;
+            padding: 0 5px 2px;
+            position: absolute;
+            right: 17px;
+
+            i {
+                color: white;
+                font-size: 1.2em;
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 800px) {
-	.account-sections {
-		grid-template-columns: repeat(1, 1fr) !important;
-		width: 95%;
-	}
+    .account-sections {
+        grid-template-columns: repeat(1, 1fr) !important;
+        width: 95%;
+    }
 }

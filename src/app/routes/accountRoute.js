@@ -6,7 +6,7 @@ const {
     sendAccountPage,
     handleAccountDeletion,
     handleAccountLogOut,
-    handleAccountUpdates
+    handleAccountUpdates,
 } = require('./../controllers/accountController')
 
 router.get('/', sendAccountPage)

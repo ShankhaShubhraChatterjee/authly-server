@@ -1,12 +1,19 @@
 const { client } = require('./../utils/db')
 const { regex } = require('./../utils/regex')
 const bcrypt = require('bcrypt')
+const {
+    updateOldPassword,
+    matchPasswordFromDB,
+    matchPasswords,
+} = require('../modules/comparePassword')
+
 const accountErrors = {
     fnameError: '',
     unameError: '',
     emailError: '',
     pcodeError: '',
-    pcodeMatch: '',
+    pcodeMatchError: '',
+    pcodeUpdateError: '',
 }
 
 const sendAccountPage = async (req, res) => {
@@ -39,61 +46,37 @@ const handleAccountUpdates = async (req, res) => {
         email: req.body.update_email,
         avtar: req.body.update_avtar,
     }
-    if (regex.fname.test(updates.fname)) {
-        console.log('Updating Full Name')
-        client.query(
-            'UPDATE users SET fname=$1 WHERE uname=$2',
-            [updates.fname, 'fossy0123'],
-            (err, data) => {
-                if (err) console.error(err)
-                else {
-                    console.log('Updated Successfully')
-                }
-            }
-        )
-    } else {
-        if (updates.fname.length === 0) {
-            console.log('Full Name Input Empty, Ignoring Update')
-        } else {
-            console.log('')
-        }
+    const passcode = {
+        currentPassword: req.body.current_password,
+        newPassword: req.body.new_password,
+        confirmPassword: req.body.confim_password,
     }
-    if (regex.uname.test(updates.uname)) {
-        console.log('Updating User Name')
-        client.query(
-            'UPDATE users SET uname WHERE uname=$1',
-            [updates.uname],
-            (err, data) => {
-                if (err) console.error(err)
-                else {
-                    console.log('Updated Successfully')
-                }
-            }
-        )
-    } else {
-        if (updates.uname.length === 0) {
-            console.log('Username Input Empty, Ignoring Update')
-        } else {
-            console.log('')
-        }
+    const queries = {
+        getPasswordQuery: 'SELECT passcode FROM users WHERE uname=$1',
     }
-    if (regex.fname.test(updates.email)) {
-        console.log('Updating Email')
-        client.query(
-            'UPDATE users SET email WHERE email=$1',
-            [updates.email],
-            (err, data) => {
-                if (err) console.error(err)
-                else {
-                    console.log('Updated Successfully')
-                }
-            }
+    let oldPasswordMatches = await matchPasswordFromDB(
+        queries.getPasswordQuery,
+        ['fossy0123'],
+        passcode.currentPassword
+    )
+    let newPasswordMatches = matchPasswords(
+        passcode.newPassword,
+        passcode.confirmPassword
+    )
+    // let updateOldPassword = await updateOldPassword()
+    if (
+        regex.pcode.test(
+            passcode.currentPassword,
+            passcode.newPassword,
+            passcode.confirmPassword
         )
-    } else {
-        if (updates.email.length === 0) {
-            console.log('Email Input Empty, Ignoring Update')
-        } else {
-            console.log('')
+    ) {
+        if (oldPasswordMatches) {
+            if (newPasswordMatches) {
+                console.log('Password Updated Successfully')
+            } else {
+                accountErrors.pcodeUpdateError = 'Error Updating Pasword'
+            }
         }
     }
     res.redirect('/account')

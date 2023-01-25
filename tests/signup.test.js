@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { client } = require('./../src/app/utils/db')
+const { client } = require('../src/app/utils/db')
 
 let input = "foss0123";
 

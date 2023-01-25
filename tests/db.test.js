@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { client } = require('../src/app/utils/db')
-const signin = require('./../src/app/controllers/signinController');
-const signup = require('./../src/app/controllers/signupController');
+const signin = require('../src/app/controllers/signinController');
+const signup = require('../src/app/controllers/signupController');
 
 let username = "moss0123";
 

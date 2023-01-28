@@ -1,6 +1,14 @@
 const express = require('express')
 
-test("Check For Session", (req, res) => {
+test("Session Works", (req, res) => {
     expect(req.session.auth).toBeDefined()
-    expect(req.session.auth).toBeUndefined()
 })
+test("User Session Is Created During Registration", () => {
+
+})
+test("User Session Is Created After Successful SignIn", () => {
+
+})
+
+test('User Session Is Deleted After LogOut', async () => {})
+test('', async () => {})

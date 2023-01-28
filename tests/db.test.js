@@ -6,7 +6,7 @@ const signup = require('../src/app/controllers/signupController');
 let username = "moss0123";
 
 // test Database Query 
-test('Query Username', async () => {
+test('DataBase Works', async () => {
     client.query(`SELECT * FROM users WHERE uname=$1;`,[username], (err, data) => {
         if (err) {
             console.error(err)

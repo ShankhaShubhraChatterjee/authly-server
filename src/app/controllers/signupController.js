@@ -2,15 +2,11 @@
 
 const { client } = require('../utils/db')
 const { regex } = require('./../utils/regex')
+const { SQL } = require('./../utils/query')
+const { errors } = require('./../utils/error')
 const { userExistsInDb } = require('./../utils/validate')
 const bcrypt = require('bcrypt')
-var errors = {
-    fnameError: '',
-    unameError: '',
-    emailError: '',
-    pcodeError: '',
-    userExists: '',
-}
+
 const sendSignUpPage = (req, res) => {
     res.render('pages/signup.pug', { errors: errors })
     console.log(req.session.auth)
@@ -76,16 +72,19 @@ const createUser = async (req, res) => {
             bcrypt.compare(user.pcode, hashedPassword, (err, result) => {
                 if (err) console.error(err)
                 else {
-                    client.query(
-                        'INSERT INTO users(fname, uname, email, passcode) VALUES($1, $2, $3, $4)',
-                        [user.fname, user.uname, user.email, hashedPassword],
-                        (err, data) => {
-                            if (err) console.error(err)
-                            else {
-                                console.log('Success')
-                            }
-                        }
-                    )
+                    client
+                        .query(SQL.createNewUser, [
+                            user.fname,
+                            user.uname,
+                            user.email,
+                            hashedPassword,
+                        ])
+                        .then((data) => {
+                            console.log('Success')
+                        })
+                        .catch((err) => {
+                            console.error(err)
+                        })
                 }
             })
         }

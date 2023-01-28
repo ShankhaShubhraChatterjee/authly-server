@@ -1,5 +1,7 @@
 const { client } = require('./../utils/db')
 const { regex } = require('./../utils/regex')
+const { SQL } = require('./../utils/query')
+const { errors } = require('./../utils/error')
 const bcrypt = require('bcrypt')
 const {
     updateOldPassword,
@@ -7,14 +9,6 @@ const {
     matchPasswords,
 } = require('../modules/comparePassword')
 
-const accountErrors = {
-    fnameError: '',
-    unameError: '',
-    emailError: '',
-    pcodeError: '',
-    pcodeMatchError: '',
-    pcodeUpdateError: '',
-}
 
 const sendAccountPage = async (req, res) => {
     // if (!req.session.auth) {
@@ -28,7 +22,6 @@ const sendAccountPage = async (req, res) => {
         email,
         uname,
         avtar = null
-    fname = 'Foster Z'
     res.render('pages/account.pug', {
         userinfo: {
             fname: fname,
@@ -40,35 +33,29 @@ const sendAccountPage = async (req, res) => {
     })
 }
 const handleAccountUpdates = async (req, res) => {
-    const updates = {
+    const user = {
         fname: req.body.update_fname,
         uname: req.body.update_uname,
         email: req.body.update_email,
         avtar: req.body.update_avtar,
-    }
-    const passcode = {
         currentPassword: req.body.current_password,
         newPassword: req.body.new_password,
-        confirmPassword: req.body.confim_password,
-    }
-    const queries = {
-        getPasswordQuery: 'SELECT passcode FROM users WHERE uname=$1',
+        confirmPassword: req.body.confim_password
     }
     let oldPasswordMatches = await matchPasswordFromDB(
-        queries.getPasswordQuery,
+        SQL.getPasswordQuery,
         ['fossy0123'],
-        passcode.currentPassword
+        user.currentPassword
     )
     let newPasswordMatches = matchPasswords(
-        passcode.newPassword,
-        passcode.confirmPassword
+        user.newPassword,
+        user.confirmPassword
     )
-    // let updateOldPassword = await updateOldPassword()
     if (
         regex.pcode.test(
-            passcode.currentPassword,
-            passcode.newPassword,
-            passcode.confirmPassword
+            user.currentPassword,
+            user.newPassword,
+            user.confirmPassword
         )
     ) {
         if (oldPasswordMatches) {
@@ -89,16 +76,13 @@ const handleAccountLogOut = async (req, res) => {
 }
 const handleAccountDeletion = async (req, res) => {
     console.log('Deleted')
-    client.query(
-        'DELETE FROM users WHERE uname=$1',
-        [req.session.user.uname],
-        (err, _) => {
-            if (err) console.error(err)
-            else {
-                res.redirect('/')
-            }
-        }
-    )
+    client
+    .query(SQL.deleteByUsername, [req.session.user.uname])
+    .then(async () => {
+        await req.session.destroy();
+        await res.redirect('/')
+    })
+    .catch(err => console.error(err))
 }
 
 module.exports = {

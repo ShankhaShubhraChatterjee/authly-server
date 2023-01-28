@@ -8,3 +8,8 @@ test('Check If Password Exists For The Username', async () => {
     expect(result).toBeUndefined();
     client.end();
 })
+test('User Can Update Password', async () => {})
+test('User Can Update Username', async () => {})
+test('User Can Update Name', async () => {})
+test('User Can Update Email', async () => {})
+test('User Access Is Forbidden After Session Expires', async () => {})

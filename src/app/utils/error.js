@@ -1,5 +1,6 @@
 let errors = {
     // Client Side Errors For Account Page
+    accountImageUploadError: '',
     accountFnameError: '',
     accountUnameError: '',
     accountEmailError: '',

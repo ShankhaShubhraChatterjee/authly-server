@@ -1,15 +1,45 @@
+require('dotenv').config()
+const path = require('path')
 const { client } = require('./../utils/db')
 const { regex } = require('./../utils/regex')
 const { SQL } = require('./../utils/query')
 const { errors } = require('./../utils/error')
 const bcrypt = require('bcrypt')
+const ImageKit = require('imagekit')
+
 const {
     updateOldPassword,
     matchPasswordFromDB,
     matchPasswords,
 } = require('../modules/comparePassword')
 
-
+const imageKit = new ImageKit({
+    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
+})
+const uploadProfilePic = async (req, res) => {
+    let profileImage = {
+        originalFileName: await req.file.originalname,
+        fileName: await req.file.filename,
+        dest: await req.file.destination,
+        path: await req.file.path
+    }
+    await imageKit.upload({
+        file: profileImage.path,
+        fileName:profileImage.originalFileName,
+        extensions: [
+            {
+                width: 300,
+                height:300
+            }
+        ]
+    })
+    .then((data) => console.log(data))
+    .catch((err) => console.error(err))
+    await res.redirect("/")
+    await res.end()
+}
 const sendAccountPage = async (req, res) => {
     // if (!req.session.auth) {
     //     res.redirect('forbidden')
@@ -29,7 +59,7 @@ const sendAccountPage = async (req, res) => {
             email: email,
             avtar: avtar,
         },
-        errors: accountErrors,
+        errors: errors,
     })
 }
 const handleAccountUpdates = async (req, res) => {
@@ -40,7 +70,7 @@ const handleAccountUpdates = async (req, res) => {
         avtar: req.body.update_avtar,
         currentPassword: req.body.current_password,
         newPassword: req.body.new_password,
-        confirmPassword: req.body.confim_password
+        confirmPassword: req.body.confim_password,
     }
     let oldPasswordMatches = await matchPasswordFromDB(
         SQL.getPasswordQuery,
@@ -77,16 +107,17 @@ const handleAccountLogOut = async (req, res) => {
 const handleAccountDeletion = async (req, res) => {
     console.log('Deleted')
     client
-    .query(SQL.deleteByUsername, [req.session.user.uname])
-    .then(async () => {
-        await req.session.destroy();
-        await res.redirect('/')
-    })
-    .catch(err => console.error(err))
+        .query(SQL.deleteByUsername, [req.session.user.uname])
+        .then(async () => {
+            await req.session.destroy()
+            await res.redirect('/')
+        })
+        .catch((err) => console.error(err))
 }
 
 module.exports = {
     sendAccountPage,
+    uploadProfilePic,
     handleAccountLogOut,
     handleAccountUpdates,
     handleAccountDeletion,

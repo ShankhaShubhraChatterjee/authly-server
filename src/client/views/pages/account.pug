@@ -4,19 +4,14 @@ block title
 
 block content
     .account-container 
-        |
-        |
-        |
-        |
-        |
         h1.has-text-centered.is-size-1 Your Account
         .account-sections
             .profile-info-container.account-section-cell
                 h2.is-size-3 #{ userinfo.fname }'s Profile
-                .profile-info-container-pic
+                form(action="account/user/upload/profile_pic" method="POST" enctype="multipart/form-data").profile-info-container-pic
                     .profile-section
                         img(
-                            src='./img/user.png',
+                            src='./img/application/user.png',
                             alt='Account Profile Picture'
                         )
                         label(for='profile-pic-input')
@@ -24,9 +19,11 @@ block content
                         input#profile-pic-input.profile-pic-input(
                             type='file',
                             accept='.jpg,.jpeg,.png,.svg,.bmp,.gif,.avif',
-                            name='profile-picture'
+                            name='profile_picture'
                         )
-                .profile-info.is-size-5
+                    p.has-text-danger Upload A File
+                    button.profile-pic-upload-button(type="submit") Upload
+                form(action="/account" method="POST").profile-info.is-size-5
                     .fname
                         h3 Name
                         p #{ userinfo.fname }

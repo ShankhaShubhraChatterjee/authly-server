@@ -1,4 +1,4 @@
-let errors = {
+let clientErrors = {
     // Client Side Errors For Account Page
     accountImageUploadError: '',
     accountFnameError: '',
@@ -14,11 +14,8 @@ let errors = {
     signInUserExists: '',
 
     // Client Side Errors For SignUp Page
-    signUpFnameError: '',
-    signUpUnameError: '',
-    signUpEmailError: '',
-    signUpPcodeError: '',
+    signupErrors: {},
     signUpUserExists: '',
 }
 
-module.exports = { errors }
+module.exports = { clientErrors }

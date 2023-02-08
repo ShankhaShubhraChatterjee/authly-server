@@ -6,7 +6,7 @@ const { SQL } = require('./../utils/query')
 const { errors } = require('./../utils/error')
 const bcrypt = require('bcrypt')
 const ImageKit = require('imagekit')
-
+const notifications = {}
 const {
     updateOldPassword,
     matchPasswordFromDB,
@@ -16,7 +16,7 @@ const {
 const imageKit = new ImageKit({
     privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
     publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
-    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
+    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
 })
 const uploadProfilePic = async (req, res) => {
     let profileImage = {

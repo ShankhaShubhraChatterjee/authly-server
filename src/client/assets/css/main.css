@@ -1,5 +1,5 @@
 .index-page-container {
-  margin-top: 60px;
+  margin: 60px 0;
 }
 
 .index {
@@ -18,7 +18,7 @@
 }
 
 .index-content > img {
-  width: 300px;
+  max-width: 300px;
 }
 
 .index-content {
@@ -150,6 +150,7 @@ footer h3 i {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 50px 0;
   display: flex;
 }
 
@@ -296,12 +297,10 @@ footer h3 i {
 }
 
 html {
-  height: 100%;
   background-color: #ffffffb3;
 }
 
 body {
-  height: 100%;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -309,6 +308,8 @@ body {
 }
 
 .container {
+  height: inherit;
+  min-height: inherit;
   width: 95%;
   flex-direction: column;
   justify-content: center;

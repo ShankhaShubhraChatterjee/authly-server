@@ -1,16 +1,22 @@
 // src/app/controllers/signupController.js
 
 const { client } = require('../utils/db')
-const { regex } = require('./../utils/regex')
 const { SQL } = require('./../utils/query')
-const { errors } = require('./../utils/error')
+const { clientErrors } = require('./../utils/error')
 const { userExistsInDb } = require('./../utils/validate')
+const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcrypt')
 
 const sendSignUpPage = (req, res) => {
-    res.render('pages/signup.pug', { errors: errors })
-    console.log(req.session.auth)
+    // if (req.session.auth) {
+    //     res.redirect("/account")
+    //     res.end()
+    // }
+    // else {
+    res.render('pages/signup.pug', { errors: clientErrors.signupErrors, userExists: clientErrors.signUpUserExists })
     res.end()
+    // }
+    
 }
 const createUser = async (req, res) => {
     let user = {
@@ -20,78 +26,35 @@ const createUser = async (req, res) => {
         pcode: req.body.signup_password,
     }
     let userExists = await userExistsInDb(user.uname)
-
-    if (
-        !regex.fname.test(user.fname) ||
-        !regex.uname.test(user.uname) ||
-        !regex.email.test(user.email) ||
-        !regex.pcode.test(user.pcode) ||
-        userExists
-    ) {
-        if (regex.fname.test(user.fname)) {
-            errors.fnameError = 'Name Valid'
-        } else {
-            errors.fnameError = 'Name Not Valid'
+    const errorFormat = ({ location, msg, param, value, nestedErrors }) => {
+        return `${msg}`;
+    };
+    const errors = validationResult(req).formatWith(errorFormat)
+    if (!errors.isEmpty()) {
+        try { 
+            clientErrors.signupErrors = errors.mapped()
         }
-
-        if (regex.uname.test(user.uname)) {
-            errors.unameError = 'Username Valid'
-        } else {
-            errors.unameError = 'Username Not Valid'
-        }
-        if (userExists) {
-            errors.unameError = 'Username Already Taken'
-        } else {
-            errors.unameError = 'Username Available'
-        }
-        if (regex.email.test(user.email)) {
-            errors.emailError = 'Email Valid'
-        } else {
-            errors.emailError = 'Email Not Valid'
-        }
-
-        if (regex.pcode.test(user.pcode)) {
-            errors.pcodeError = 'Password Valid'
-        } else {
-            errors.pcodeError = 'Password Not Valid'
-        }
-        res.redirect('/signup')
+        catch (err) { console.error("No Error Occured") }
+        res.redirect("/signup")
         res.end()
-    } else {
-        if (
-            (regex.fname.test(user.fname),
-            regex.uname.test(user.uname),
-            regex.email.test(user.email),
-            regex.pcode.test(user.pcode),
-            !userExists)
-        ) {
-            req.session.auth = true
-            req.session.user = user
-            let salt = await bcrypt.genSalt()
-            let hashedPassword = await bcrypt.hash(user.pcode, salt)
-            bcrypt.compare(user.pcode, hashedPassword, (err, result) => {
-                if (err) console.error(err)
+    }
+    else {
+        client.query(SQL.getAllFromUsername, [user.uname])
+            .then((data) => {
+                if (data.rows.length === 0) {
+                    clientErrors.signUpUserExists = ""
+                    console.log("Can Create Account")
+                    console.log(userExists)
+                    res.redirect("/signup")
+                    res.end()
+                }   
                 else {
-                    client
-                        .query(SQL.createNewUser, [
-                            user.fname,
-                            user.uname,
-                            user.email,
-                            hashedPassword,
-                        ])
-                        .then((data) => {
-                            console.log('Success')
-                        })
-                        .catch((err) => {
-                            console.error(err)
-                        })
+                    clientErrors.signUpUserExists = "Username Already Taken"
+                    res.redirect("/signup")
+                    res.end()
                 }
-            })
-        }
-        setTimeout(() => {
-            res.redirect('/account')
-            res.end()
-        }, 1500)
+            }
+        )
     }
 }
 

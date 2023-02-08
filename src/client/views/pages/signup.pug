@@ -4,11 +4,6 @@ block title
 block content
     form.form-container(action='signup', method='POST')
         .field 
-            |
-            |
-            |
-            |
-            |
             h1.is-size-1 Sign Up
         .field
             label.label Fullname
@@ -20,7 +15,7 @@ block content
                 )
                 span.icon.is-small.is-left
                     i.fas.fa-signature
-            span.span-error.is-size-6.has-text-grey #{ errors.fnameError }
+            span.span-error.is-size-6.has-text-danger #{ errors.signup_fullname }
         .field
             label.label Username
             .control.has-icons-left.has-icons-right
@@ -31,7 +26,7 @@ block content
                 )
                 span.icon.is-small.is-left
                     i.fas.fa-circle-user
-            span.is-size-6.has-text-grey #{ errors.unameError }
+            span.span-error.is-size-6.has-text-danger #{ errors.signup_username }
         .field
             label.label Email
             .control.has-icons-left.has-icons-right
@@ -42,7 +37,7 @@ block content
                 )
                 span.icon.is-small.is-left
                     i.fas.fa-envelope
-            span.is-size-6.has-text-grey #{ errors.emailError }
+            span.span-error.is-size-6.has-text-danger #{ errors.signup_email }
         .field
             label.label Password
             .control.has-icons-left.has-icons-right
@@ -57,32 +52,22 @@ block content
                     i#signup-eye.eye-icon.fas.fa-eye-slash(
                         style='cursor: pointer; z-index: 1'
                     )
-            span.span-error.is-size-6.has-text-grey #{ errors.pcodeError }
-        .field
-            .control.form-utilities
-                span
-                    p
-                        | Already An User ?
-                        a(href='/signin') 
-                            |
-                            |
-                            |
-                            |
-                            | Login
-                    p
-                        | Forgot Password ?
-                        a(href='/forgot-password') 
-                            |
-                            |
-                            |
-                            |
-                            | Reset
+            span.span-error.is-size-6.has-text-danger #{ errors.signup_password }
+            p
+                | Already An User ?
+                a(href='/signin') 
+                    | Login
+            p
+                | Forgot Password ?
+                a(href='/forgot-password') 
+                    | Reset
         .field.is-grouped
             .control
                 input#signup-submit.button.is-link(
                     type='submit',
                     value='Create Account'
                 )
+        span.span-error.is-size-6.has-text-danger #{ userExists }
     script(type='text/javascript').
         const signupFname = document.getElementById('signup-fname')
         const signupUname = document.getElementById('signup-uname')

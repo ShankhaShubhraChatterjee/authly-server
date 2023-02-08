@@ -2,21 +2,16 @@ const bcrypt = require('bcrypt')
 
 const { regex } = require('./../utils/regex')
 const { SQL } = require('./../utils/query')
-const { errors } = require('./../utils/error')
+const { clientErrors } = require('./../utils/error')
 const { client } = require('./../utils/db')
 const { dehashPassword } = require('./../utils/dehash')
-const {
-    handleEmptyInputs,
-    displayErrorsOnClient,
-    handleRegexBasedErrors,
-} = require('../utils/error-handle')
 
 const sendSigninPage = (req, res) => {
     if (req.session.auth) {
         res.redirect('/account')
         res.end()
     } else {
-        res.render('pages/signin.pug', { error: errors })
+        res.render('pages/signin.pug', { error: clientErrors })
         res.end()
     }
 }
@@ -27,14 +22,12 @@ const handleSignin = async (req, res) => {
         pcode: req.body.signin_password,
     }
     if (!user.uname, !user.pcode) {
-        handleEmptyInputs(user.uname, errors.unameError, 'Username')
-        handleEmptyInputs(user.uname, errors.unameError, 'Password')
         res.redirect('/signin')
         res.end()
     } else {
         if (!regex.uname.test(user.uname, user.pcode)) {
             handleRegexBasedErrors(
-                regex.uname.test(user.uname),
+                regex.uname.test(user.unames),
                 errors.unameError,
                 'Username'
             )

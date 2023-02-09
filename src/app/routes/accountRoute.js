@@ -15,18 +15,26 @@ const storage = multer.diskStorage({
 })
 
 const router = express.Router()
-const upload = multer({storage: storage})
+const upload = multer({ storage: storage })
 
 const {
     sendAccountPage,
     // uploadProfilePic,
     // handleAccountDeletion,
     // handleAccountLogOut,
-    // handleAccountUpdates,
+    handleAccountUpdates
 } = require('./../controllers/accountController')
 
 router.get('/', sendAccountPage)
-// router.post('/user/update', handleAccountUpdates)
+router.post(
+    '/user/update', 
+    body('account_update_fullname'),
+    body('account_update_username'),
+    body('account_update_email'),
+    body('account_update_current_password'),
+    body('account_update_new_password'),
+    body('account_update__confirm_password'),
+    handleAccountUpdates)
 // router.post('/user/upload/profile_pic', upload.single('profile_picture'), uploadProfilePic)
 // router.post('/', handleAccountDeletion)
 // router.post('/user/logout', handleAccountLogOut)

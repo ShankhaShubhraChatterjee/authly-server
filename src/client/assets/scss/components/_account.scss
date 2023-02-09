@@ -47,6 +47,10 @@
         }
         .icon {
             margin-top: 5px;
+            i.fa-eye, i.fa-eye-slash {
+                z-index: 1;
+                cursor: pointer;
+            }
         }
         .account-submit-section {
             text-align: center;

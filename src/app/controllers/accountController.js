@@ -17,10 +17,22 @@ const sendAccountPage = (req, res) => {
     res.render("pages/account.pug")
 }
 
+const handleAccountUpdates = (req, res) => {
+    let updates = {
+        fname: req.body.account_update_fullname,
+        uname: req.body.account_update_username,
+        email: req.body.account_update_email,
+        currentPassword: req.body.account_update_current_password,
+        newPassword: req.body.account_update_new_password,
+        confirmPassword: req.body.account_update_confirm_password,
+    }
+    
+}
+
 module.exports = {
     sendAccountPage,
     // uploadProfilePic,
     // handleAccountLogOut,
-    // handleAccountUpdates,
+    handleAccountUpdates
     // handleAccountDeletion,
 }

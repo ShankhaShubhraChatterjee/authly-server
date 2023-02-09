@@ -58,7 +58,7 @@ block content
                         .control.has-icons-left.has-icons-right
                             input.input(
                                 type='text',
-                                name='update_fname',
+                                name='account_update_fullname',
                                 placeholder='Update Your Name'
                             )
                             span.icon.is-left
@@ -68,7 +68,7 @@ block content
                         .control.has-icons-left.has-icons-right
                             input.input(
                                 type='text',
-                                name='update_uname',
+                                name='account_update_username',
                                 placeholder='Update Your Username'
                             )
                             span.icon.is-left
@@ -78,7 +78,7 @@ block content
                         .control.has-icons-left.has-icons-right
                             input.input(
                                 type='email',
-                                name='update_email',
+                                name='account_update_email',
                                 placeholder='Update Your Email'
                             )
                             span.icon.is-left
@@ -87,40 +87,40 @@ block content
                     h3.is-size-5 Change Password
                     .field
                         .control.has-icons-left.has-icons-right
-                            input.input(
+                            input#current-password.input(
                                 type='password',
-                                name='update_current_password',
+                                name='account_update_current_password',
                                 placeholder='Type Current Password'
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-lock
 
                             span.icon.is-right
-                                i.fa-solid.fa-eye
+                                i#current-eye.fa-solid.fa-eye
                     .field
                         .control.has-icons-left.has-icons-right
-                            input.input(
+                            input#new-password.input(
                                 type='password',
-                                name='update_new_password',
+                                name='account_update_new_password',
                                 placeholder='Type New Password'
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-lock
 
                             span.icon.is-right
-                                i.fa-solid.fa-eye
+                                i#new-eye.fa-solid.fa-eye
                     .field
                         .control.has-icons-left.has-icons-right
-                            input.input(
+                            input#confirm-password.input(
                                 type='password',
-                                name='update_confirm_password',
+                                name='account_update_confirm_password',
                                 placeholder='Confirm New Password'
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-lock
 
                             span.icon.is-right
-                                i.fa-solid.fa-eye
+                                i#confirm-eye.fa-solid.fa-eye
                     .account-submit-section
                         hr
                         input.button.has-background-info.has-text-white(
@@ -128,3 +128,28 @@ block content
                             name='account_submit_button',
                             value='Update Info'
                         )
+    script(type="text/javascript").
+        const currentEye = document.getElementById("current-eye");
+        const newEye = document.getElementById("new-eye");
+        const confirmEye = document.getElementById("confirm-eye");
+
+        const currentPasswordField = document.getElementById("current-password");
+        const newPasswordField = document.getElementById("new-password");
+        const confirmPasswordField = document.getElementById("confirm-password");
+
+        function togglePasswordField(input, button){
+            button.addEventListener("click", () => {
+                if(input.type === "password"){
+                    input.type = "text"
+                    button.className = "fa-solid fa-eye"
+                }
+                else {
+                    input.type = "password"
+                    button.className = "fa-solid fa-eye-slash"
+                }
+            })
+        }
+
+        togglePasswordField(currentPasswordField, currentEye)
+        togglePasswordField(newPasswordField, newEye)
+        togglePasswordField(confirmPasswordField, confirmEye)

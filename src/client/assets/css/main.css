@@ -229,6 +229,11 @@ footer h3 i {
   margin-top: 5px;
 }
 
+.update-info-container .update-info .icon i.fa-eye, .update-info-container .update-info .icon i.fa-eye-slash {
+  z-index: 1;
+  cursor: pointer;
+}
+
 .update-info-container .update-info .account-submit-section {
   text-align: center;
   width: 100%;

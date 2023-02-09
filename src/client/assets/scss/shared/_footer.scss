@@ -1,14 +1,15 @@
 footer {
     align-items: center;
-    background-color: white;
-    box-shadow: 0 -5px 10px darkgray;
+    background-color: transparent;
+    background: none;
+    // box-shadow: 0 -5px 10px darkgray;
     display: flex;
     justify-content: center;
-    margin-top: 15px;
     text-align: center;
     width: 100%;
 
     h3 {
+        color: antiquewhite;
         align-items: center;
         display: flex;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

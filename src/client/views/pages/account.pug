@@ -7,7 +7,7 @@ block content
         h1.has-text-centered.is-size-1 Your Account
         .account-sections
             .profile-info-container.account-section-cell
-                h2.is-size-3 #{ userinfo.fname }'s Profile
+                h2.is-size-3 User Profile
                 form(action="account/user/upload/profile_pic" method="POST" enctype="multipart/form-data").profile-info-container-pic
                     .profile-section
                         img(
@@ -21,31 +21,31 @@ block content
                             accept='.jpg,.jpeg,.png,.svg,.bmp,.gif,.avif',
                             name='profile_picture'
                         )
-                    p.has-text-danger Upload A File
-                    button.profile-pic-upload-button(type="submit") Upload
+                    p.has-text-secondary Upload Profile Picture
+                    button.button.profile-pic-upload-button(type="submit") Upload
                 form(action="/account" method="POST").profile-info.is-size-5
                     .fname
                         h3 Name
-                        p #{ userinfo.fname }
+                        p XYZ
                     .uname
                         h3 Username
-                        p #{ userinfo.uname }
+                        p User XYZ
                     .email
                         h3 Email
-                        p #{ userinfo.email }
+                        p Email@email.com
 
-                    form.account-page-btn-container.is-flex.flex-direction-row.is-justify-content-space-between.is-align-items-center(
-                        action='/account',
-                        method='POST'
-                    )
-                        button.button.my-2.has-background-warning.has-text-white(
-                            type='submit',
-                            name='account_logout_button'
-                        ) Log Out
-                        button.button.my-2.has-background-danger.has-text-white(
-                            type='submit',
-                            name='account_delete_button'
-                        ) Delete Account
+                form.account-page-btn-container.is-flex.flex-direction-row.is-justify-content-space-between.is-align-items-center(
+                    action='/account',
+                    method='POST'
+                )
+                    button.button.my-2.has-background-warning.has-text-white(
+                        type='submit',
+                        name='account_logout_button'
+                    ) Log Out
+                    button.button.my-2.has-background-danger.has-text-white(
+                        type='submit',
+                        name='account_delete_button'
+                    ) Delete Account
 
             form.update-info-container.account-section-cell(
                 action='account/user/update',
@@ -54,43 +54,73 @@ block content
                 h2.is-size-3 Update Your Info
                 .update-info
                     h3.is-size-5 Change Details
-                    input.input(
-                        type='text',
-                        name='update_fname',
-                        placeholder='Update Your Name'
-                    )
-                    p #{ errors.fnameError }
-                    input.input(
-                        type='text',
-                        name='update_uname',
-                        placeholder='Update Your Username'
-                    )
-                    p #{ errors.unameError }
-                    input.input(
-                        type='email',
-                        name='update_email',
-                        placeholder='Update Your Email'
-                    )
-                    p #{ errors.emailError }
+                    .field
+                        .control.has-icons-left.has-icons-right
+                            input.input(
+                                type='text',
+                                name='update_fname',
+                                placeholder='Update Your Name'
+                            )
+                            span.icon.is-left
+                                i.fa-solid.fa-signature
+
+                    .field
+                        .control.has-icons-left.has-icons-right
+                            input.input(
+                                type='text',
+                                name='update_uname',
+                                placeholder='Update Your Username'
+                            )
+                            span.icon.is-left
+                                i.fa-solid.fa-user-circle
+
+                    .field
+                        .control.has-icons-left.has-icons-right
+                            input.input(
+                                type='email',
+                                name='update_email',
+                                placeholder='Update Your Email'
+                            )
+                            span.icon.is-left
+                                i.fa-solid.fa-envelope
+
                     h3.is-size-5 Change Password
+                    .field
+                        .control.has-icons-left.has-icons-right
+                            input.input(
+                                type='password',
+                                name='update_current_password',
+                                placeholder='Type Current Password'
+                            )
+                            span.icon.is-left
+                                i.fa-solid.fa-lock
 
-                    input.input(
-                        type='password',
-                        name='update_current_password',
-                        placeholder='Type Current Password'
-                    )
-                    p #{ errors.emailError }
-                    input.input(
-                        type='password',
-                        name='update_new_password',
-                        placeholder='Type New Password'
-                    )
+                            span.icon.is-right
+                                i.fa-solid.fa-eye
+                    .field
+                        .control.has-icons-left.has-icons-right
+                            input.input(
+                                type='password',
+                                name='update_new_password',
+                                placeholder='Type New Password'
+                            )
+                            span.icon.is-left
+                                i.fa-solid.fa-lock
 
-                    input.input(
-                        type='password',
-                        name='update_confirm_password',
-                        placeholder='Confirm New Password'
-                    )
+                            span.icon.is-right
+                                i.fa-solid.fa-eye
+                    .field
+                        .control.has-icons-left.has-icons-right
+                            input.input(
+                                type='password',
+                                name='update_confirm_password',
+                                placeholder='Confirm New Password'
+                            )
+                            span.icon.is-left
+                                i.fa-solid.fa-lock
+
+                            span.icon.is-right
+                                i.fa-solid.fa-eye
                     .account-submit-section
                         hr
                         input.button.has-background-info.has-text-white(

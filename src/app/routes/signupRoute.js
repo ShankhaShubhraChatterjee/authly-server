@@ -3,7 +3,7 @@
 const express = require('express')
 const router = express.Router()
 const { regex } = require('./../utils/regex')
-const { body, validationResult } = require('express-validator')
+const { body } = require('express-validator')
 
 const signupController = require('./../controllers/signupController')
 

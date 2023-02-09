@@ -3,7 +3,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 60px;
+    margin-top: 40px;
+    width: 100%;
     max-width: 100% !important;
 }
 
@@ -17,8 +18,8 @@
 }
 
 .account-section-cell {
-    background-color: rgb(255 255 255 / 10%);
-    border: 5px solid orangered;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 10px silver;
     border-radius: 10px;
     position: relative;
 
@@ -44,7 +45,9 @@
         h3 {
             margin: 5px 0;
         }
-
+        .icon {
+            margin-top: 5px;
+        }
         .account-submit-section {
             text-align: center;
             width: 100%;
@@ -55,8 +58,9 @@
 .profile-info-container {
     padding: 0 40px;
     width: 100%;
-
+    position: relative;
     .profile-info {
+        margin-bottom: 60px;
         .uname,
         .fname,
         .email {
@@ -73,7 +77,12 @@
         }
     }
 }
-
+.account-page-btn-container {
+    padding: 0 10px;
+    width: 100%;
+    position: absolute;
+    bottom: -3px;left: 0px;
+}
 .profile-info-container-pic {
     border-radius: 50%;
     display: flex;
@@ -115,15 +124,11 @@
         }
     }
     .profile-pic-upload-button {
-        padding: 10px;
         font-size: 1.1em;
-        font-family: "Verdana, monospace";
         outline: none;
         background: none;
         background-color: indigo;
         color: white;
-        border: none;
-        border-radius: 5px;
         margin-top: 5px;
         cursor: pointer;
     }

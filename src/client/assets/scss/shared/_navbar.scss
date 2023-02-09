@@ -1,3 +1,6 @@
+.navbar {
+    background: transparent;
+}
 #profile {
     height: 40px;
     width: 40px;
@@ -6,6 +9,7 @@
 #title {
     align-items: center;
     display: flex;
+    color: white;
 }
 
 .profile {
@@ -14,7 +18,9 @@
     top: 6px;
     transform: translate(-50%, 0%);
 }
-
+#burger {
+    color: floralwhite;
+}
 .control {
     align-items: center;
     display: inherit;

@@ -1,4 +1,4 @@
-nav.navbar.is-white.has-shadow.is-fixed-top
+nav.navbar.is-fixed-top
     // logo / brand
     .navbar-brand
         a#title.navbar-item(href='/')
@@ -19,24 +19,24 @@ nav.navbar.is-white.has-shadow.is-fixed-top
     #nav-links.navbar-menu.has-text-centered
         // right links
         .navbar-end
-            p.control.mx-1.has-text-primary-light
-                a.button.has-background-black(href='/')
-                    span.icon.has-text-primary-light
+            p.control.mx-1
+                a.button.has-background-primary-light(href='/')
+                    span.icon.has-text-link-dark
                         i.fa-solid.fa-home
-                    span.has-text-primary-light Home
+                    span.has-text-link-dark Home
             p.control.mx-1
-                if auth
-                    a.button.has-background-black(href='/signout')
-                        span.icon.has-text-primary-light
+                if !auth
+                    a.button.has-background-primary-light(href='/signin')
+                        span.icon.has-text-link-dark
                             i.fa-solid.fa-arrow-right-to-bracket
-                        span.has-text-primary-light Sign Out
+                        span.has-text-link-dark Log In
                 else
-                    a.button.has-background-black(href='/signin')
-                        span.icon.has-text-primary-light
-                            i.fa-solid.fa-arrow-right-to-bracket
-                        span.has-text-primary-light Sign In
+                    a.button.has-background-primary-light(href='/signout')
+                        span.icon.has-text-link-dark
+                            i.fa-solid.fa-arrow-left-to-bracket
+                        span.has-text-link-dark Log Out
             p.control.mx-1
-                a.button.has-background-black(href='/signup')
-                    span.icon.has-text-primary-light
-                        i.fa-solid.fa-user
-                    span.has-text-primary-light Sign Up
+                a.button.has-background-primary-light(href='/signup')
+                    span.icon.has-text-link-dark
+                        i.fa-solid.fa-arrow-right-to-bracket
+                    span.has-text-link-dark Register

@@ -3,10 +3,11 @@ block title
     title Authly
 block content
     .index-page-container 
-        .notification.is-info.is-light
-            button#notification-close-button.delete
-            p You Are Successfully Logged Out Of Your Account
-            a(href='/signin') Log In Again
+        if notfify
+            .notification.is-info.is-light
+                button#notification-close-button.delete
+                p You Are Successfully Logged Out Of Your Account
+                a(href='/signin') Log In Again
 
         .index 
             .index-header

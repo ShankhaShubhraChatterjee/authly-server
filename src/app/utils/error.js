@@ -7,12 +7,12 @@ let clientErrors = {
     accountPcodeError: '',
     accountPcodeMatchError: '',
     accountPcodeUpdateError: '',
-
+    accountErrors: {},
     // Client Side Errors For SignIn Page
     signInUnameError: '',
     signInPcodeError: '',
-    signInUserExists: '',
-
+    signinErrors: {},
+    
     // Client Side Errors For SignUp Page
     signupErrors: {},
     signUpUserExists: '',

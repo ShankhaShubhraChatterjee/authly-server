@@ -1,15 +1,16 @@
 const express = require('express')
 const router = express.Router()
+const { regex } = require('./../utils/regex')
 const { body } = require('express-validator')
 
-const signinController = require('./../controllers/signinController')
+const { handleSignin, sendSigninPage } = require('./../controllers/signinController')
 
-router.get('/', signinController.sendSigninPage)
+router.get('/', sendSigninPage)
 router.post(
     '/',
-    body('signin_username').not().isEmpty().trim().escape(),
-    body('signin_password').not().isEmpty().isLength({ min: 5 }),
-    signinController.handleSignin
+    body('signin_username').not().isEmpty().trim().escape().matches(regex.uname),
+    body('signin_password').not().isEmpty().isLength({ min: 5 }).matches(regex.pcode),
+    handleSignin
 )
 
 module.exports = router

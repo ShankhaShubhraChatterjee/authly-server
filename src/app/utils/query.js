@@ -3,7 +3,9 @@ var SQL = {
     updateUserPassword: 'UPDATE users SET passcode=$1 FROM users WHERE uname=$2',
     getPasswordForUser: 'SELECT passcode FROM users WHERE uname=$1',
     deleteByUsername: 'DELETE FROM users WHERE uname=$1',
-    createNewUser: 'INSERT INTO users(fname, uname, email, passcode) VALUES($1, $2, $3, $4)'
+    createNewUser: 'INSERT INTO users(fname, uname, email, passcode) VALUES($1, $2, $3, $4)',
+    getUserEmail: 'SELECT * FROM users WHERE email=$1',
+    getUsername: 'SELECT uname FROM users WHER uname=$1'
 }
 
 module.exports = { SQL }

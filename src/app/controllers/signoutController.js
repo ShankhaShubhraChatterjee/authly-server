@@ -1,5 +1,6 @@
 const { client } = require('./../utils/db')
 const { SQL } = require('./../utils/query')
+
 const signOutCurrentUser = async (req, res) => {
     req.session.auth = false
     await req.session.destroy()

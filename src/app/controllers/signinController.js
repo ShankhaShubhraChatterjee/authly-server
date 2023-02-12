@@ -6,7 +6,7 @@ const { regex } = require('./../utils/regex')
 const { SQL } = require('./../utils/query')
 const { clientErrors } = require('./../utils/error')
 const { client } = require('./../utils/db')
-const { dehashPassword } = require('./../utils/dehash')
+const { dehashPassword } = require('./../utils/hash')
 
 const sendSigninPage = (req, res) => {
     if (req.session.auth) {
@@ -28,7 +28,7 @@ const handleSignin = async (req, res) => {
         .then(async (data) => {
             if (data.rows.length === 0) {
                 console.log('User Doesnt Exist')
-                errors.userExists = 'User Doesnt Exist'
+                clientErrors.userExists = 'User Doesnt Exist'
                 res.redirect('/signin')
                 res.end()
             } else {
@@ -49,7 +49,7 @@ const handleSignin = async (req, res) => {
                     console.log('Wrong Password')
                     displayErrorsOnClient(
                         'Wrong Password',
-                        errors.pcodeError
+                        clientErrors.pcodeError
                     )
                     console.log(errors.pcodeError)
                     res.redirect('/signin')

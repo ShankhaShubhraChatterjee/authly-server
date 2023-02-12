@@ -2,22 +2,11 @@ require('dotenv').config()
 const path = require('path')
 
 const express = require('express')
-const multer = require('multer')
 const { body } = require('express-validator')
 
 const { regex } = require('./../utils/regex')
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, "../../app/files/images/uploads/"))
-    },
-    filename: (req, file, cb) => {
-        cb(null, 'profile-image' + path.extname(file.originalname))
-    }
-})
-
 const router = express.Router()
-const upload = multer({ storage: storage })
 
 const {
     sendAccountPage,

@@ -3,7 +3,7 @@
 const { client } = require('../utils/db')
 const { SQL } = require('./../utils/query')
 const { clientErrors } = require('./../utils/error')
-const { userExistsInDb } = require('./../utils/validate')
+// const { hashPassword } = require('./../utils/hash')
 const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcrypt')
 
@@ -25,7 +25,6 @@ const createUser = async (req, res) => {
         email: req.body.signup_email,
         pcode: req.body.signup_password,
     }
-    let userExists = await userExistsInDb(user.uname)
     const errorFormat = ({ location, msg, param, value, nestedErrors }) => {
         return `${msg}`;
     };
@@ -40,22 +39,28 @@ const createUser = async (req, res) => {
     }
     else {
         client.query(SQL.getAllFromUsername, [user.uname])
-            .then((data) => {
+            .then(async (data) => {
                 if (data.rows.length === 0) {
                     clientErrors.signUpUserExists = ""
                     console.log("Can Create Account")
-                    console.log(userExists)
-                    res.redirect("/signup")
+                    await bcrypt.hash(user.pcode, 10)
+                        .then(hash => {
+                            client.query(SQL.createNewUser, [user.fname, user.uname, user.email, hash])
+                        })
+                        .then(() => { console.log("User Created") })
+                        .catch((err) => console.error(err))
+                    res.redirect("/account")
                     res.end()
-                }   
+                }
                 else {
                     clientErrors.signUpUserExists = "Username Already Taken"
                     res.redirect("/signup")
                     res.end()
-                }
+                }   
             }
-        )
+            ).catch((err) => console.error(err))
     }
 }
+
 
 module.exports = { sendSignUpPage, createUser }

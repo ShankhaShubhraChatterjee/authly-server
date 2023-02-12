@@ -9,4 +9,4 @@ const dehashPassword = async (password, hash) => {
     return passcode;
 }
 
-module.exports = { dehashPassword }
+module.exports = { dehashPassword } 

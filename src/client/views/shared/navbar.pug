@@ -18,13 +18,13 @@ nav.navbar.is-fixed-top
 
     #nav-links.navbar-menu.has-text-centered
         // right links
-        .navbar-end
-            p.control.mx-1
+        .navbar-end(style="background-color:transparent;")
+            p.control.mx-1.my-1
                 a.button.has-background-primary-light(href='/')
                     span.icon.has-text-link-dark
                         i.fa-solid.fa-home
                     span.has-text-link-dark Home
-            p.control.mx-1
+            p.control.mx-1.my-1
                 if !auth
                     a.button.has-background-primary-light(href='/signin')
                         span.icon.has-text-link-dark
@@ -35,7 +35,7 @@ nav.navbar.is-fixed-top
                         span.icon.has-text-link-dark
                             i.fa-solid.fa-arrow-left-to-bracket
                         span.has-text-link-dark Log Out
-            p.control.mx-1
+            p.control.mx-1.my-1
                 a.button.has-background-primary-light(href='/signup')
                     span.icon.has-text-link-dark
                         i.fa-solid.fa-arrow-right-to-bracket

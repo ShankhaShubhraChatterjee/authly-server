@@ -1,6 +1,7 @@
 .navbar {
     background: transparent;
 }
+
 #profile {
     height: 40px;
     width: 40px;
@@ -18,17 +19,22 @@
     top: 6px;
     transform: translate(-50%, 0%);
 }
+
 #burger {
     color: floralwhite;
 }
+
 .control {
     align-items: center;
     display: inherit;
     justify-content: space-evenly;
     width: inherit;
 }
-
 @media only screen and (max-width: 1030px) {
+    .navbar-menu {
+        background-color: rgba(0, 54, 255, 0.5);
+        backdrop-filter: blur(2.5px);
+    }
     .control {
         align-items: center;
         display: flex;

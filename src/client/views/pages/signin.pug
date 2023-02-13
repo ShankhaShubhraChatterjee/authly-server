@@ -9,15 +9,14 @@ block content
         .field
             label.label Username
             .control.has-icons-left.has-icons-right
-                input.input.is-link(
+                input.input.is-link#username(
                     type='text',
                     placeholder='Username',
                     name='signin_username'
                 )
                 span.icon.is-small.is-left
                     i.fas.fa-user-circle
-            p.has-text-danger= error.unameError
-            p.has-text-danger= error.userExists
+            p.has-text-danger= error.signin_username
         .field
             label.label Password
             .control.has-icons-left.has-icons-right
@@ -32,20 +31,22 @@ block content
                     i#login-eye.eye-icon.fas.fa-eye-slash(
                         style='cursor: pointer; z-index: 1'
                     )
-            p.has-text-danger= error.pcodeError
+            p.has-text-danger= error.signin_password
         .field.is-grouped
             .control
-                button.button.is-link Login
+                button#login.button.is-link Login
         .field.has-text-centered
             .control
                 span
-                    p
+                    p.has-text-danger
                         | First Time Here ?
-                        a(href='/signup') 
+                        a(href='/signup').has-text-warning
                             | Register
     script(type='text/javascript').
+        const username = document.getElementById("username")
         const loginEye = document.getElementById('login-eye')
         const pcode = document.getElementsByClassName('password-field')[0]
+        const loginButton = document.getElementById("login")
 
         const showHidePassword = () => {
             if (pcode.type === 'password') {
@@ -56,4 +57,10 @@ block content
                 pcode.type = 'password'
             }
         }
+        loginButton.addEventListener("click", () => {
+            localStorage.setItem("signin_username", username.value)
+        })
+        window.addEventListener("load", () => {
+            username.value = localStorage.getItem("signin_username")
+        })
         loginEye.addEventListener('click', showHidePassword)

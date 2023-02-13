@@ -24,15 +24,26 @@ block content
                     p.has-text-secondary Upload Profile Picture
                     button.button.profile-pic-upload-button(type="submit") Upload
                 form(action="/account" method="POST").profile-info.is-size-5
-                    .fname
-                        h3 Name
-                        p XYZ
-                    .uname
-                        h3 Username
-                        p User XYZ
-                    .email
-                        h3 Email
-                        p Email@email.com
+                    if user!==undefined
+                        .fname
+                            h3 Name
+                            p #{user.fname}
+                        .uname
+                            h3 Username
+                            p #{user.uname}
+                        .email
+                            h3 Email
+                            p #{user.email}
+                    else
+                        .fname
+                            h3 Name
+                            p Full Name
+                        .uname
+                            h3 Username
+                            p Username
+                        .email
+                            h3 Email
+                            p Email Address
 
                 form.account-page-btn-container.is-flex.flex-direction-row.is-justify-content-space-between.is-align-items-center(
                     action='/account',
@@ -40,11 +51,11 @@ block content
                 )
                     button.button.my-2.has-background-warning.has-text-white(
                         type='submit',
-                        name='account_logout_button'
+                        value='account_logout'
                     ) Log Out
                     button.button.my-2.has-background-danger.has-text-white(
                         type='submit',
-                        name='account_delete_button'
+                        value='account_delete'
                     ) Delete Account
 
             form.update-info-container.account-section-cell(
@@ -63,6 +74,7 @@ block content
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-signature
+                        p.has-text-danger #{error.account_update_fullname}
 
                     .field
                         .control.has-icons-left.has-icons-right
@@ -73,6 +85,7 @@ block content
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-user-circle
+                        p.has-text-danger #{error.account_update_username}
 
                     .field
                         .control.has-icons-left.has-icons-right
@@ -83,6 +96,7 @@ block content
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-envelope
+                        p.has-text-danger #{error.account_update_email}
 
                     h3.is-size-5 Change Password
                     .field
@@ -96,7 +110,8 @@ block content
                                 i.fa-solid.fa-lock
 
                             span.icon.is-right
-                                i#current-eye.fa-solid.fa-eye
+                                i#current-eye.fa-solid.fa-eye           
+                        p.has-text-danger #{error.account_update_current_password}
                     .field
                         .control.has-icons-left.has-icons-right
                             input#new-password.input(
@@ -109,6 +124,7 @@ block content
 
                             span.icon.is-right
                                 i#new-eye.fa-solid.fa-eye
+                        p.has-text-danger #{error.account_update_new_password}
                     .field
                         .control.has-icons-left.has-icons-right
                             input#confirm-password.input(
@@ -121,6 +137,7 @@ block content
 
                             span.icon.is-right
                                 i#confirm-eye.fa-solid.fa-eye
+                        p.has-text-danger #{error.account_update_confirm_password}
                     .account-submit-section
                         hr
                         input.button.has-background-info.has-text-white(

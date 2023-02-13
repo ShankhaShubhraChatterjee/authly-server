@@ -104,6 +104,12 @@
 }
 
 @media only screen and (max-width: 1030px) {
+  .navbar-menu {
+    -webkit-backdrop-filter: blur(2.5px);
+    backdrop-filter: blur(2.5px);
+    background-color: #0036ff80;
+  }
+
   .control {
     justify-content: center;
     align-items: center;
@@ -317,6 +323,7 @@ footer h3 i {
   color: #fff;
   cursor: pointer;
   background: indigo;
+  border-radius: 50px;
   outline: none;
   margin-top: 5px;
   font-size: 1.1em;

@@ -3,7 +3,8 @@ const path = require('path')
 const { client } = require('./../utils/db')
 const { regex } = require('./../utils/regex')
 const { SQL } = require('./../utils/query')
-const { errors } = require('./../utils/error')
+const { clientErrors } = require('./../utils/error')
+const { errorFormat } = require('./../configs/errorConfig')
 const bcrypt = require('bcrypt')
 const { validationResult} = require('express-validator')
 const ImageKit = require('imagekit')
@@ -16,7 +17,7 @@ const imageKit = new ImageKit({
 // Send Account Template To Client
 const sendAccountPage = (req, res) => {
     // if(req.session.auth){
-        res.render("pages/account.pug")
+        res.render("pages/account.pug", { error:clientErrors.accountErrors, user: req.session.user })
         res.end()
     // }
     // else {
@@ -35,7 +36,19 @@ const handleAccountUpdates = (req, res) => {
         newPassword: req.body.account_update_new_password,
         confirmPassword: req.body.account_update_confirm_password,
     }
-    
+    let errors = validationResult(req).formatWith(errorFormat)
+    if(!errors.isEmpty()){
+        try { 
+            clientErrors.accountErrors = errors.mapped()
+        }
+        catch (err) { console.error("No Error Occured") }
+        res.redirect("/account")
+        res.end()
+    }
+    else {
+        
+    }
+
 }
 // Handles User Account LogOut
 const handleAccountLogOut = async (req, res) => {

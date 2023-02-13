@@ -11,8 +11,15 @@ const deleteAccount = async (req, res) => {
     client.query(SQL.deleteByUsername, [req.session.user.uname])
         .then(async () => {
             req.session.auth = false
-            await req.session.destroy()
-            await res.redirect("/")
+            if(req.session.auth){
+                await req.session.destroy()
+                await res.redirect("/")
+            }
+            else {
+                console.log("error")
+                res.redirect("/account")
+            }
+            
         })
         .catch((err) => {
             console.error(err)

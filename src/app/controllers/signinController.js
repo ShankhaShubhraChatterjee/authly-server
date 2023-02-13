@@ -1,10 +1,9 @@
 const bcrypt = require('bcrypt')
-const session = require('express-session')
 const { validationResult } = require('express-validator')
 
-const { regex } = require('./../utils/regex')
 const { SQL } = require('./../utils/query')
 const { clientErrors } = require('./../utils/error')
+const { errorFormat } = require('./../configs/errorConfig')
 const { client } = require('./../utils/db')
 const { dehashPassword } = require('./../utils/hash')
 
@@ -13,7 +12,7 @@ const sendSigninPage = (req, res) => {
         res.redirect('/account')
         res.end()
     } else {
-        res.render('pages/signin.pug', { error: clientErrors })
+        res.render('pages/signin.pug', { error: clientErrors.signinErrors })
         res.end()
     }
 }
@@ -23,41 +22,52 @@ const handleSignin = async (req, res) => {
         uname: req.body.signin_username,
         pcode: req.body.signin_password
     }
-    client
-        .query(SQL.getAllFromUsername, [user.uname])
-        .then(async (data) => {
-            if (data.rows.length === 0) {
-                console.log('User Doesnt Exist')
-                clientErrors.userExists = 'User Doesnt Exist'
-                res.redirect('/signin')
-                res.end()
-            } else {
-                let dehashed = await dehashPassword(
-                    user.pcode,
-                    data.rows[0].passcode
-                )
-                if (dehashed) {
-                    console.log(dehashed)
-                    console.log('User Exists')
-                    req.session.auth = true;
-                    req.session.notifyLogOut = true;
-                    req.session.user = data.rows[0];
-                    res.redirect('/')
-                    res.end()
-                } else {
-                    console.log(dehashed)
-                    console.log('Wrong Password')
-                    displayErrorsOnClient(
-                        'Wrong Password',
-                        clientErrors.pcodeError
-                    )
-                    console.log(errors.pcodeError)
+    
+    let errors = validationResult(req).formatWith(errorFormat)
+    if (errors.isEmpty()) {
+        client
+            .query(SQL.getAllFromUsername, [user.uname])
+            .then(async (data) => {
+                if (data.rows.length === 0) {
+                    console.log(data.rows[0])
+                    clientErrors.userExists = 'User Doesnt Exist'
                     res.redirect('/signin')
                     res.end()
+                } 
+                else {
+                    let dehashed = await dehashPassword(
+                        user.pcode,
+                        data.rows[0].passcode
+                    )
+                    if (dehashed) {
+                        console.log(dehashed)
+                        console.log('User Exists')
+                        req.session.auth = true;
+                        req.session.notifyLogOut = true;
+                        req.session.user = data.rows[0];
+                        res.redirect('/account')
+                        res.end()
+                    } else {
+                        console.log(dehashed)
+                        console.log('Wrong Password')
+                        clientErrors.signinErrors = 'Wrong Password'
+
+                        res.redirect('/signin')
+                        res.end()
+                    }
                 }
-            }
-        })
-        .catch((err) => console.error(err))
+            })
+            .catch((err) => console.error(err))
+    }
+    else {
+        try { 
+            clientErrors.signinErrors = errors.mapped()
+        }
+        catch (err) { console.error("No Error Occured") }
+        res.redirect("/signin")
+        res.end()
+    }
+    
 }
 
 module.exports = {

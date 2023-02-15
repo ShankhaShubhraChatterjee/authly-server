@@ -2,7 +2,7 @@ require('dotenv').config()
 const path = require('path')
 
 const express = require('express')
-const { body } = require('express-validator')
+const { check } = require('express-validator')
 
 const { accountRegex } = require('./../utils/regex')
 
@@ -19,12 +19,12 @@ const {
 router.get('/', sendAccountPage)
 router.post(
     '/user/update',
-    body('account_update_fullname').trim().escape().matches(accountRegex.fname).withMessage("Name is not valid"),
-    body('account_update_username').trim().escape().matches(accountRegex.uname).withMessage("Username is not valid"),
-    body('account_update_email').isEmpty().matches(accountRegex.email).withMessage("Email is not valid"),
-    body('account_update_current_password').trim().escape().matches(accountRegex.pcode).withMessage("Password is not valid"),
-    body('account_update_new_password').trim().escape().matches(accountRegex.pcode).withMessage("Password is not valid"),
-    body('account_update_confirm_password').custom((value, { req }) => {
+    check('account_update_fullname').not().isEmpty().trim().escape().withMessage("Name Is Not Valid").matches(accountRegex.fname),
+    check('account_update_username').not().isEmpty().trim().escape().withMessage("Username Is Not Valid").matches(accountRegex.uname),
+    check('account_update_email').isEmail().withMessage("Email Is Not Valid").matches(accountRegex.email),
+    check('account_update_current_password').isLength({ min: 5 }).withMessage("Password Is Not Valid").matches(accountRegex.pcode),
+    check('account_update_new_password').isLength({ min: 5 }).withMessage("Password Is Not Valid").matches(accountRegex.pcode),
+    check('account_update_confirm_password').custom((value, { req }) => {
         if (value !== req.body.account_update_new_password) {
             throw new Error('Passwords Dont Match');
         }

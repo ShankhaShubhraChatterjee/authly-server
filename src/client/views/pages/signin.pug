@@ -32,13 +32,13 @@ block content
                         style='cursor: pointer; z-index: 1'
                     )
             p.has-text-danger= error.signin_password
-        .field.is-grouped
+        .field.is-grouped(style="margin-top: 16px!important;")
             .control
                 button#login.button.is-link Login
         .field.has-text-centered
             .control
                 span
-                    p.has-text-danger
+                    p.has-text-danger(style="margin-top: 16px;!")
                         | First Time Here ?
                         a(href='/signup').has-text-warning
                             | Register

@@ -71,7 +71,7 @@
 }
 
 .navbar {
-  background: none;
+  background: #0036ff80;
 }
 
 #profile {
@@ -229,6 +229,7 @@ footer h3 i {
 
 .update-info-container .update-info h3 {
   margin: 5px 0;
+  font-weight: lighter;
 }
 
 .update-info-container .update-info .icon {
@@ -257,15 +258,8 @@ footer h3 i {
 
 .profile-info-container .profile-info .uname, .profile-info-container .profile-info .fname, .profile-info-container .profile-info .email {
   justify-content: space-between;
+  font-weight: lighter;
   display: flex;
-}
-
-.profile-info-container .profile-info .uname h3, .profile-info-container .profile-info .fname h3, .profile-info-container .profile-info .email h3 {
-  text-align: left;
-}
-
-.profile-info-container .profile-info .uname p, .profile-info-container .profile-info .fname p, .profile-info-container .profile-info .email p {
-  text-align: right;
 }
 
 .account-page-btn-container {
@@ -329,10 +323,36 @@ footer h3 i {
   font-size: 1.1em;
 }
 
-@media only screen and (max-width: 800px) {
+@media (max-width: 800px) {
   .account-sections {
     width: 95%;
     grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .account-section-cell h2 {
+    font-size: 24px !important;
+  }
+
+  .update-info-container .update-info h3.is-size-5 {
+    font-size: 16px !important;
+  }
+
+  .profile-info-container .profile-info .fname, .profile-info-container .profile-info .uname, .profile-info-container .profile-info .email {
+    color: #f5f5f5;
+    background-color: #4169e1;
+    border-radius: 10px;
+    flex-direction: column;
+    margin: 5px 0;
+    padding: 5px;
+    justify-content: flex-start !important;
+  }
+
+  .profile-info-container .profile-info .fname h3, .profile-info-container .profile-info .uname h3, .profile-info-container .profile-info .email h3 {
+    font-size: 20px !important;
+  }
+
+  .profile-info-container .profile-info .fname p, .profile-info-container .profile-info .uname p, .profile-info-container .profile-info .email p {
+    font-size: 18px !important;
   }
 }
 

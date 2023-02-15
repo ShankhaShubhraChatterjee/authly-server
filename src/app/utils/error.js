@@ -15,6 +15,7 @@ let clientErrors = {
     
     // Client Side Errors For SignUp Page
     signupErrors: {},
+    signUpEmailInUse: '',
     signUpUserExists: '',
 }
 

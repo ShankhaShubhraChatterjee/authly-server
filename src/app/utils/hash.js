@@ -1,12 +1,15 @@
 const bcrypt = require('bcrypt')
 
-const dehashPassword = async (password, hash) => {
-    let passcode = bcrypt.compare(password, hash).then(data => {
-        return data;
-    }).catch((err) => {
-        console.error(err)
-    })
-    return passcode;
+async function hashPassword(password, salt) {
+    return await bcrypt.hash(password, salt)
+        .then(data => data)
+        .catch(err => console.error(err))
 }
 
-module.exports = { dehashPassword } 
+async function dehashPassword(password, hash) {
+    return await bcrypt.compare(password, hash)
+        .then(data => data)
+        .catch(err => console.error(err))
+}
+
+module.exports = { hashPassword, dehashPassword } 

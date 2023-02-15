@@ -1,5 +1,5 @@
 const errorFormat = ({ location, msg, param, value, nestedErrors }) => {
-        return `${msg}`;
+    return `${msg}`;
 };
 
 module.exports = { errorFormat }

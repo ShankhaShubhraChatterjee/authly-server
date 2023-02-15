@@ -3,17 +3,18 @@
 const express = require('express')
 const router = express.Router()
 const { regex } = require('./../utils/regex')
-const { body } = require('express-validator')
+const { check } = require('express-validator')
 
-const { sendSignUpPage, createUser, test } = require('./../controllers/signupController')
+const { sendSignUpPage, createUser } = require('./../controllers/signupController')
 
 router.get('/', sendSignUpPage)
+
 router.post(
     '/',
-    body('signup_fullname').not().isEmpty().matches(regex.fname),
-    body('signup_username').not().isEmpty().matches(regex.uname),
-    body('signup_email').isEmail().normalizeEmail().matches(regex.email),
-    body('signup_password').isLength({ min: 5 }).matches(regex.pcode),
+    check('signup_fullname').not().isEmpty().trim().escape().withMessage("Name Invalid").matches(regex.fname),
+    check('signup_username').not().isEmpty().trim().escape().withMessage("Username Not Valid").matches(regex.uname),
+    check('signup_email').isEmail().withMessage("Email Is Incorrect").matches(regex.email),
+    check('signup_password').not().isEmpty().withMessage("Password Not Valid").isLength({ min: 5 }).matches(regex.pcode),
     createUser
 )
 

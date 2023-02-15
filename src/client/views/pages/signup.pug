@@ -3,8 +3,11 @@ block title
     title Create Account
 block content
     form.form-container(action='signup', method='POST')
-        .field 
+        .field(style="text-align:center;")
             h1.is-size-1 Sign Up
+            .error-container(style="text-align:center;")
+                p.span-error.is-size-6.has-text-danger #{ userExists }
+                p.span-error.is-size-6.has-text-danger #{ emailUsed }
         .field
             label.label Fullname
             .control.has-icons-left.has-icons-right
@@ -31,7 +34,7 @@ block content
             label.label Email
             .control.has-icons-left.has-icons-right
                 input#signup-email.input.is-link(
-                    type='email',
+                    type='text',
                     placeholder='Email',
                     name='signup_email'
                 )
@@ -67,7 +70,6 @@ block content
                     type='submit',
                     value='Create Account'
                 )
-        span.span-error.is-size-6.has-text-danger #{ userExists }
     script(type='text/javascript').
         const signupFname = document.getElementById('signup-fname')
         const signupUname = document.getElementById('signup-uname')

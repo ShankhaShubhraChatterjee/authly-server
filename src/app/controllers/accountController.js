@@ -6,7 +6,7 @@ const { SQL } = require('./../utils/query')
 const { clientErrors } = require('./../utils/error')
 const { errorFormat } = require('./../configs/errorConfig')
 const bcrypt = require('bcrypt')
-const { validationResult} = require('express-validator')
+const { validationResult } = require('express-validator')
 const ImageKit = require('imagekit')
 
 const imageKit = new ImageKit({
@@ -16,14 +16,14 @@ const imageKit = new ImageKit({
 })
 // Send Account Template To Client
 const sendAccountPage = (req, res) => {
-    // if(req.session.auth){
-        res.render("pages/account.pug", { error:clientErrors.accountErrors, user: req.session.user })
+    if (req.session.auth) {
+        res.render("pages/account.pug", { error: clientErrors.accountErrors, user: req.session.user })
         res.end()
-    // }
-    // else {
-        // res.redirect("/forbidden");
-        // res.end()
-    // }
+    }
+    else {
+        res.redirect("/forbidden");
+        res.end()
+    }
 }
 
 // Handles All Updates In Account Page
@@ -37,7 +37,7 @@ const handleAccountUpdates = (req, res) => {
         confirmPassword: req.body.account_update_confirm_password,
     }
     let errors = validationResult(req).formatWith(errorFormat)
-    if(!errors.isEmpty()){
+    if (!errors.isEmpty()) {
         try { 
             clientErrors.accountErrors = errors.mapped()
         }
@@ -46,7 +46,33 @@ const handleAccountUpdates = (req, res) => {
         res.end()
     }
     else {
-        
+        if (!updates.fname) { return null }
+        else {
+            client
+                .query(SQL.updateFullname, [updates.fname, req.session.user.uname])
+                .then(() => {
+                    req.session.user.fname = updates.fname;
+                })
+                .catch((err) => console.error(err))
+        }
+
+        if (!updates.uname) { return null }
+        else {
+            client
+                .query('UPDATE users SET uname=$1 WHERE uname=$2', [updates.uname, req.session.user.uname])
+                .then(() => {
+                    req.session.user.uname = updates.uname;
+                })
+                .catch((err) => console.error(err))
+        }
+        if (!updates.email) { return null }
+        if (!updates.pcode) { return null }
+
+        else {
+            console.log(updates)
+        }
+        res.redirect("/account")
+        res.end()
     }
 
 }
@@ -58,13 +84,12 @@ const handleAccountLogOut = async (req, res) => {
     res.end()
 }
 const handleAccountDeletion = async (req, res) => {
-    client.query('DELETE FROM users WHERE uname=$1', [req.session.user.uname])
-    .then(() => {
-        req.session.destroy()
-        req.session.notifyDeletion = true;
-        res.redirect("/")
-        res.end()
-    })
+    client.query(SQL.deleteByUsername, [req.session.user.uname])
+        .then(() => {
+            req.session.destroy()
+            res.redirect("/")
+            res.end()
+        })
 }
 
 module.exports = {

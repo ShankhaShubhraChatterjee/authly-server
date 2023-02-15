@@ -1,25 +1,23 @@
 const { client } = require('./../utils/db')
 const { SQL } = require('./../utils/query')
 
-const signOutCurrentUser = async (req, res) => {
+const signOutCurrentUser = (req, res) => {
     req.session.auth = false
-    await req.session.destroy()
+    req.session.destroy()
     res.redirect('/')
 }
 
 const deleteAccount = async (req, res) => {
     client.query(SQL.deleteByUsername, [req.session.user.uname])
-        .then(async () => {
-            req.session.auth = false
+        .then(() => {
             if(req.session.auth){
-                await req.session.destroy()
-                await res.redirect("/")
+                req.session.destroy()
+                res.redirect("/")
             }
             else {
                 console.log("error")
                 res.redirect("/account")
             }
-            
         })
         .catch((err) => {
             console.error(err)

@@ -43,6 +43,7 @@
         width: 90%;
 
         h3 {
+            font-weight: lighter;
             margin: 5px 0;
         }
         .icon {
@@ -69,15 +70,8 @@
         .fname,
         .email {
             display: flex;
+            font-weight: lighter;
             justify-content: space-between;
-
-            h3 {
-                text-align: left;
-            }
-
-            p {
-                text-align: right;
-            }
         }
     }
 }
@@ -139,9 +133,33 @@
     }
 }
 
-@media only screen and (max-width: 800px) {
+@media (max-width: 800px) {
     .account-sections {
         grid-template-columns: repeat(1, 1fr) !important;
         width: 95%;
+    }
+    .account-section-cell h2 {
+        font-size: 24px!important;
+    }
+    .update-info-container .update-info h3.is-size-5 {
+        font-size: 16px!important;
+    }
+    .profile-info-container .profile-info {
+        .fname, .uname, .email {
+            margin: 5px 0;
+            flex-direction: column;
+            justify-content: flex-start!important;
+            background-color: royalblue;
+            padding: 5px;
+            border-radius: 10px;
+            color: whitesmoke;
+            h3 {
+                font-size: 20px!important;
+            }
+            p {
+                font-size: 18px!important;
+            }
+        }
+
     }
 }

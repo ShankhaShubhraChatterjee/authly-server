@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt')
 const { validationResult } = require('express-validator')
 
 const { SQL } = require('./../utils/query')
@@ -29,6 +28,7 @@ const handleSignin = async (req, res) => {
             .query(SQL.getAllFromUsername, [user.uname])
             .then(async (data) => {
                 if (data.rows.length === 0) {
+                    console.log("A")
                     console.log(data.rows[0])
                     clientErrors.userExists = 'User Doesnt Exist'
                     res.redirect('/signin')
@@ -67,7 +67,6 @@ const handleSignin = async (req, res) => {
         res.redirect("/signin")
         res.end()
     }
-    
 }
 
 module.exports = {

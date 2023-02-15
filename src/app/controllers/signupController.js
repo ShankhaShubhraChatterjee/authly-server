@@ -1,22 +1,25 @@
 // src/app/controllers/signupController.js
 
+const { validationResult } = require('express-validator')
+
 const { client } = require('../utils/db')
 const { SQL } = require('./../utils/query')
 const { clientErrors } = require('./../utils/error')
-// const { hashPassword } = require('./../utils/hash')
-const { body, validationResult } = require('express-validator')
-const bcrypt = require('bcrypt')
+const { emailInUse, userExistsInDb } = require('./../utils/validate')
+const { errorFormat } = require('./../configs/errorConfig')
 
-const sendSignUpPage = (req, res) => {
-    // if (req.session.auth) {
-    //     res.redirect("/account")
-    //     res.end()
-    // }
-    // else {
-    res.render('pages/signup.pug', { errors: clientErrors.signupErrors, userExists: clientErrors.signUpUserExists })
+const { hashPassword } = require('../utils/hash')
+
+const sendSignUpPage = async (req, res) => {
+    res.render(
+        'pages/signup.pug', 
+        { 
+            errors: clientErrors.signupErrors,
+            userExists: clientErrors.signUpUserExists,
+            emailUsed: clientErrors.signUpEmailInUse
+        }
+    )
     res.end()
-    // }
-    
 }
 const createUser = async (req, res) => {
     let user = {
@@ -24,43 +27,43 @@ const createUser = async (req, res) => {
         uname: req.body.signup_username,
         email: req.body.signup_email,
         pcode: req.body.signup_password,
+        profile: null
     }
-    const errorFormat = ({ location, msg, param, value, nestedErrors }) => {
-        return `${msg}`;
-    };
-    const errors = validationResult(req).formatWith(errorFormat)
-    if (!errors.isEmpty()) {
+    let userExists = await userExistsInDb(user.uname)
+    let emailUsed = await emailInUse(user.email)
+
+    let errors = validationResult(req).formatWith(errorFormat)
+    if (errors.isEmpty() && !userExists && !emailUsed) {
+        let hashedPassword = await hashPassword(user.pcode, 10)
+        client
+            .query(SQL.createNewUser, [user.fname, user.uname, user.email,hashedPassword])
+            .then(() => {
+                    console.log("Created New User")
+                    req.session.auth = true;
+                    req.session.user = user;
+                    res.redirect('/account')
+                    res.end()
+            })
+            .catch((err) => console.error(err))
+    }
+    else {
         try { 
             clientErrors.signupErrors = errors.mapped()
+            console.log(clientErrors.signinErrors)
+            console.log(emailUsed)
+            console.log("Executing")
+            userExists ? 
+            clientErrors.signUpUserExists = "User Exists" : 
+            clientErrors.signUpUserExists = null
+
+            emailUsed ? 
+            clientErrors.signUpEmailInUse = "Email Already Used" :
+            clientErrors.signUpEmailInUse = null
         }
         catch (err) { console.error("No Error Occured") }
         res.redirect("/signup")
         res.end()
     }
-    else {
-        client.query(SQL.getAllFromUsername, [user.uname])
-            .then(async (data) => {
-                if (data.rows.length === 0) {
-                    clientErrors.signUpUserExists = ""
-                    console.log("Can Create Account")
-                    await bcrypt.hash(user.pcode, 10)
-                        .then(hash => {
-                            client.query(SQL.createNewUser, [user.fname, user.uname, user.email, hash])
-                        })
-                        .then(() => { console.log("User Created") })
-                        .catch((err) => console.error(err))
-                    res.redirect("/account")
-                    res.end()
-                }
-                else {
-                    clientErrors.signUpUserExists = "Username Already Taken"
-                    res.redirect("/signup")
-                    res.end()
-                }   
-            }
-            ).catch((err) => console.error(err))
-    }
 }
-
 
 module.exports = { sendSignUpPage, createUser }

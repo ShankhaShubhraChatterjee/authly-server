@@ -23,7 +23,7 @@ block content
                         )
                     p.has-text-secondary Upload Profile Picture
                     button.button.profile-pic-upload-button(type="submit") Upload
-                form(action="/account" method="POST").profile-info.is-size-5
+                form(action="/account" method="POST" autocomplete="off").profile-info.is-size-5
                     if user!==undefined
                         .fname
                             h3 Name

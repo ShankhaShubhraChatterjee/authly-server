@@ -56,19 +56,20 @@ block content
                         style='cursor: pointer; z-index: 1'
                     )
             span.span-error.is-size-6.has-text-danger #{ errors.signup_password }
-            p(style="color:darkorange;margin-top: 5px;")
-                | Already An User ? 
-                a(href='/signin', style="color:darkorange;")
-                    | Login
-            p(style="color:darkorange;")
-                | Forgot Password ?
-                a(href='/forgot-password', style="color:darkorange;") 
-                    | Reset
-        .field.is-grouped(style="margin-top:10px;")
+        p(style="color:darkorange;margin-top: 5px;")
+            | Already An User ? 
+            a(href='/signin', style="color:darkorange;")
+                | Login
+        p(style="color:darkorange;")
+            | Forgot Password ?
+            a(href='/forgot-password', style="color:darkorange;") 
+                | Reset
+        .field.is-grouped
             .control
                 input#signup-submit.button.is-link(
                     type='submit',
-                    value='Create Account'
+                    value='Create Account',
+                    style="margin-top:10px;"
                 )
     script(type='text/javascript').
         const signupFname = document.getElementById('signup-fname')

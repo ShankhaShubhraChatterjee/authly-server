@@ -8,7 +8,8 @@ const signOutCurrentUser = (req, res) => {
 }
 
 const deleteAccount = async (req, res) => {
-    client.query(SQL.deleteByUsername, [req.session.user.uname])
+    await client
+        .query(SQL.deleteByUsername, [req.session.user.uname])
         .then(() => {
             if(req.session.auth){
                 req.session.destroy()

@@ -36,11 +36,12 @@ const createUser = async (req, res) => {
     if (errors.isEmpty() && !userExists && !emailUsed) {
         let hashedPassword = await hashPassword(user.pcode, 10)
         client
-            .query(SQL.createNewUser, [user.fname, user.uname, user.email,hashedPassword])
+            .query(SQL.createNewUser, [user.fname, user.uname, user.email, hashedPassword])
             .then(() => {
                     console.log("Created New User")
                     req.session.auth = true;
                     req.session.user = user;
+                    req.session.user.pcode = hashedPassword;
                     res.redirect('/account')
                     res.end()
             })

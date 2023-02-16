@@ -11,7 +11,7 @@
 .account-sections {
     column-gap: 10px;
     display: grid;
-    grid-auto-columns: minmax(250px, auto);
+    grid-auto-columns: minmax(150px, auto);
     grid-template-columns: repeat(2, 1fr);
     row-gap: 10px;
     width: 100%;
@@ -46,13 +46,21 @@
             font-weight: lighter;
             margin: 5px 0;
         }
+
+        p {
+            text-align: right;
+        }
+
         .icon {
             margin-top: 5px;
-            i.fa-eye, i.fa-eye-slash {
+
+            i.fa-eye,
+            i.fa-eye-slash {
                 z-index: 1;
                 cursor: pointer;
             }
         }
+
         .account-submit-section {
             text-align: center;
             width: 100%;
@@ -61,26 +69,53 @@
 }
 
 .profile-info-container {
-    padding: 0 40px;
+    padding: 0 10px;
     width: 100%;
     position: relative;
+
     .profile-info {
         margin-bottom: 60px;
+
         .uname,
         .fname,
         .email {
             display: flex;
+            flex-direction: column;
+            align-items: flex-start;
             font-weight: lighter;
             justify-content: space-between;
+            margin: 5px 0;
+            flex-direction: column;
+            justify-content: flex-start !important;
+            background-color: royalblue;
+            padding: 5px;
+            border-radius: 10px;
+            color: whitesmoke;
+
+            h3 {
+                font-size: 12px !important;
+                font-weight: bolder;
+            }
+
+            p {
+                font-size: 16px !important;
+                font-weight: 500;
+            }
         }
     }
 }
+
 .account-page-btn-container {
     padding: 0 10px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     position: absolute;
-    bottom: -3px;left: 0px;
+    bottom: -3px;
+    left: 0px;
 }
+
 .profile-info-container-pic {
     border-radius: 50%;
     display: flex;
@@ -90,47 +125,51 @@
     margin-top: 5px;
     text-align: center;
     width: 100%;
-    .profile-section {
+}
+
+.profile-section {
+    height: 150px;
+    position: relative;
+    width: 150px;
+
+    img {
+        border-radius: 50%;
         height: 150px;
-        position: relative;
+        border: none;
+        box-shadow: 0 0 10px black;
+        object-fit: cover;
         width: 150px;
-
-        img {
-            border-radius: 50%;
-            height: 150px;
-            object-fit: cover;
-            width: 150px;
-        }
-
-        #profile-pic-input {
-            display: none;
-        }
-
-        label {
-            background: black;
-            border-radius: 50%;
-            bottom: 17px;
-            cursor: pointer;
-            padding: 0 5px 2px;
-            position: absolute;
-            right: 17px;
-
-            i {
-                color: white;
-                font-size: 1.2em;
-            }
-        }
     }
-    .profile-pic-upload-button {
-        font-size: 1.1em;
-        outline: none;
-        border-radius: 50px;
-        background: none;
-        background-color: indigo;
-        color: white;
-        margin-top: 5px;
+
+    #profile-pic-input {
+        display: none;
+    }
+
+    label {
+        background: black;
+        border-radius: 50%;
+        bottom: 17px;
         cursor: pointer;
+        padding: 0 5px 2px;
+        position: absolute;
+        right: 17px;
+
+        i {
+            color: white;
+            font-size: 1.2em;
+        }
     }
+}
+
+.profile-pic-upload-button {
+    font-size: 1.1em;
+    outline: none;
+    border-radius: 50px;
+    background: none;
+    background-color: indigo;
+    color: white;
+    margin-top: 5px;
+    cursor: pointer;
 }
 
 @media (max-width: 800px) {
@@ -138,28 +177,12 @@
         grid-template-columns: repeat(1, 1fr) !important;
         width: 95%;
     }
-    .account-section-cell h2 {
-        font-size: 24px!important;
-    }
-    .update-info-container .update-info h3.is-size-5 {
-        font-size: 16px!important;
-    }
-    .profile-info-container .profile-info {
-        .fname, .uname, .email {
-            margin: 5px 0;
-            flex-direction: column;
-            justify-content: flex-start!important;
-            background-color: royalblue;
-            padding: 5px;
-            border-radius: 10px;
-            color: whitesmoke;
-            h3 {
-                font-size: 20px!important;
-            }
-            p {
-                font-size: 18px!important;
-            }
-        }
 
+    .account-section-cell h2 {
+        font-size: 24px !important;
+    }
+
+    .update-info-container .update-info h3.is-size-5 {
+        font-size: 16px !important;
     }
 }

@@ -12,7 +12,7 @@ router.get('/', sendSignUpPage)
 router.post(
     '/',
     check('signup_fullname').not().isEmpty().trim().escape().withMessage("Name Invalid").matches(regex.fname),
-    check('signup_username').not().isEmpty().trim().escape().withMessage("Username Not Valid").matches(regex.uname),
+    check('signup_username').not().isEmpty().trim().escape().withMessage("Username Error").matches(regex.uname),
     check('signup_email').isEmail().withMessage("Email Is Incorrect").matches(regex.email),
     check('signup_password').not().isEmpty().withMessage("Password Not Valid").isLength({ min: 5 }).matches(regex.pcode),
     createUser

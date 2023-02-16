@@ -11,7 +11,9 @@ const sendSigninPage = (req, res) => {
         res.redirect('/account')
         res.end()
     } else {
-        res.render('pages/signin.pug', { error: clientErrors.signinErrors })
+        
+        res.render('pages/signin.pug', { error: clientErrors.signinErrors, userDoesntExist: clientErrors.signinUserExists })
+        clientErrors.signinUserExists = ""
         res.end()
     }
 }
@@ -30,7 +32,7 @@ const handleSignin = async (req, res) => {
                 if (data.rows.length === 0) {
                     console.log("A")
                     console.log(data.rows[0])
-                    clientErrors.userExists = 'User Doesnt Exist'
+                    clientErrors.signinUserExists = 'User Doesnt Exist'
                     res.redirect('/signin')
                     res.end()
                 } 

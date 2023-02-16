@@ -9,9 +9,8 @@ let clientErrors = {
     accountPcodeUpdateError: '',
     accountErrors: {},
     // Client Side Errors For SignIn Page
-    signInUnameError: '',
-    signInPcodeError: '',
     signinErrors: {},
+    signinUserExists: '',
     
     // Client Side Errors For SignUp Page
     signupErrors: {},

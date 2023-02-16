@@ -210,7 +210,7 @@ span.span-error {
 .account-sections {
   width: 100%;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-columns: minmax(250px, auto);
+  grid-auto-columns: minmax(150px, auto);
   gap: 10px;
   display: grid;
 }
@@ -247,6 +247,10 @@ span.span-error {
   font-weight: lighter;
 }
 
+.update-info-container .update-info p {
+  text-align: right;
+}
+
 .update-info-container .update-info .icon {
   margin-top: 5px;
 }
@@ -263,7 +267,7 @@ span.span-error {
 
 .profile-info-container {
   width: 100%;
-  padding: 0 40px;
+  padding: 0 10px;
   position: relative;
 }
 
@@ -272,14 +276,35 @@ span.span-error {
 }
 
 .profile-info-container .profile-info .uname, .profile-info-container .profile-info .fname, .profile-info-container .profile-info .email {
+  color: #f5f5f5;
+  background-color: #4169e1;
+  border-radius: 10px;
+  flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
+  margin: 5px 0;
+  padding: 5px;
   font-weight: lighter;
   display: flex;
+  justify-content: flex-start !important;
+}
+
+.profile-info-container .profile-info .uname h3, .profile-info-container .profile-info .fname h3, .profile-info-container .profile-info .email h3 {
+  font-weight: bolder;
+  font-size: 12px !important;
+}
+
+.profile-info-container .profile-info .uname p, .profile-info-container .profile-info .fname p, .profile-info-container .profile-info .email p {
+  font-weight: 500;
+  font-size: 16px !important;
 }
 
 .account-page-btn-container {
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 10px;
+  display: flex;
   position: absolute;
   bottom: -3px;
   left: 0;
@@ -296,24 +321,26 @@ span.span-error {
   display: flex;
 }
 
-.profile-info-container-pic .profile-section {
+.profile-section {
   height: 150px;
   width: 150px;
   position: relative;
 }
 
-.profile-info-container-pic .profile-section img {
+.profile-section img {
   height: 150px;
   object-fit: cover;
   width: 150px;
+  border: none;
   border-radius: 50%;
+  box-shadow: 0 0 10px #000;
 }
 
-.profile-info-container-pic .profile-section #profile-pic-input {
+.profile-section #profile-pic-input {
   display: none;
 }
 
-.profile-info-container-pic .profile-section label {
+.profile-section label {
   cursor: pointer;
   background: #000;
   border-radius: 50%;
@@ -323,12 +350,12 @@ span.span-error {
   right: 17px;
 }
 
-.profile-info-container-pic .profile-section label i {
+.profile-section label i {
   color: #fff;
   font-size: 1.2em;
 }
 
-.profile-info-container-pic .profile-pic-upload-button {
+.profile-pic-upload-button {
   color: #fff;
   cursor: pointer;
   background: indigo;
@@ -350,24 +377,6 @@ span.span-error {
 
   .update-info-container .update-info h3.is-size-5 {
     font-size: 16px !important;
-  }
-
-  .profile-info-container .profile-info .fname, .profile-info-container .profile-info .uname, .profile-info-container .profile-info .email {
-    color: #f5f5f5;
-    background-color: #4169e1;
-    border-radius: 10px;
-    flex-direction: column;
-    margin: 5px 0;
-    padding: 5px;
-    justify-content: flex-start !important;
-  }
-
-  .profile-info-container .profile-info .fname h3, .profile-info-container .profile-info .uname h3, .profile-info-container .profile-info .email h3 {
-    font-size: 20px !important;
-  }
-
-  .profile-info-container .profile-info .fname p, .profile-info-container .profile-info .uname p, .profile-info-container .profile-info .email p {
-    font-size: 18px !important;
   }
 }
 

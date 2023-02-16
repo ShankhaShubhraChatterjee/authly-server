@@ -10,10 +10,16 @@ block content
                 h2.is-size-3 User Profile
                 form(action="account/user/upload/profile_pic" method="POST" enctype="multipart/form-data").profile-info-container-pic
                     .profile-section
-                        img(
-                            src='./img/application/user.png',
-                            alt='Account Profile Picture'
-                        )
+                        if user.profile === null
+                            img(
+                                src='./img/application/user.png',
+                                alt='Account Profile Picture'
+                            )
+                        else
+                            img(
+                                src=`${user.profile}`,
+                                alt='Account Profile Picture'
+                            )
                         label(for='profile-pic-input')
                             i.bi.bi-camera
                         input#profile-pic-input.profile-pic-input(
@@ -21,7 +27,8 @@ block content
                             accept='.jpg,.jpeg,.png,.svg,.bmp,.gif,.avif',
                             name='profile_picture'
                         )
-                    p.has-text-secondary Upload Profile Picture
+                    if user.profile === null
+                        p.has-text-secondary Upload Profile Picture
                     button.button.profile-pic-upload-button(type="submit") Upload
                 form(action="/account" method="POST" autocomplete="off").profile-info.is-size-5
                     if user!==undefined
@@ -44,19 +51,23 @@ block content
                         .email
                             h3 Email
                             p Email Address
+                .account-page-btn-container
+                    form.is-flex.flex-direction-row.is-justify-content-space-between.is-align-items-center(
+                        action='/account/user/logout',
+                        method='POST'
+                    )
+                        button.button.my-2.has-background-warning.has-text-white(
+                            type='submit',
+                        ) Log Out
 
-                form.account-page-btn-container.is-flex.flex-direction-row.is-justify-content-space-between.is-align-items-center(
-                    action='/account',
-                    method='POST'
-                )
-                    button.button.my-2.has-background-warning.has-text-white(
-                        type='submit',
-                        value='account_logout'
-                    ) Log Out
-                    button.button.my-2.has-background-danger.has-text-white(
-                        type='submit',
-                        value='account_delete'
-                    ) Delete Account
+                    form.is-flex.flex-direction-row.is-justify-content-space-between.is-align-items-center(
+                        action='/account/user/delete',
+                        method='POST'
+                    )
+                        button.button.my-2.has-background-danger.has-text-white(
+                            type='submit',
+                            value='account_delete'
+                        ) Delete Account
 
             form.update-info-container.account-section-cell(
                 action='account/user/update',
@@ -74,7 +85,7 @@ block content
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-signature
-                        p.has-text-danger #{error.account_update_fullname}
+                        p.span-error.has-text-danger #{error.account_update_fullname}
 
                     .field
                         .control.has-icons-left.has-icons-right
@@ -85,7 +96,7 @@ block content
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-user-circle
-                        p.has-text-danger #{error.account_update_username}
+                        p.span-error.has-text-danger #{error.account_update_username}
 
                     .field
                         .control.has-icons-left.has-icons-right
@@ -96,7 +107,7 @@ block content
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-envelope
-                        p.has-text-danger #{error.account_update_email}
+                        p.span-error.has-text-danger #{error.account_update_email}
 
                     h3.is-size-5 Change Password
                     .field
@@ -111,7 +122,7 @@ block content
 
                             span.icon.is-right
                                 i#current-eye.fa-solid.fa-eye           
-                        p.has-text-danger #{error.account_update_current_password}
+                        p.span-error.has-text-danger #{error.account_update_current_password}
                     .field
                         .control.has-icons-left.has-icons-right
                             input#new-password.input(
@@ -124,7 +135,7 @@ block content
 
                             span.icon.is-right
                                 i#new-eye.fa-solid.fa-eye
-                        p.has-text-danger #{error.account_update_new_password}
+                        p.span-error.has-text-danger #{error.account_update_new_password}
                     .field
                         .control.has-icons-left.has-icons-right
                             input#confirm-password.input(
@@ -137,7 +148,7 @@ block content
 
                             span.icon.is-right
                                 i#confirm-eye.fa-solid.fa-eye
-                        p.has-text-danger #{error.account_update_confirm_password}
+                        p.span-error.has-text-danger #{error.account_update_confirm_password}
                     .account-submit-section
                         hr
                         input.button.has-background-info.has-text-white(

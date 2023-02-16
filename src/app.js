@@ -7,9 +7,10 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const session = require('express-session')
-
+const fileUpload = require('express-fileupload')
 // Utilities
-const server = require('./app/utils/server')
+const { uploadConfig } = require('./app/configs/uploadConfig')
+const { server } = require('./app/utils/server')
 const { sessionOptions } = require('./app/utils/session')
 const { routes } = require('./app/utils/route')
 
@@ -24,6 +25,7 @@ app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, process.env.VIEWS_DIR))
 app.use(express.static(path.join(__dirname, process.env.PUBLIC_DIR)))
 app.use(express.static(path.join(__dirname, process.env.STATIC_DIR)))
+app.use(fileUpload(uploadConfig))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use((req, res, next) => {

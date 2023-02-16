@@ -1,22 +1,23 @@
 require('dotenv').config()
-const path = require('path')
+const fs = require('fs')
 const { client } = require('./../utils/db')
-const { regex } = require('./../utils/regex')
 const { SQL } = require('./../utils/query')
 const { clientErrors } = require('./../utils/error')
 const { errorFormat } = require('./../configs/errorConfig')
-const bcrypt = require('bcrypt')
 const { validationResult } = require('express-validator')
 const ImageKit = require('imagekit')
+const { inputFieldEmpty, updateAccountDetails } = require('../utils/validate')
 
 const imageKit = new ImageKit({
     privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
     publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
     urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
 })
+
 // Send Account Template To Client
 const sendAccountPage = (req, res) => {
     if (req.session.auth) {
+        console.log(req.session.user)
         res.render("pages/account.pug", { error: clientErrors.accountErrors, user: req.session.user })
         res.end()
     }
@@ -27,7 +28,7 @@ const sendAccountPage = (req, res) => {
 }
 
 // Handles All Updates In Account Page
-const handleAccountUpdates = (req, res) => {
+const handleAccountUpdates = async (req, res) => {
     let updates = {
         fname: req.body.account_update_fullname,
         uname: req.body.account_update_username,
@@ -36,8 +37,39 @@ const handleAccountUpdates = (req, res) => {
         newPassword: req.body.account_update_new_password,
         confirmPassword: req.body.account_update_confirm_password,
     }
+    let checkValues = {
+        fname: inputFieldEmpty(updates.fname),
+        uname: inputFieldEmpty(updates.uname),
+        email: inputFieldEmpty(updates.email),
+        currentPassword: inputFieldEmpty(updates.currentPassword),
+        newPassword: inputFieldEmpty(updates.newPassword),
+        confirmPassword: inputFieldEmpty(updates.confirmPassword)
+    }
     let errors = validationResult(req).formatWith(errorFormat)
-    if (!errors.isEmpty()) {
+    if (checkValues) {
+        console.log("Executed If")
+        if (!checkValues.fname) {
+            console.log("Working")
+            console.log(checkValues.fname)
+            await client
+                .query(SQL.updateFullname, [updates.fname, updates.uname])
+                .then(() => console.log("name updated"))
+                .catch((err) => { console.error(err); return false })
+            // await updateAccountDetails(SQL.updateFullname, [updates.fname, updates.uname])
+        }
+        if (!checkValues.uname) {
+            console.log(checkValues.uname)
+            await updateAccountDetails(SQL.updateUsername, [updates.uname, updates.uname])
+        }
+        if (!checkValues.email) {
+            console.log(checkValues.email)
+            await updateAccountDetails(SQL.updateEmail, [updates.email, updates.uname])
+        }
+        res.redirect('/account')
+        res.end()
+    }
+    else {
+        console.log("EXecuted Else")
         try { 
             clientErrors.accountErrors = errors.mapped()
         }
@@ -45,56 +77,58 @@ const handleAccountUpdates = (req, res) => {
         res.redirect("/account")
         res.end()
     }
-    else {
-        if (!updates.fname) { return null }
-        else {
-            client
-                .query(SQL.updateFullname, [updates.fname, req.session.user.uname])
+}
+// Handle Profile Image Upload
+
+const handleProfileImage = async (req, res) => {
+    let image = req.files.profile_picture;
+    let user = req.session.user.uname;
+    console.log(image)
+    imageKit.upload({
+        file: image.data,
+        fileName: image.name
+    }, async (err, result) => {
+        if (err) console.error(err)
+        else { 
+            await client
+                .query(SQL.addProfileImage, [result.url, user])
                 .then(() => {
-                    req.session.user.fname = updates.fname;
+                    console.log("Profile Image Added")
+                    req.session.user.profile = result.url; 
                 })
                 .catch((err) => console.error(err))
         }
-
-        if (!updates.uname) { return null }
-        else {
-            client
-                .query('UPDATE users SET uname=$1 WHERE uname=$2', [updates.uname, req.session.user.uname])
-                .then(() => {
-                    req.session.user.uname = updates.uname;
-                })
-                .catch((err) => console.error(err))
-        }
-        if (!updates.email) { return null }
-        if (!updates.pcode) { return null }
-
-        else {
-            console.log(updates)
-        }
+    })
+    setTimeout(() => {
         res.redirect("/account")
         res.end()
-    }
-
+    }, 2500)
+    
 }
+
 // Handles User Account LogOut
 const handleAccountLogOut = async (req, res) => {
-    await req.session.destroy()
-    req.session.notifyLogOut = true;
-    res.redirect("/")
-    res.end()
+    req.session.destroy(() => {
+        res.redirect("/")
+        res.end()
+    })
 }
 const handleAccountDeletion = async (req, res) => {
-    client.query(SQL.deleteByUsername, [req.session.user.uname])
+    await client
+        .query(SQL.deleteByUsername, [req.session.user.uname])
         .then(() => {
-            req.session.destroy()
-            res.redirect("/")
-            res.end()
+            req.session.destroy(() => {
+                res.redirect("/")
+                res.end()
+            })
+            
         })
+        .catch((err) => console.error(err))
 }
 
 module.exports = {
     sendAccountPage,
-    // uploadProfilePic,
+    handleProfileImage,
     handleAccountLogOut,
     handleAccountUpdates,
     handleAccountDeletion,

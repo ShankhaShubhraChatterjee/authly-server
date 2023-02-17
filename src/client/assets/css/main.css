@@ -74,9 +74,19 @@
   background: #0036ff80;
 }
 
+.navbar-end {
+  align-items: center;
+}
+
+.navbar-end .control {
+  margin-right: 5px;
+}
+
 #profile {
   height: 40px;
   width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 #title {
@@ -108,6 +118,14 @@
     -webkit-backdrop-filter: blur(2.5px);
     backdrop-filter: blur(2.5px);
     background-color: #0036ff80;
+  }
+
+  .navbar-end {
+    padding: 0 10px;
+  }
+
+  .navbar-end .control {
+    margin-bottom: 5px;
   }
 
   .control {
@@ -355,14 +373,33 @@ span.span-error {
   font-size: 1.2em;
 }
 
-.profile-pic-upload-button {
-  color: #fff;
+.button {
+  color: #f5f5f5 !important;
+}
+
+.profile-button {
   cursor: pointer;
-  background: indigo;
+  background: none;
   border-radius: 50px;
   outline: none;
   margin-top: 5px;
   font-size: 1.1em;
+  color: #fff !important;
+}
+
+.profile-button-section {
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+}
+
+.profile-pic-upload-button {
+  background-color: indigo;
+}
+
+.profile-pic-delete-button {
+  background-color: #ff4500;
 }
 
 @media (max-width: 800px) {

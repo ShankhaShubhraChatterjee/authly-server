@@ -20,7 +20,7 @@ var SQL = {
 
     updateUserPassword: 'UPDATE users SET passcode=$1 FROM users WHERE uname=$2',
 
-    addProfileImage: 'UPDATE users SET profile_pic=$1 WHERE uname=$2',
+    addProfileImage: 'UPDATE users SET profile_image=$1 WHERE uname=$2',
     
     deleteByUsername: 'DELETE FROM users WHERE uname=$1'
     

@@ -1,10 +1,17 @@
 .navbar {
     background: rgba(0, 54, 255, 0.5);
 }
-
+.navbar-end {
+    align-items: center;
+    .control {
+        margin-right: 5px;
+    }
+}
 #profile {
     height: 40px;
     width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 #title {
@@ -30,11 +37,20 @@
     justify-content: space-evenly;
     width: inherit;
 }
+
 @media only screen and (max-width: 1030px) {
     .navbar-menu {
         background-color: rgba(0, 54, 255, 0.5);
         backdrop-filter: blur(2.5px);
     }
+
+    .navbar-end {
+        padding: 0 10px;
+        .control {
+            margin-bottom: 5px;
+        }
+    }
+
     .control {
         align-items: center;
         display: flex;

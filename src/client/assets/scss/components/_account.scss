@@ -160,16 +160,29 @@
         }
     }
 }
-
-.profile-pic-upload-button {
+.button {
+    color: whitesmoke!important;
+}
+.profile-button {
     font-size: 1.1em;
     outline: none;
     border-radius: 50px;
     background: none;
-    background-color: indigo;
-    color: white;
+    color: white!important;
     margin-top: 5px;
     cursor: pointer;
+}
+.profile-button-section {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.profile-pic-upload-button {
+    background-color: indigo;
+}
+.profile-pic-delete-button {
+    background-color: orangered;
 }
 
 @media (max-width: 800px) {

@@ -27,7 +27,7 @@ const createUser = async (req, res) => {
         uname: req.body.signup_username,
         email: req.body.signup_email,
         pcode: req.body.signup_password,
-        profile: null
+        profile_image: null
     }
     let userExists = await userExistsInDb(user.uname)
     let emailUsed = await emailInUse(user.email)
@@ -50,9 +50,6 @@ const createUser = async (req, res) => {
     else {
         try { 
             clientErrors.signupErrors = errors.mapped()
-            console.log(clientErrors.signinErrors)
-            console.log(emailUsed)
-            console.log("Executing")
             userExists ? 
             clientErrors.signUpUserExists = "User Exists" : 
             clientErrors.signUpUserExists = null

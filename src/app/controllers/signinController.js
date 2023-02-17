@@ -30,8 +30,6 @@ const handleSignin = async (req, res) => {
             .query(SQL.getAllFromUsername, [user.uname])
             .then(async (data) => {
                 if (data.rows.length === 0) {
-                    console.log("A")
-                    console.log(data.rows[0])
                     clientErrors.signinUserExists = 'User Doesnt Exist'
                     res.redirect('/signin')
                     res.end()
@@ -42,18 +40,13 @@ const handleSignin = async (req, res) => {
                         data.rows[0].passcode
                     )
                     if (dehashed) {
-                        console.log(dehashed)
-                        console.log('User Exists')
                         req.session.auth = true;
                         req.session.notifyLogOut = true;
                         req.session.user = data.rows[0];
                         res.redirect('/account')
                         res.end()
                     } else {
-                        console.log(dehashed)
-                        console.log('Wrong Password')
                         clientErrors.signinErrors = 'Wrong Password'
-
                         res.redirect('/signin')
                         res.end()
                     }

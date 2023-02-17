@@ -14,29 +14,33 @@ nav.navbar.is-fixed-top
             span
 
     a.nav-item.profile(href='/account')
-        img#profile(src='./img/application/user.png', alt='Profile Placeholder Image') 
+        if user === undefined 
+            img#profile(src='./img/application/user.png', alt='Profile Placeholder Image')
+        else
+            img#profile(src=`${user.profile_image}`, alt='Profile Placeholder Image')
 
     #nav-links.navbar-menu.has-text-centered
         // right links
         .navbar-end(style="background-color:transparent;")
-            p.control.mx-1.my-1
+            p.control
                 a.button.has-background-primary-light(href='/')
                     span.icon.has-text-link-dark
                         i.fa-solid.fa-home
                     span.has-text-link-dark Home
-            p.control.mx-1.my-1
-                if !auth
+            if !auth
+                p.control
                     a.button.has-background-primary-light(href='/signin')
                         span.icon.has-text-link-dark
                             i.fa-solid.fa-arrow-right-to-bracket
                         span.has-text-link-dark Log In
-                else
-                    form.button.has-background-primary-light(action='/signout', method='POST')
+            else
+                form.control(action='/account/user/logout', method='POST')
+                    button(style="width: 100%;", type="submit").button.has-background-primary-light
                         span.icon.has-text-link-dark
-                            i.fa-solid.fa-arrow-left-to-bracket
+                            i.fa-solid.fa-angles-left
                         span.has-text-link-dark Log Out
-            p.control.mx-1.my-1
+            p.control
                 a.button.has-background-primary-light(href='/signup')
                     span.icon.has-text-link-dark
-                        i.fa-solid.fa-arrow-right-to-bracket
+                        i.fa-solid.fa-id-card
                     span.has-text-link-dark Register

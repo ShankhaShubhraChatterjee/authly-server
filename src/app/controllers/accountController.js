@@ -16,9 +16,9 @@ const imageKit = new ImageKit({
 
 // Send Account Template To Client
 const sendAccountPage = (req, res) => {
+    console.log(req.session.user)
     if (req.session.auth) {
-        console.log(req.session.user)
-        res.render("pages/account.pug", { error: clientErrors.accountErrors, user: req.session.user })
+        res.render("pages/account.pug", { error: clientErrors.accountErrors, user: req.session.user, imageUploadError: clientErrors.accountImageUploadError })
         res.end()
     }
     else {
@@ -81,29 +81,34 @@ const handleAccountUpdates = async (req, res) => {
 // Handle Profile Image Upload
 
 const handleProfileImage = async (req, res) => {
-    let image = req.files.profile_picture;
+    let image = req.files;
     let user = req.session.user.uname;
-    console.log(image)
-    imageKit.upload({
-        file: image.data,
-        fileName: image.name
-    }, async (err, result) => {
-        if (err) console.error(err)
-        else { 
-            await client
-                .query(SQL.addProfileImage, [result.url, user])
-                .then(() => {
-                    console.log("Profile Image Added")
-                    req.session.user.profile = result.url; 
-                })
-                .catch((err) => console.error(err))
-        }
-    })
-    setTimeout(() => {
+    if (req.files === null) {
+        clientErrors.accountImageUploadError = "Please Select An Image"
         res.redirect("/account")
         res.end()
-    }, 2500)
-    
+    }
+    else {
+        imageKit.upload({
+            file: image.profile_picture.data,
+            fileName: image.profile_picture.name
+        }, async (err, result) => {
+            if (err) console.error(err)
+            else { 
+                await client
+                    .query(SQL.addProfileImage, [result.url, user])
+                    .then(async () => {
+                        req.session.user.profile_image = await result.url; 
+
+                    })
+                    .catch((err) => console.error(err))
+            }
+        })
+        setTimeout(() => {
+            res.redirect("/account")
+            res.end()
+        }, 3000)
+    }
 }
 
 // Handles User Account LogOut

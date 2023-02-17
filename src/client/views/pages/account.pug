@@ -10,14 +10,14 @@ block content
                 h2.is-size-3 User Profile
                 form(action="account/user/upload/profile_pic" method="POST" enctype="multipart/form-data").profile-info-container-pic
                     .profile-section
-                        if user.profile === null
+                        if user.profile_image === null
                             img(
                                 src='./img/application/user.png',
                                 alt='Account Profile Picture'
                             )
                         else
                             img(
-                                src=`${user.profile}`,
+                                src=`${user.profile_image}`,
                                 alt='Account Profile Picture'
                             )
                         label(for='profile-pic-input')
@@ -27,9 +27,13 @@ block content
                             accept='.jpg,.jpeg,.png,.svg,.bmp,.gif,.avif',
                             name='profile_picture'
                         )
-                    if user.profile === null
+                    if user.profile_image === null
                         p.has-text-secondary Upload Profile Picture
-                    button.button.profile-pic-upload-button(type="submit") Upload
+                        p.span-error #{ imageUploadError }
+                    .profile-button-section
+                        button.button.profile-pic-upload-button(type="submit") Upload
+                        button.button.profile-pic-delete-button(type="submit") Delete
+
                 form(action="/account" method="POST" autocomplete="off").profile-info.is-size-5
                     if user!==undefined
                         .fname

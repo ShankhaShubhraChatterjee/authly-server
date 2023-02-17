@@ -47,11 +47,6 @@ router.get("/forbidden", (req, res) => {
 })
 router.use('/account', routes.accountRoute)
 
-app.use('/384534983hg89h34g349', (req, res) => {
-    let auth = req.session.auth
-    res.render('templates/base.pug', { auth: auth })
-})
-
 app.use(router)
 app.use('*', (_, res) => {
     res.render('pages/notfound.pug')

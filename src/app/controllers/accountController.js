@@ -1,5 +1,5 @@
 require('dotenv').config()
-const fs = require('fs')
+const path = require('path')
 const { client } = require('./../utils/db')
 const { SQL } = require('./../utils/query')
 const { clientErrors } = require('./../utils/error')
@@ -16,7 +16,7 @@ const imageKit = new ImageKit({
 
 // Send Account Template To Client
 const sendAccountPage = (req, res) => {
-    console.log(req.session.user)
+    console.log()
     if (req.session.auth) {
         res.render("pages/account.pug", { error: clientErrors.accountErrors, user: req.session.user, imageUploadError: clientErrors.accountImageUploadError })
         res.end()
@@ -89,25 +89,58 @@ const handleProfileImage = async (req, res) => {
         res.end()
     }
     else {
-        imageKit.upload({
-            file: image.profile_picture.data,
-            fileName: image.profile_picture.name
-        }, async (err, result) => {
-            if (err) console.error(err)
-            else { 
-                await client
-                    .query(SQL.addProfileImage, [result.url, user])
-                    .then(async () => {
-                        req.session.user.profile_image = await result.url; 
+        if (req.session.user.profile_image !== null) {
+            imageKit.deleteFile(`${req.session.user.profile_image_id}`, 
+                (err, result) => {
+                if (err) console.error(err)
+                else {
+                    console.log(result)
+                }
+            })
+            imageKit.upload({
+                file: image.profile_picture.data,
+                fileName: image.profile_picture.name
+            }, async (err, result) => {
+                if (err) console.error(err)
+                else { 
+                    await client
+                        .query(SQL.addProfileImage, [result.url, result.fileId, user])
+                        .then(async () => {
+                            console.log(result)
+                            req.session.user.profile_image = await result.url
+                            req.session.user.profile_image_id = await result.fileId
 
-                    })
-                    .catch((err) => console.error(err))
-            }
-        })
-        setTimeout(() => {
-            res.redirect("/account")
-            res.end()
-        }, 3000)
+                        })
+                        .catch((err) => console.error(err))
+                }
+            })
+            setTimeout(() => {
+                res.redirect("/account")
+                res.end()
+            }, 3000)
+        }
+        else {
+            imageKit.upload({
+                file: image.profile_picture.data,
+                fileName: image.profile_picture.name
+            }, async (err, result) => {
+                if (err) console.error(err)
+                else { 
+                    await client
+                        .query(SQL.addProfileImage, [result.url, result.fileId, user])
+                        .then(async () => {
+                            req.session.user.profile_image = await result.url
+                            req.session.user.profile_image_id = await result.fileId
+
+                        })
+                        .catch((err) => console.error(err))
+                }
+            })
+            setTimeout(() => {
+                res.redirect("/account")
+                res.end()
+            }, 2500)
+        }
     }
 }
 

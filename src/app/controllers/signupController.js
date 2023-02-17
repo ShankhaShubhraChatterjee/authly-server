@@ -16,7 +16,8 @@ const sendSignUpPage = async (req, res) => {
         { 
             errors: clientErrors.signupErrors,
             userExists: clientErrors.signUpUserExists,
-            emailUsed: clientErrors.signUpEmailInUse
+            emailUsed: clientErrors.signUpEmailInUse,
+            user: req.session.user
         }
     )
     res.end()
@@ -27,7 +28,8 @@ const createUser = async (req, res) => {
         uname: req.body.signup_username,
         email: req.body.signup_email,
         pcode: req.body.signup_password,
-        profile_image: null
+        profile_image: null,
+        profile_image_id: null
     }
     let userExists = await userExistsInDb(user.uname)
     let emailUsed = await emailInUse(user.email)

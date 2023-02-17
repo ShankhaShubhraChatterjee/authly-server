@@ -10,7 +10,7 @@ block content
                 h2.is-size-3 User Profile
                 form(action="account/user/upload/profile_pic" method="POST" enctype="multipart/form-data").profile-info-container-pic
                     .profile-section
-                        if user.profile_image === null
+                        if user === undefined || user.profile_image === undefined
                             img(
                                 src='./img/application/user.png',
                                 alt='Account Profile Picture'

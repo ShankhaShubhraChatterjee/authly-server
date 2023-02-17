@@ -391,6 +391,7 @@ span.span-error {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  margin-top: 10px;
   display: flex;
 }
 

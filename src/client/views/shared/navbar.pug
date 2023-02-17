@@ -14,7 +14,7 @@ nav.navbar.is-fixed-top
             span
 
     a.nav-item.profile(href='/account')
-        if user.profile_image === null  
+        if user === undefined || user.profile_image === undefined
             img#profile(src='./img/application/user.png', alt='Profile Placeholder Image')
         else
             img#profile(src=`${user.profile_image}`, alt='Profile Placeholder Image')

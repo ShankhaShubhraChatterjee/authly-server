@@ -18,7 +18,15 @@ const imageKit = new ImageKit({
 const sendAccountPage = (req, res) => {
     console.log()
     if (req.session.auth) {
-        res.render("pages/account.pug", { error: clientErrors.accountErrors, user: req.session.user, imageUploadError: clientErrors.accountImageUploadError })
+        res.render(
+            "pages/account.pug", 
+            { 
+                error: clientErrors.accountErrors, 
+                user: req.session.user, 
+                auth: req.session.auth,
+                imageUploadError: clientErrors.accountImageUploadError 
+            }
+        )
         res.end()
     }
     else {

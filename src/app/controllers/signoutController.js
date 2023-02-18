@@ -1,6 +1,8 @@
 const { client } = require('./../utils/db')
 const { SQL } = require('./../utils/query')
 
+const { imageKit } = require('./../utils/imagekit')
+
 const signOutCurrentUser = (req, res) => {
     req.session.auth = false
     req.session.destroy()

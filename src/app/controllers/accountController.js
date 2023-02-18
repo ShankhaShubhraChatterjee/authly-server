@@ -5,18 +5,14 @@ const { SQL } = require('./../utils/query')
 const { clientErrors } = require('./../utils/error')
 const { errorFormat } = require('./../configs/errorConfig')
 const { validationResult } = require('express-validator')
-const ImageKit = require('imagekit')
+const { imageKit } = require('./../utils/imagekit')
 const { inputFieldEmpty, updateAccountDetails } = require('../utils/validate')
 
-const imageKit = new ImageKit({
-    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
-    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
-})
+
 
 // Send Account Template To Client
 const sendAccountPage = (req, res) => {
-    console.log()
+    console.log(req.session.user)
     if (req.session.auth) {
         res.render(
             "pages/account.pug", 
@@ -100,11 +96,11 @@ const handleProfileImage = async (req, res) => {
         if (req.session.user.profile_image !== null) {
             imageKit.deleteFile(`${req.session.user.profile_image_id}`, 
                 (err, result) => {
-                if (err) console.error(err)
-                else {
-                    console.log(result)
-                }
-            })
+                    if (err) console.error(err)
+                    else {
+                        console.log(result)
+                    }
+                })
             imageKit.upload({
                 file: image.profile_picture.data,
                 fileName: image.profile_picture.name
@@ -112,7 +108,7 @@ const handleProfileImage = async (req, res) => {
                 if (err) console.error(err)
                 else { 
                     await client
-                        .query(SQL.addProfileImage, [result.url, result.fileId, user])
+                        .query(SQL.modifyProfileImage, [result.url, result.fileId, user])
                         .then(async () => {
                             console.log(result)
                             req.session.user.profile_image = await result.url
@@ -135,7 +131,7 @@ const handleProfileImage = async (req, res) => {
                 if (err) console.error(err)
                 else { 
                     await client
-                        .query(SQL.addProfileImage, [result.url, result.fileId, user])
+                        .query(SQL.modifyProfileImage, [result.url, result.fileId, user])
                         .then(async () => {
                             req.session.user.profile_image = await result.url
                             req.session.user.profile_image_id = await result.fileId
@@ -159,7 +155,44 @@ const handleAccountLogOut = async (req, res) => {
         res.end()
     })
 }
+
+const handleProfilePicDeletion = async (req, res) => {
+    let user = req.session.user.uname;
+    if (req.session.user.profile_image !== null) {
+        imageKit.deleteFile(
+            `${req.session.user.profile_image_id}`, 
+            async (err, _) => {
+                if (err) console.error(err)
+                else {
+                    await client
+                        .query(SQL.modifyProfileImage, [null, null, user])
+                        .then(async () => {
+                            req.session.user.profile_image = null
+                            req.session.user.profile_image_id = null
+
+                        })
+                        .catch((err) => console.error(err))
+                }
+            })
+        
+        setTimeout(() => {
+            res.redirect("/account")
+            res.end()
+        }, 2500)
+    }
+    else {
+        res.json({ error: "Image Doesnt Exist" })
+    }
+    
+}
 const handleAccountDeletion = async (req, res) => {
+    imageKit.deleteFile(`${req.session.user.profile_image_id}`, 
+        (err, result) => {
+            if (err) console.error(err)
+            else {
+                console.log(result)
+            }
+        })
     await client
         .query(SQL.deleteByUsername, [req.session.user.uname])
         .then(() => {
@@ -178,4 +211,5 @@ module.exports = {
     handleAccountLogOut,
     handleAccountUpdates,
     handleAccountDeletion,
+    handleProfilePicDeletion
 }

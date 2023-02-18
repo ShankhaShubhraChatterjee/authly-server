@@ -13,7 +13,8 @@ const {
     handleProfileImage,
     handleAccountDeletion,
     handleAccountLogOut,
-    handleAccountUpdates
+    handleAccountUpdates,
+    handleProfilePicDeletion
 } = require('./../controllers/accountController')
 
 router.get('/', sendAccountPage)
@@ -34,5 +35,6 @@ router.post(
 router.post('/user/upload/profile_pic', handleProfileImage)
 router.post('/user/logout', handleAccountLogOut)
 router.post('/user/delete', handleAccountDeletion)
+router.post('/user/delete/profile_pic', handleProfilePicDeletion)
 
 module.exports = router

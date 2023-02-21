@@ -57,7 +57,7 @@ block content
                             p Email Address
                 .account-page-btn-container
                     form.is-flex.flex-direction-row.is-justify-content-space-between.is-align-items-center(
-                        action='/account/user/logout',
+                        action='/account/user/logout',s
                         method='POST'
                     )
                         button.button.my-2.has-background-warning.has-text-white(
@@ -81,6 +81,9 @@ block content
                 .update-info
                     h3.is-size-5 Change Details
                     .field
+                        p.span-error.has-text-danger #{errors.accountUserExists}
+                        p.span-error.has-text-danger #{errors.accountEmailUsed}
+                    .field
                         .control.has-icons-left.has-icons-right
                             input.input(
                                 type='text',
@@ -89,7 +92,7 @@ block content
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-signature
-                        p.span-error.has-text-danger #{error.account_update_fullname}
+                        p.span-error.has-text-danger #{errors.accountFnameError}
 
                     .field
                         .control.has-icons-left.has-icons-right
@@ -100,7 +103,7 @@ block content
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-user-circle
-                        p.span-error.has-text-danger #{error.account_update_username}
+                        p.span-error.has-text-danger #{errors.accountUnameError}
 
                     .field
                         .control.has-icons-left.has-icons-right
@@ -111,7 +114,7 @@ block content
                             )
                             span.icon.is-left
                                 i.fa-solid.fa-envelope
-                        p.span-error.has-text-danger #{error.account_update_email}
+                        p.span-error.has-text-danger #{errors.accountEmailError}
 
                     h3.is-size-5 Change Password
                     .field
@@ -126,7 +129,7 @@ block content
 
                             span.icon.is-right
                                 i#current-eye.fa-solid.fa-eye           
-                        p.span-error.has-text-danger #{error.account_update_current_password}
+                        p.span-error.has-text-danger #{errors.accountPcodeError}
                     .field
                         .control.has-icons-left.has-icons-right
                             input#new-password.input(
@@ -139,7 +142,7 @@ block content
 
                             span.icon.is-right
                                 i#new-eye.fa-solid.fa-eye
-                        p.span-error.has-text-danger #{error.account_update_new_password}
+                        p.span-error.has-text-danger #{errors.accountPcodeMatchError}
                     .field
                         .control.has-icons-left.has-icons-right
                             input#confirm-password.input(
@@ -152,7 +155,7 @@ block content
 
                             span.icon.is-right
                                 i#confirm-eye.fa-solid.fa-eye
-                        p.span-error.has-text-danger #{error.account_update_confirm_password}
+                        p.span-error.has-text-danger #{errors.accountPcodeUpdateError}
                     .account-submit-section
                         hr
                         input.button.has-background-info.has-text-white(

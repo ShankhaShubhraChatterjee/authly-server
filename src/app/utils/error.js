@@ -1,13 +1,16 @@
 let clientErrors = {
     // Client Side Errors For Account Page
-    accountImageUploadError: '',
-    accountFnameError: '',
-    accountUnameError: '',
-    accountEmailError: '',
-    accountPcodeError: '',
-    accountPcodeMatchError: '',
-    accountPcodeUpdateError: '',
-    accountErrors: {},
+    accountErrors: {
+        accountImageUploadError: '',
+        accountFnameError: '',
+        accountUnameError: '',
+        accountEmailError: '',
+        accountPcodeError: '',
+        accountPcodeMatchError: '',
+        accountPcodeUpdateError: '',
+        accountUserExists: '',
+        accountEmailUsed: ''
+    },
     // Client Side Errors For SignIn Page
     signinErrors: {},
     signinUserExists: '',

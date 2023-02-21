@@ -1,15 +1,12 @@
 require('dotenv').config()
-const path = require('path')
 const { client } = require('./../utils/db')
 const { SQL } = require('./../utils/query')
 const { clientErrors } = require('./../utils/error')
-const { errorFormat } = require('./../configs/errorConfig')
-const { validationResult } = require('express-validator')
 const { imageKit } = require('./../utils/imagekit')
-const { inputFieldEmpty, updateAccountDetails } = require('../utils/validate')
-
-
-
+const { userExistsInDb, emailInUse } = require('../utils/validate')
+const { regex } = require('../utils/regex')
+const crypto = require("node:crypto")
+crypto.create
 // Send Account Template To Client
 const sendAccountPage = (req, res) => {
     console.log(req.session.user)
@@ -17,10 +14,9 @@ const sendAccountPage = (req, res) => {
         res.render(
             "pages/account.pug", 
             { 
-                error: clientErrors.accountErrors, 
+                errors: clientErrors.accountErrors, 
                 user: req.session.user, 
-                auth: req.session.auth,
-                imageUploadError: clientErrors.accountImageUploadError 
+                auth: req.session.auth 
             }
         )
         res.end()
@@ -41,54 +37,88 @@ const handleAccountUpdates = async (req, res) => {
         newPassword: req.body.account_update_new_password,
         confirmPassword: req.body.account_update_confirm_password,
     }
-    let checkValues = {
-        fname: inputFieldEmpty(updates.fname),
-        uname: inputFieldEmpty(updates.uname),
-        email: inputFieldEmpty(updates.email),
-        currentPassword: inputFieldEmpty(updates.currentPassword),
-        newPassword: inputFieldEmpty(updates.newPassword),
-        confirmPassword: inputFieldEmpty(updates.confirmPassword)
+    let regexValues = {
+        fname: regex.fname.test(updates.fname),
+        uname: regex.uname.test(updates.uname),
+        email: regex.email.test(updates.email),
+        oldPassword: regex.pcode.test(updates.currentPassword),
+        newPassword: regex.pcode.test(updates.newPassword),
+        confirmPassword: regex.pcode.test(updates.confirmPassword)
     }
-    let errors = validationResult(req).formatWith(errorFormat)
-    if (checkValues) {
-        console.log("Executed If")
-        if (!checkValues.fname) {
+    let userExists = await userExistsInDb(updates.uname);
+    let emailTaken = await emailInUse(updates.email);
+    
+    if (updates.fname.length > 0) {
+        if (regexValues.fname) {
             console.log("Working")
-            console.log(checkValues.fname)
             await client
-                .query(SQL.updateFullname, [updates.fname, updates.uname])
-                .then(() => console.log("name updated"))
-                .catch((err) => { console.error(err); return false })
-            // await updateAccountDetails(SQL.updateFullname, [updates.fname, updates.uname])
+                .query(SQL.updateFullname, [updates.fname, req.session.user.uname])
+                .then(() => {
+                    console.log("Then Working")
+                    req.session.user.fname = updates.fname
+                })
+                .catch((err) => console.error(err))
         }
-        if (!checkValues.uname) {
-            console.log(checkValues.uname)
-            await updateAccountDetails(SQL.updateUsername, [updates.uname, updates.uname])
+        else {
+            !regexValues.fname ?
+            clientErrors.accountErrors.accountFnameError = "Name Invalid" :
+            clientErrors.accountErrors.accountFnameError = ""
         }
-        if (!checkValues.email) {
-            console.log(checkValues.email)
-            await updateAccountDetails(SQL.updateEmail, [updates.email, updates.uname])
+    }
+    if (updates.uname.length > 0) {
+        if (regexValues.uname && !userExists) {
+            console.log("Working")
+            await client
+                .query(SQL.updateUsername, [updates.uname, req.session.user.uname])
+                .then(() => {
+                    console.log("Then Working")
+                    req.session.user.uname = updates.uname
+                })
+                .catch((err) => console.error(err))
         }
+        else {
+            !regexValues.uname ? 
+            clientErrors.accountErrors.accountUnameError = "Username Invalid" : 
+            clientErrors.accountErrors.accountUnameError = ""
+
+            userExists ? 
+            clientErrors.accountErrors.accountUserExists = "User Exists" :
+            clientErrors.accountErrors.accountUserExists = ""
+        }
+    }
+    if (updates.email.length > 0) {
+        if (regexValues.email && !emailTaken) {
+            await client
+                .query(SQL.updateEmail, [updates.email, req.session.user.uname])
+                .then(() => {
+                    console.log("Then Working")
+                    req.session.user.email = updates.email
+                })
+                .catch((err) => console.error(err))
+        }
+        else {
+            console.log("Working")
+            !regexValues.email ? 
+            clientErrors.accountErrors.accountEmailError = "Email Invalid" : 
+            clientErrors.accountErrors.accountEmailError = ""
+
+            emailTaken ? 
+            clientErrors.accountErrors.accountEmailUsed = "Email In Use" :
+            clientErrors.accountErrors.accountEmailUsed = ""
+        }
+    }
+    setTimeout(() => {
         res.redirect('/account')
         res.end()
-    }
-    else {
-        console.log("EXecuted Else")
-        try { 
-            clientErrors.accountErrors = errors.mapped()
-        }
-        catch (err) { console.error("No Error Occured") }
-        res.redirect("/account")
-        res.end()
-    }
+    }, 1500)
+    
 }
-// Handle Profile Image Upload
-
+// Handles Profile Image Upload
 const handleProfileImage = async (req, res) => {
     let image = req.files;
     let user = req.session.user.uname;
     if (req.files === null) {
-        clientErrors.accountImageUploadError = "Please Select An Image"
+        clientErrors.accountErrors.accountImageUploadError = "Please Select An Image"
         res.redirect("/account")
         res.end()
     }
@@ -147,7 +177,6 @@ const handleProfileImage = async (req, res) => {
         }
     }
 }
-
 // Handles User Account LogOut
 const handleAccountLogOut = async (req, res) => {
     req.session.destroy(() => {
@@ -155,7 +184,7 @@ const handleAccountLogOut = async (req, res) => {
         res.end()
     })
 }
-
+// Handles Profile Picture Deletion
 const handleProfilePicDeletion = async (req, res) => {
     let user = req.session.user.uname;
     if (req.session.user.profile_image !== null) {
@@ -185,6 +214,7 @@ const handleProfilePicDeletion = async (req, res) => {
     }
     
 }
+// Handles Entire Account Deletion
 const handleAccountDeletion = async (req, res) => {
     imageKit.deleteFile(`${req.session.user.profile_image_id}`, 
         (err, result) => {
@@ -204,7 +234,6 @@ const handleAccountDeletion = async (req, res) => {
         })
         .catch((err) => console.error(err))
 }
-
 module.exports = {
     sendAccountPage,
     handleProfileImage,

@@ -5,9 +5,9 @@ let clientErrors = {
         accountFnameError: '',
         accountUnameError: '',
         accountEmailError: '',
-        accountPcodeError: '',
-        accountPcodeMatchError: '',
-        accountPcodeUpdateError: '',
+        accountCurrentPasswordError: '',
+        accountNewPasswordError: '',
+        accountConfirmPasswordError: '',
         accountUserExists: '',
         accountEmailUsed: ''
     },

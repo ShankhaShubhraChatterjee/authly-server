@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const { client } = require('./db')
 const { SQL } = require('./query')
 
@@ -18,16 +19,21 @@ async function emailInUse(email) {
 
 function inputFieldEmpty(input) { return input ? false : true }
 
-async function updateAccountDetails(query, params) {
-   await client
-      .query(query, params)
-      .then(() => true )
-      .catch((err) => { console.error(err); return false })
+async function matchCurrentPassword(password, username) {
+   return await client
+      .query(SQL.getPasswordForUser, username)
+      .then(async (data) => {
+         let hash = await data.rows[0];
+         await bcrypt
+            .compare(password, hash)
+            .then((result) => result)
+            .catch((err) => console.error(err))
+      })
 }
 
 module.exports = {
    userExistsInDb,
    inputFieldEmpty,
    emailInUse,
-   updateAccountDetails
+   matchCurrentPassword
 }

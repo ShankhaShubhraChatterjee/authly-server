@@ -5,7 +5,7 @@ const { clientErrors } = require('./../utils/error')
 const { imageKit } = require('./../utils/imagekit')
 const { userExistsInDb, emailInUse } = require('../utils/validate')
 const { regex } = require('../utils/regex')
-const crypto = require("node:crypto")
+
 // Send Account Template To Client
 const sendAccountPage = (req, res) => {
     console.log(req.session.user)
@@ -18,6 +18,12 @@ const sendAccountPage = (req, res) => {
                 auth: req.session.auth 
             }
         )
+        clientErrors.accountErrors.accountFnameError = null;
+        clientErrors.accountErrors.accountUnameError = null;
+        clientErrors.accountErrors.accountEmailError = null;
+        clientErrors.accountErrors.accountPcodeError = null;
+        clientErrors.accountErrors.accountEmailUsed = null;
+        clientErrors.accountErrors.accountUserExists = null;
         res.end()
     }
     else {
@@ -34,7 +40,7 @@ const handleAccountUpdates = async (req, res) => {
         email: req.body.account_update_email,
         currentPassword: req.body.account_update_current_password,
         newPassword: req.body.account_update_new_password,
-        confirmPassword: req.body.account_update_confirm_password,
+        confirmPassword: req.body.account_update_confirm_password
     }
     let regexValues = {
         fname: regex.fname.test(updates.fname),
@@ -59,9 +65,7 @@ const handleAccountUpdates = async (req, res) => {
                 .catch((err) => console.error(err))
         }
         else {
-            !regexValues.fname ?
-            clientErrors.accountErrors.accountFnameError = "Name Invalid" :
-            clientErrors.accountErrors.accountFnameError = ""
+            if (!regexValues.fname) clientErrors.accountErrors.accountFnameError = "Name Invalid"
         }
     }
     if (updates.uname.length > 0) {
@@ -76,13 +80,9 @@ const handleAccountUpdates = async (req, res) => {
                 .catch((err) => console.error(err))
         }
         else {
-            !regexValues.uname ? 
-            clientErrors.accountErrors.accountUnameError = "Username Invalid" : 
-            clientErrors.accountErrors.accountUnameError = ""
+            if (!regexValues.uname) clientErrors.accountErrors.accountUnameError = "Username Invalid"
 
-            userExists ? 
-            clientErrors.accountErrors.accountUserExists = "User Exists" :
-            clientErrors.accountErrors.accountUserExists = ""
+            if (userExists) clientErrors.accountErrors.accountUserExists = "User Exists"
         }
     }
     if (updates.email.length > 0) {
@@ -96,14 +96,18 @@ const handleAccountUpdates = async (req, res) => {
                 .catch((err) => console.error(err))
         }
         else {
-            console.log("Working")
-            !regexValues.email ? 
-            clientErrors.accountErrors.accountEmailError = "Email Invalid" : 
-            clientErrors.accountErrors.accountEmailError = ""
+            if (!regexValues.email) clientErrors.accountErrors.accountEmailError = "Email Invalid"
 
-            emailTaken ? 
-            clientErrors.accountErrors.accountEmailUsed = "Email In Use" :
-            clientErrors.accountErrors.accountEmailUsed = ""
+            if (emailTaken) clientErrors.accountErrors.accountEmailUsed = "Email In Use"
+        }
+    }
+
+    if (updates.currentPassword.length > 0) {
+        if (regexValues.oldPassword) {
+
+        }
+        else {
+            clientErrors.accountErrors.accountCurrentPasswordError = "Invalid Password"
         }
     }
     setTimeout(() => {
@@ -150,7 +154,7 @@ const handleProfileImage = async (req, res) => {
             setTimeout(() => {
                 res.redirect("/account")
                 res.end()
-            }, 3000)
+            }, 2500)
         }
         else {
             imageKit.upload({

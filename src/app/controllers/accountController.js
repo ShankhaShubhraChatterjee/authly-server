@@ -6,7 +6,6 @@ const { imageKit } = require('./../utils/imagekit')
 const { userExistsInDb, emailInUse } = require('../utils/validate')
 const { regex } = require('../utils/regex')
 const crypto = require("node:crypto")
-crypto.create
 // Send Account Template To Client
 const sendAccountPage = (req, res) => {
     console.log(req.session.user)

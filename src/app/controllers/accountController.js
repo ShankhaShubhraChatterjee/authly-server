@@ -123,7 +123,7 @@ const handleProfileImage = async (req, res) => {
     }
     else {
         if (req.session.user.profile_image !== null) {
-            imageKit.deleteFile(`${req.session.user.profile_image_id}`, 
+            imageKit.deleteFile(`${await req.session.user.profile_image_id}`, 
                 (err, result) => {
                     if (err) console.error(err)
                     else {

@@ -3,6 +3,7 @@ const routes = {
     signupRoute: require('./../routes/signupRoute'),
     signinRoute: require('./../routes/signinRoute'),
     accountRoute: require('./../routes/accountRoute'),
+    forgotPassword: require('./../routes/forgotPasswordRoute')
 }
 
 module.exports = { routes }

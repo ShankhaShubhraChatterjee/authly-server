@@ -418,6 +418,36 @@ span.span-error {
   }
 }
 
+.fp-container {
+  min-height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.fp-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.fp-form {
+  max-width: 700px;
+  width: 100%;
+  padding: 40px;
+}
+
+.fp-input {
+  grid-gap: 10px;
+  text-align: center;
+  flex-direction: column;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+  display: grid;
+}
+
 html {
   height: 100%;
   min-height: 100%;

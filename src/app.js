@@ -36,6 +36,7 @@ app.use((req, res, next) => {
 router.use('/', routes.homeRoute)
 router.use('/signin', routes.signinRoute)
 router.use('/signup', routes.signupRoute)
+router.use('/forgot-password', routes.forgotPassword)
 router.get('/signout', (req, res) => {
     req.session.auth = false
     req.session.destroy()

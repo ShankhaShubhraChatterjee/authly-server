@@ -31,8 +31,8 @@ block content
                         p.has-text-secondary Upload Profile Picture
                         p.span-error #{ imageUploadError }
                     .profile-button-section
-                        button.button.profile-pic-upload-button(type="submit") Upload
-                        button.button.profile-pic-delete-button(type="submit" formaction="account/user/delete/profile_pic") Delete
+                        button.button.profile-pic-upload-button.mx-1(type="submit") Upload
+                        button.button.profile-pic-delete-button.mx-1(type="submit" formaction="account/user/delete/profile_pic") Delete
 
                 form(action="/account" method="POST" autocomplete="off").profile-info.is-size-5
                     if user!==undefined
@@ -72,97 +72,97 @@ block content
                             type='submit',
                             value='account_delete'
                         ) Delete Account
+            .account-section-cell
+                form.update-info-container(
+                    action='account/user/update/details',
+                    method='POST'
+                )
+                    h2.is-size-3 Update Your Info
+                    .update-info
+                        h3.is-size-5 Change Details
+                        .field
+                            p.span-error.has-text-centered.has-text-danger #{errors.accountUserExists}
+                            p.span-error.has-text-centered.has-text-danger #{errors.accountEmailUsed}
+                        .field
+                            .control.has-icons-left.has-icons-right
+                                input.input(
+                                    type='text',
+                                    name='account_update_fullname',
+                                    placeholder='Update Your Name'
+                                )
+                                span.icon.is-left
+                                    i.fa-solid.fa-signature
+                            p.span-error.has-text-danger #{errors.accountFnameError}
 
-            form.update-info-container.account-section-cell(
-                action='account/user/update',
-                method='POST'
-            )
-                h2.is-size-3 Update Your Info
-                .update-info
-                    h3.is-size-5 Change Details
-                    .field
-                        p.span-error.has-text-centered.has-text-danger #{errors.accountUserExists}
-                        p.span-error.has-text-centered.has-text-danger #{errors.accountEmailUsed}
-                    .field
-                        .control.has-icons-left.has-icons-right
-                            input.input(
-                                type='text',
-                                name='account_update_fullname',
-                                placeholder='Update Your Name'
+                        .field
+                            .control.has-icons-left.has-icons-right
+                                input.input(
+                                    type='text',
+                                    name='account_update_username',
+                                    placeholder='Update Your Username'
+                                )
+                                span.icon.is-left
+                                    i.fa-solid.fa-user-circle
+                            p.span-error.has-text-danger #{errors.accountUnameError}
+
+                        .field
+                            .control.has-icons-left.has-icons-right
+                                input.input(
+                                    type='text',
+                                    name='account_update_email',
+                                    placeholder='Update Your Email'
+                                )
+                                span.icon.is-left
+                                    i.fa-solid.fa-envelope
+                            p.span-error.has-text-danger #{errors.accountEmailError}
+                        .account-submit-section
+                            hr
+                            input.button.has-background-info.has-text-white(
+                                type='submit',
+                                name='account_submit_details',
+                                value='Update Details'
                             )
-                            span.icon.is-left
-                                i.fa-solid.fa-signature
-                        p.span-error.has-text-danger #{errors.accountFnameError}
-
-                    .field
-                        .control.has-icons-left.has-icons-right
-                            input.input(
-                                type='text',
-                                name='account_update_username',
-                                placeholder='Update Your Username'
+                form.update-info-container(action="/account/user/update/password", method="POST")
+                    h2.is-size-5 Change Password
+                        p.span-error.has-text-danger #{errors.wrongPassword}
+                    .update-info
+                        .field
+                            .control.has-icons-left.has-icons-right
+                                input#current-password.input(
+                                    type='password',
+                                    name='account_update_current_password',
+                                    placeholder='Type Current Password'
+                                )
+                                span.icon.is-left
+                                    i.fa-solid.fa-lock
+                            p.span-error.has-text-danger #{errors.accountPcodeError}
+                        .field
+                            .control.has-icons-left.has-icons-right
+                                input#new-password.input(
+                                    type='password',
+                                    name='account_update_new_password',
+                                    placeholder='Type New Password'
+                                )
+                                span.icon.is-left
+                                    i.fa-solid.fa-lock
+                            p.span-error.has-text-danger #{errors.accountPcodeMatchError}
+                        .field
+                            .control.has-icons-left.has-icons-right
+                                input#confirm-password.input(
+                                    type='password',
+                                    name='account_update_confirm_password',
+                                    placeholder='Confirm New Password'
+                                )
+                                span.icon.is-left
+                                    i.fa-solid.fa-lock
+                            p.span-error.has-text-danger #{errors.accountPcodeUpdateError}
+                        .account-submit-section
+                            hr
+                            input.button.has-background-info.has-text-white(
+                                type='submit',
+                                name='account_submit_password',
+                                value='Update Password'
                             )
-                            span.icon.is-left
-                                i.fa-solid.fa-user-circle
-                        p.span-error.has-text-danger #{errors.accountUnameError}
-
-                    .field
-                        .control.has-icons-left.has-icons-right
-                            input.input(
-                                type='text',
-                                name='account_update_email',
-                                placeholder='Update Your Email'
-                            )
-                            span.icon.is-left
-                                i.fa-solid.fa-envelope
-                        p.span-error.has-text-danger #{errors.accountEmailError}
-
-                    h3.is-size-5 Change Password
-                    .field
-                        .control.has-icons-left.has-icons-right
-                            input#current-password.input(
-                                type='password',
-                                name='account_update_current_password',
-                                placeholder='Type Current Password'
-                            )
-                            span.icon.is-left
-                                i.fa-solid.fa-lock
-
-                            span.icon.is-right
-                                i#current-eye.fa-solid.fa-eye           
-                        p.span-error.has-text-danger #{errors.accountPcodeError}
-                    .field
-                        .control.has-icons-left.has-icons-right
-                            input#new-password.input(
-                                type='password',
-                                name='account_update_new_password',
-                                placeholder='Type New Password'
-                            )
-                            span.icon.is-left
-                                i.fa-solid.fa-lock
-
-                            span.icon.is-right
-                                i#new-eye.fa-solid.fa-eye
-                        p.span-error.has-text-danger #{errors.accountPcodeMatchError}
-                    .field
-                        .control.has-icons-left.has-icons-right
-                            input#confirm-password.input(
-                                type='password',
-                                name='account_update_confirm_password',
-                                placeholder='Confirm New Password'
-                            )
-                            span.icon.is-left
-                                i.fa-solid.fa-lock
-
-                            span.icon.is-right
-                                i#confirm-eye.fa-solid.fa-eye
-                        p.span-error.has-text-danger #{errors.accountPcodeUpdateError}
-                    .account-submit-section
-                        hr
-                        input.button.has-background-info.has-text-white(
-                            type='submit',
-                            name='account_submit_button',
-                            value='Update Info'
-                        )
     script(type="text/javascript").
         const currentEye = document.getElementById("current-eye");
         const newEye = document.getElementById("new-eye");

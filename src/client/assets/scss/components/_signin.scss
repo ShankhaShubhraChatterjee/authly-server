@@ -5,6 +5,7 @@
     flex-direction: column;
     justify-content: center;
     width: 100%;
+    color: var(--default-fg-color);
 }
 
 .eye {
@@ -13,4 +14,7 @@
     position: absolute;
     right: 10px;
     top: 8px;
+}
+.label {
+    color: var(--default-fg-color);
 }

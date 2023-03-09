@@ -24,8 +24,8 @@ async function matchCurrentPassword(password, username) {
       .query(SQL.getPasswordForUser, username)
       .then(async (data) => {
          let hash = await data.rows[0];
-         await bcrypt
-            .compare(password, hash)
+         return await bcrypt
+            .compare(password, hash.passcode)
             .then((result) => result)
             .catch((err) => console.error(err))
       })

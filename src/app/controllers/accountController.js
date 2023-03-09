@@ -3,12 +3,11 @@ const { client } = require('./../utils/db')
 const { SQL } = require('./../utils/query')
 const { clientErrors } = require('./../utils/error')
 const { imageKit } = require('./../utils/imagekit')
-const { userExistsInDb, emailInUse } = require('../utils/validate')
+const { userExistsInDb, emailInUse, matchCurrentPassword } = require('../utils/validate')
 const { regex } = require('../utils/regex')
 
 // Send Account Template To Client
 const sendAccountPage = (req, res) => {
-    console.log(req.session.user)
     if (req.session.auth) {
         res.render(
             "pages/account.pug", 
@@ -22,7 +21,7 @@ const sendAccountPage = (req, res) => {
         clientErrors.accountErrors.accountUnameError = null;
         clientErrors.accountErrors.accountEmailError = null;
         clientErrors.accountErrors.accountPcodeError = null;
-        clientErrors.accountErrors.accountEmailUsed = null;
+        clientErrors.accountErrors.accountEmailUsed  = null;
         clientErrors.accountErrors.accountUserExists = null;
         res.end()
     }
@@ -33,22 +32,16 @@ const sendAccountPage = (req, res) => {
 }
 
 // Handles All Updates In Account Page
-const handleAccountUpdates = async (req, res) => {
+const handleAccountDetails = async (req, res) => {
     let updates = {
         fname: req.body.account_update_fullname,
         uname: req.body.account_update_username,
-        email: req.body.account_update_email,
-        currentPassword: req.body.account_update_current_password,
-        newPassword: req.body.account_update_new_password,
-        confirmPassword: req.body.account_update_confirm_password
+        email: req.body.account_update_email
     }
     let regexValues = {
         fname: regex.fname.test(updates.fname),
         uname: regex.uname.test(updates.uname),
-        email: regex.email.test(updates.email),
-        oldPassword: regex.pcode.test(updates.currentPassword),
-        newPassword: regex.pcode.test(updates.newPassword),
-        confirmPassword: regex.pcode.test(updates.confirmPassword)
+        email: regex.email.test(updates.email)
     }
     let userExists = await userExistsInDb(updates.uname);
     let emailTaken = await emailInUse(updates.email);
@@ -101,20 +94,45 @@ const handleAccountUpdates = async (req, res) => {
             if (emailTaken) clientErrors.accountErrors.accountEmailUsed = "Email In Use"
         }
     }
-
-    if (updates.currentPassword.length > 0) {
-        if (regexValues.oldPassword) {
-
-        }
-        else {
-            clientErrors.accountErrors.accountCurrentPasswordError = "Invalid Password"
-        }
-    }
     setTimeout(() => {
         res.redirect('/account')
         res.end()
     }, 1500)
     
+}
+// Handle Password Updates
+const handlePasswordUpdates = async (req, res, next) => {
+    let username = req.session.user.uname;
+    let updates = {
+        currentPassword: req.body.account_update_current_password,
+        newPassword: req.body.account_update_new_password,
+        confirmPassword: req.body.account_update_confirm_password
+    }
+
+    let regexValues = {
+        oldPassword: regex.pcode.test(updates.currentPassword),
+        newPassword: regex.pcode.test(updates.newPassword),
+        confirmPassword: regex.pcode.test(updates.confirmPassword)
+    }
+
+    if(regexValues.oldPassword && regexValues.newPassword && regexValues.confirmPassword) {
+        let check = await matchCurrentPassword(updates.currentPassword, [username])
+        if (updates.newPassword === updates.confirmPassword && check){
+            await client.query(SQL.updateUserPassword, [updates.confirmPassword, username])
+        }
+        else {
+            if(!check) {
+                clientErrors.accountErrors.wrongPassword = "Wrong Password"
+            }
+        }
+    }
+    else {
+        regexValues.oldPassword ? clientErrors.accountErrors.accountCurrentPasswordError = "Old Password Invalid" : ""
+        regexValues.newPassword ? clientErrors.accountErrors.accountNewPasswordError = "New Password Invalid" : ""
+        regexValues.confirmPassword ? clientErrors.accountErrors.accountConfirmPasswordError = "Confirm Password Invalid" : ""
+    }
+    res.redirect("/account")
+    res.end()
 }
 // Handles Profile Image Upload
 const handleProfileImage = async (req, res) => {
@@ -168,7 +186,6 @@ const handleProfileImage = async (req, res) => {
                         .then(async () => {
                             req.session.user.profile_image = await result.url
                             req.session.user.profile_image_id = await result.fileId
-
                         })
                         .catch((err) => console.error(err))
                 }
@@ -241,7 +258,8 @@ module.exports = {
     sendAccountPage,
     handleProfileImage,
     handleAccountLogOut,
-    handleAccountUpdates,
+    handleAccountDetails,
+    handlePasswordUpdates,
     handleAccountDeletion,
     handleProfilePicDeletion
 }

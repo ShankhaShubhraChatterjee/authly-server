@@ -9,7 +9,9 @@ let clientErrors = {
         accountNewPasswordError: '',
         accountConfirmPasswordError: '',
         accountUserExists: '',
-        accountEmailUsed: ''
+        accountEmailUsed: '',
+        passwordMatch: '',
+        wrongPassword: ''
     },
     // Client Side Errors For SignIn Page
     signinErrors: {},

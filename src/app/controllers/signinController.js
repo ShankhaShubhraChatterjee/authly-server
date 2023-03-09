@@ -11,7 +11,6 @@ const sendSigninPage = (req, res) => {
         res.redirect('/account')
         res.end()
     } else {
-        
         res.render('pages/signin.pug', { error: clientErrors.signinErrors, userDoesntExist: clientErrors.signinUserExists })
         clientErrors.signinUserExists = ""
         res.end()

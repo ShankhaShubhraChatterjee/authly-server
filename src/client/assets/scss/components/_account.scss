@@ -1,3 +1,11 @@
+:root {
+    --account-accent-color: royalblue;
+    --input-icon-color: whitesmoke;
+    --box-shadow-color: silver;
+    --profile-pic-delete-button-bg-color: orangered;
+    --profile-pic-upload-button-bg-color: indigo;
+}
+
 .account-container {
     align-items: center;
     display: flex;
@@ -6,6 +14,7 @@
     margin-top: 40px;
     width: 100%;
     max-width: 100% !important;
+    color: var(--default-fg-color);
 }
 
 .account-sections {
@@ -18,12 +27,13 @@
 }
 
 .account-section-cell {
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 0 10px silver;
+    background-color: var(--default-bg-color);
+    box-shadow: 0 0 10px var(--box-shadow-color);
     border-radius: 10px;
     position: relative;
 
     h2 {
+        color: inherit;
         text-align: center;
     }
 }
@@ -87,10 +97,10 @@
             margin: 5px 0;
             flex-direction: column;
             justify-content: flex-start !important;
-            background-color: royalblue;
+            background-color: var(--account-accent-color);
             padding: 5px;
             border-radius: 10px;
-            color: whitesmoke;
+            color: var(--default-fg-color);
 
             h3 {
                 font-size: 12px !important;
@@ -136,7 +146,7 @@
         border-radius: 50%;
         height: 150px;
         border: none;
-        box-shadow: 0 0 10px black;
+        box-shadow: 0 0 10px var(--account-accent-color);
         object-fit: cover;
         width: 150px;
     }
@@ -146,7 +156,7 @@
     }
 
     label {
-        background: black;
+        background: var(--default-bg-color);
         border-radius: 50%;
         bottom: 17px;
         cursor: pointer;
@@ -155,23 +165,27 @@
         right: 17px;
 
         i {
-            color: white;
+            color: var(--default-fg-color);
             font-size: 1.2em;
         }
     }
 }
+
 .button {
-    color: whitesmoke!important;
+    color: var(--default-fg-color) !important;
+    border: none;
 }
+
 .profile-button {
     font-size: 1.1em;
     outline: none;
     border-radius: 50px;
     background: none;
-    color: white!important;
+    color: var(--default-fg-color) !important;
     margin-top: 5px;
     cursor: pointer;
 }
+
 .profile-button-section {
     display: flex;
     margin-top: 10px;
@@ -179,11 +193,13 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
+
 .profile-pic-upload-button {
-    background-color: indigo;
+    background-color: var(--profile-pic-upload-button-bg-color);
 }
+
 .profile-pic-delete-button {
-    background-color: orangered;
+    background-color: var(--profile-pic-delete-button-bg-color);
 }
 
 @media (max-width: 800px) {

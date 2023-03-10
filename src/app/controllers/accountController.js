@@ -8,7 +8,6 @@ const { regex } = require('../utils/regex')
 const { hashPassword } = require('../utils/hash')
 // $2b$10$yc21C3qvZubEk05y53FY6.X/DSfgBMqydx6Mz6KzaGNrw3MZBkZCK
 // Send Account Template To Client
-let passwordChanged = false;
 const sendAccountPage = (req, res) => {
     if (req.session.auth) {
         console.log(req.session.user)
@@ -132,9 +131,9 @@ const handlePasswordUpdates = async (req, res, next) => {
                 else {
                     console.log(data)
                     req.session.destroy()
-                    req.session.passwordChanged = true;
                 }
             })
+            req.session.passwordChanged = true;
         }
         if (!check) {
             clientErrors.accountErrors.wrongPassword = "Wrong Password"

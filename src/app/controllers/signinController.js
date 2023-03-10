@@ -7,7 +7,7 @@ const { client } = require('./../utils/db')
 const { dehashPassword } = require('./../utils/hash')
 
 const sendSigninPage = (req, res) => {
-    if (req.session.auth) {
+    if (req.session.auth && !req.session.passwordChanged) {
         res.redirect('/account')
         res.end()
     } else {
@@ -43,9 +43,9 @@ const handleSignin = async (req, res) => {
                         req.session.notifyLogOut = true;
                         req.session.user = data.rows[0];
                         res.redirect('/account')
+                        req.session.passwordChanged = false
                         res.end()
                     } else {
-                        clientErrors.signinErrors = 'Wrong Password'
                         res.redirect('/signin')
                         res.end()
                     }

@@ -124,38 +124,42 @@ block content
                             )
                 form.update-info-container(action="/account/user/update/password", method="POST")
                     h2.is-size-5 Change Password
-                        p.span-error.has-text-danger #{errors.wrongPassword}
+                    p.span-error.has-text-danger #{errors.wrongPassword}
+                    p.span-error.has-text-danger #{errors.passwordMatch}
                     .update-info
                         .field
                             .control.has-icons-left.has-icons-right
                                 input#current-password.input(
                                     type='password',
                                     name='account_update_current_password',
-                                    placeholder='Type Current Password'
+                                    placeholder='Type Current Password',
+                                    required=true
                                 )
                                 span.icon.is-left
                                     i.fa-solid.fa-lock
-                            p.span-error.has-text-danger #{errors.accountPcodeError}
+                            p.span-error.has-text-danger #{errors.accountCurrentPasswordError}
                         .field
                             .control.has-icons-left.has-icons-right
                                 input#new-password.input(
                                     type='password',
                                     name='account_update_new_password',
                                     placeholder='Type New Password'
+                                    required=true
                                 )
                                 span.icon.is-left
                                     i.fa-solid.fa-lock
-                            p.span-error.has-text-danger #{errors.accountPcodeMatchError}
+                            p.span-error.has-text-danger #{errors.accountNewPasswordError}
                         .field
                             .control.has-icons-left.has-icons-right
                                 input#confirm-password.input(
                                     type='password',
                                     name='account_update_confirm_password',
                                     placeholder='Confirm New Password'
+                                    required=true
                                 )
                                 span.icon.is-left
                                     i.fa-solid.fa-lock
-                            p.span-error.has-text-danger #{errors.accountPcodeUpdateError}
+                            p.span-error.has-text-danger #{errors.accountConfirmPasswordError}
                         .account-submit-section
                             hr
                             input.button.has-background-info.has-text-white(

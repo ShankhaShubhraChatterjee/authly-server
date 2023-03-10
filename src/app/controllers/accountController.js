@@ -5,10 +5,13 @@ const { clientErrors } = require('./../utils/error')
 const { imageKit } = require('./../utils/imagekit')
 const { userExistsInDb, emailInUse, matchCurrentPassword } = require('../utils/validate')
 const { regex } = require('../utils/regex')
-
+const { hashPassword } = require('../utils/hash')
+// $2b$10$yc21C3qvZubEk05y53FY6.X/DSfgBMqydx6Mz6KzaGNrw3MZBkZCK
 // Send Account Template To Client
+let passwordChanged = false;
 const sendAccountPage = (req, res) => {
     if (req.session.auth) {
+        console.log(req.session.user)
         res.render(
             "pages/account.pug", 
             { 
@@ -17,12 +20,18 @@ const sendAccountPage = (req, res) => {
                 auth: req.session.auth 
             }
         )
+        clientErrors.accountErrors.passwordMatch = null;
+        clientErrors.accountErrors.wrongPassword = null;
+        clientErrors.accountErrors.accountEmailUsed = null;
         clientErrors.accountErrors.accountFnameError = null;
         clientErrors.accountErrors.accountUnameError = null;
         clientErrors.accountErrors.accountEmailError = null;
         clientErrors.accountErrors.accountPcodeError = null;
-        clientErrors.accountErrors.accountEmailUsed  = null;
         clientErrors.accountErrors.accountUserExists = null;
+        clientErrors.accountErrors.accountNewPasswordError = null;
+        clientErrors.accountErrors.accountConfirmPasswordError = null;
+        clientErrors.accountErrors.accountCurrentPasswordError = null;
+
         res.end()
     }
     else {
@@ -114,26 +123,45 @@ const handlePasswordUpdates = async (req, res, next) => {
         newPassword: regex.pcode.test(updates.newPassword),
         confirmPassword: regex.pcode.test(updates.confirmPassword)
     }
-
-    if(regexValues.oldPassword && regexValues.newPassword && regexValues.confirmPassword) {
+    if (regexValues.oldPassword && regexValues.newPassword && regexValues.confirmPassword) {
         let check = await matchCurrentPassword(updates.currentPassword, [username])
-        if (updates.newPassword === updates.confirmPassword && check){
-            await client.query(SQL.updateUserPassword, [updates.confirmPassword, username])
+        let hash = await hashPassword(updates.newPassword, 10)
+        if (updates.newPassword === updates.confirmPassword && check) {
+            client.query(SQL.updateUserPassword, [hash, username], (err, data) => {
+                if (err) console.error(err)
+                else {
+                    console.log(data)
+                    req.session.destroy()
+                    req.session.passwordChanged = true;
+                }
+            })
         }
-        else {
-            if(!check) {
-                clientErrors.accountErrors.wrongPassword = "Wrong Password"
-            }
+        if (!check) {
+            clientErrors.accountErrors.wrongPassword = "Wrong Password"
         }
+        if (updates.newPassword !== updates.confirmPassword) {
+            clientErrors.accountErrors.passwordMatch = "Passwords Doesnt Match"
+        }
+        console.log(check)
     }
     else {
-        regexValues.oldPassword ? clientErrors.accountErrors.accountCurrentPasswordError = "Old Password Invalid" : ""
-        regexValues.newPassword ? clientErrors.accountErrors.accountNewPasswordError = "New Password Invalid" : ""
-        regexValues.confirmPassword ? clientErrors.accountErrors.accountConfirmPasswordError = "Confirm Password Invalid" : ""
+        !regexValues.oldPassword ? clientErrors.accountErrors.accountCurrentPasswordError = "Old Password Invalid" : ""
+        !regexValues.newPassword ? clientErrors.accountErrors.accountNewPasswordError = "New Password Invalid" : ""
+        !regexValues.confirmPassword ? clientErrors.accountErrors.accountConfirmPasswordError = "Confirm Password Invalid" : ""
     }
-    res.redirect("/account")
-    res.end()
+    if (req.session.passwordChanged) {
+        res.redirect("/signin")
+        res.end()
+    }
+    else {
+        passwordChanged = false;
+        res.redirect("/account")
+        res.end()
+    }
+    
 }
+// Password0123#
+// Password0123$
 // Handles Profile Image Upload
 const handleProfileImage = async (req, res) => {
     let image = req.files;

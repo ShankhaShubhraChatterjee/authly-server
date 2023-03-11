@@ -154,6 +154,7 @@ const handleProfileImage = async (req, res) => {
                 if(err) console.error(err)
                 else {
                     console.log("Success")
+                    client.query(SQL.modifyProfileImage, [null, null, user])
                 }
             })
         }

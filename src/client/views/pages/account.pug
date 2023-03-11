@@ -33,6 +33,7 @@ block content
                     .profile-button-section
                         button.button.profile-pic-upload-button.mx-1(type="submit") Upload
                         button.button.profile-pic-delete-button.mx-1(type="submit" formaction="account/user/delete/profile_pic") Delete
+                        button.button.profile-pic-delete-button.mx-1(type="submit" action="account" method="GET") Refresh
 
                 form(action="/account" method="POST" autocomplete="off").profile-info.is-size-5
                     if user!==undefined

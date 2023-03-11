@@ -10,7 +10,7 @@ const session = require('express-session')
 const fileUpload = require('express-fileupload')
 // Utilities
 const { uploadConfig } = require('./app/configs/uploadConfig')
-const { server } = require('./app/utils/server')
+const { server } = require('./app/configs/serverConfig')
 const { sessionOptions } = require('./app/utils/session')
 const { routes } = require('./app/utils/route')
 

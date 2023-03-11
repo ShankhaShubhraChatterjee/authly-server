@@ -11,6 +11,8 @@ var SQL = {
     getPasswordForUser: 'SELECT passcode FROM users WHERE uname=$1',
 
     getAllFromUsername: 'SELECT * FROM users WHERE uname=$1',
+
+    getProfileImageData: 'SELECT profile_image, profile_image_id FROM users WHERE uname=$1',
     
     updateFullname: 'UPDATE users SET fname=$1 WHERE uname=$2',
 

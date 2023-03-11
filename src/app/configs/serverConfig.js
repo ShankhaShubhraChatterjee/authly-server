@@ -1,5 +1,5 @@
 require('dotenv').config()
-const db = require('./db')
+const db = require('./../utils/db')
 const server = () => {
     console.log(
         `Server Running On ${process.env.APP_URL}:${process.env.APP_PORT}`

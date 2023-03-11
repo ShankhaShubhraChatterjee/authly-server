@@ -42,6 +42,10 @@ block content
                         | First Time Here ?
                         a(href='/signup').mx-1.has-text-warning
                             | Register
+                    p(style="color:darkorange;")
+                        | Forgot Password ?
+                        a(href='/forgot-password', style="color:darkorange;") 
+                            | Reset
     script(type='text/javascript').
         const username = document.getElementById("username")
         const loginEye = document.getElementById('login-eye')

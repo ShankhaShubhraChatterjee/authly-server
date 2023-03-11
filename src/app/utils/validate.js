@@ -30,10 +30,13 @@ async function matchCurrentPassword(password, username) {
             .catch((err) => console.error(err))
       })
 }
-
+function validateInputsWithRegex(regex) {
+   return regex
+}
 module.exports = {
    userExistsInDb,
    inputFieldEmpty,
    emailInUse,
-   matchCurrentPassword
+   matchCurrentPassword,
+   validateInputsWithRegex
 }

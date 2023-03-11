@@ -196,11 +196,15 @@ footer h3 i {
 }
 
 .eye {
+  cursor: pointer;
+  z-index: 1;
+  color: #000;
   background: none;
   border-radius: 50%;
+  font-size: 1.1em;
   position: absolute;
-  top: 8px;
-  right: 10px;
+  top: 7px;
+  right: 5px;
 }
 
 .label {
@@ -228,6 +232,7 @@ span.span-error {
   --box-shadow-color: silver;
   --profile-pic-delete-button-bg-color: orangered;
   --profile-pic-upload-button-bg-color: indigo;
+  --profile-pic-refresh-button-bg-color: navy;
 }
 
 .account-container {
@@ -421,6 +426,10 @@ span.span-error {
   background-color: var(--profile-pic-delete-button-bg-color);
 }
 
+.profile-pic-refresh-button {
+  background-color: var(--profile-pic-refresh-button-bg-color);
+}
+
 @media (max-width: 800px) {
   .account-sections {
     width: 95%;
@@ -466,6 +475,31 @@ span.span-error {
   display: grid;
 }
 
+.error-page-container {
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Source Code Pro, monospace;
+  display: flex;
+}
+
+.error-header {
+  color: #d3d3d3;
+  margin-bottom: 15px;
+  font-size: 28px;
+}
+
+.error-page-link {
+  color: #fff;
+  background-color: #add8e6;
+  border-radius: 10px;
+  padding: 10px;
+  font-family: Verdana, monospace;
+  font-size: 1.3em;
+  text-decoration: none;
+}
+
 :root {
   --default-fg-color: white;
   --default-bg-color: #000000e6;
@@ -479,7 +513,7 @@ html {
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   background-image: url("background-1.c675ba9e.svg"), url("background-2.dec26221.svg");
   background-position: center;
   background-repeat: no-repeat;

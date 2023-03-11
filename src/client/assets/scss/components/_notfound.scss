@@ -1,0 +1,24 @@
+.error-page-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Source Code Pro', monospace;
+}
+
+.error-header {
+    color: lightgray;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.error-page-link {
+    background-color: lightblue;
+    text-decoration: none;
+    font-size: 1.3em;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Verdana', monospace;
+    padding: 10px;
+}

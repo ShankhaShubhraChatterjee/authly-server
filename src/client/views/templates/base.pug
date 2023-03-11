@@ -3,8 +3,11 @@ html(lang='en')
     head
         include ../shared/header.pug
         block title
-    body#body
-        include ../shared/navbar.pug
+    body
+        block navbar
+
         .container
             block content
         include ../shared/footer.pug
+
+        block script

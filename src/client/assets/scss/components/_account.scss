@@ -4,6 +4,7 @@
     --box-shadow-color: silver;
     --profile-pic-delete-button-bg-color: orangered;
     --profile-pic-upload-button-bg-color: indigo;
+    --profile-pic-refresh-button-bg-color: navy;
 }
 
 .account-container {
@@ -201,6 +202,10 @@
 .profile-pic-delete-button {
     background-color: var(--profile-pic-delete-button-bg-color);
 }
+.profile-pic-refresh-button {
+    background-color: var(--profile-pic-refresh-button-bg-color);
+}
+
 
 @media (max-width: 800px) {
     .account-sections {

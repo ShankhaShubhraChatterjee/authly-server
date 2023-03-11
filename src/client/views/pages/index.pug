@@ -1,6 +1,9 @@
 extends ../templates/base.pug
 block title
     title Authly
+
+block navbar
+    include ../shared/navbar.pug
 block content
     .index-page-container 
         if notfify
@@ -8,7 +11,6 @@ block content
                 button#notification-close-button.delete
                 p You Are Successfully Logged Out Of Your Account
                 a(href='/signin') Log In Again
-
         .index 
             .index-header
                 h1.is-size-1 Authly
@@ -18,8 +20,6 @@ block content
             .index-get-started 
                 button
                     a(href='/signup') Get Started
-    script(type='text/javascript').
-        const closeNotificationBtn = document.getElementById('notification-close-button')
-        closeNotificationBtn.addEventListener('click', () => {
-            document.querySelector('.notification').style.display = 'none'
-        })
+block script
+    script(src="./js/index.js")
+        

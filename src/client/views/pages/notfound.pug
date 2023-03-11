@@ -1,49 +1,10 @@
-doctype html
-html(lang='en')
-    head
-        meta(charset='UTF-8')
-        meta(http-equiv='X-UA-Compatible', content='IE=edge')
-        meta(name='viewport', content='width=device-width, initial-scale=1.0')
-        title 404 | Not Found
-        style(type='text/css').
-            body {
-                background-image: url('./../img/application/background-1.svg'), url('./../img/application/background-2.svg');
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-position: center;
-                background-size: cover;
-            }
-            .error-page-container {
-                height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                font-family: 'Source Code Pro', monospace;
-            }
-            .error-header {
-                color: lightgray;
-            }
-            .error-page-link {
-                background-color: lightblue;
-                text-decoration: none;
-                font-size: 1.3em;
-                border-radius: 10px;
-                color: white;
-                font-family: 'Verdana', monospace;
-                padding: 10px;
-            }
+extends ../templates/base.pug
+block title
+    title Not Found
 
-    body
-        .error-page-container 
-            |
-            |
-            |
-            |
-            h1.error-header 404 | Not Found
-            a.error-page-link(href='/') 
-                |
-                |
-                |
-                |
-                | Back To Home
+block navbar
+    
+block content
+    .error-page-container 
+        h1.error-header 404 | Not Found
+        a.error-page-link(href='/') Back To Home

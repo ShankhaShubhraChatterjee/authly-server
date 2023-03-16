@@ -20,38 +20,38 @@ const sendForgotPasswordPage = (req, res) => {
 }
 
 const sendPasswordResetURL = async (req, res) => {
-	// const html5 = 
-	// `
-	// 	<h1>Password Reset</h1>
-	// 	<p>Authly</p>
-	// 	<a href="#">link</a>
-	// `
-	// let transporter = nodeMailer.createTransport({
-	// 	service: 'Gmail',
-	// 	host: process.env.NODEMAILER_EMAIL,
-	// 	port: process.env.NODEMAILER_PORT,
-	// 	secure: true,
-	// 	auth: {
-	// 		type: "oauth2",
-	// 		clientId:process.env.OAUTH_CLIENT_ID,
-	// 		clientSecret: process.env.OAUTH_CLIENT_SECRET,
-	// 		refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-	// 		accessToken:await OAuthAccessToken
-	// 	}
-	// })
-	// const msg = transporter.sendMail({
-	// 	from: `Foster Z (${process.env.NODEMAILER_EMAIL})`,
-	// 	to: `You (${req.body.password_reset_email})`,
-	// 	subject: "Reset Password",
-	// 	html: html5
-	// }, (err, data) => {
-	// 	if(err) console.error(err)
-	// 	else {
-	// 		console.log(`Message sent: ${data.messageId}`)
-	// 	}
-	// })
-	// console.log(OAuthAccessToken)
-	// transporter.close()
+	const html5 = 
+	`
+		<h1>Password Reset</h1>
+		<p>Authly</p>
+		<a href="#">link</a>
+	`
+	let transporter = nodeMailer.createTransport({
+		service: 'Gmail',
+		host: process.env.NODEMAILER_EMAIL,
+		port: process.env.NODEMAILER_PORT,
+		secure: true,
+		auth: {
+			type: "oauth2",
+			clientId:process.env.OAUTH_CLIENT_ID,
+			clientSecret: process.env.OAUTH_CLIENT_SECRET,
+			refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+			accessToken:await OAuthAccessToken
+		}
+	})
+	const msg = transporter.sendMail({
+		from: `Foster Z (${process.env.NODEMAILER_EMAIL})`,
+		to: `You (${req.body.password_reset_email})`,
+		subject: "Reset Password",
+		html: html5
+	}, (err, data) => {
+		if(err) console.error(err)
+		else {
+			console.log(`Message sent: ${data.messageId}`)
+		}
+	})
+	console.log(OAuthAccessToken)
+	transporter.close()
 	res.redirect("/forgot-password")
 }
 

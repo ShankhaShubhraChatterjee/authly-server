@@ -1,7 +1,7 @@
-const username = document.getElementById("username")
+const username = document.getElementById('username')
 const loginEye = document.getElementById('login-eye')
 const pcode = document.getElementsByClassName('password-field')[0]
-const loginButton = document.getElementById("login")
+const loginButton = document.getElementById('login')
 
 const showHidePassword = () => {
     if (pcode.type === 'password') {
@@ -12,10 +12,10 @@ const showHidePassword = () => {
         pcode.type = 'password'
     }
 }
-loginButton.addEventListener("click", () => {
-    localStorage.setItem("signin_username", username.value)
+loginButton.addEventListener('click', () => {
+    localStorage.setItem('signin_username', username.value)
 })
-window.addEventListener("load", () => {
-    username.value = localStorage.getItem("signin_username")
+window.addEventListener('load', () => {
+    username.value = localStorage.getItem('signin_username')
 })
 loginEye.addEventListener('click', showHidePassword)

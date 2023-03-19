@@ -15,13 +15,19 @@ nav.navbar.is-fixed-top
 
     a.nav-item.profile(href='/account')
         if user === undefined || user.profile_image === null || user.profile_image === undefined
-            img#profile(src='./img/application/user.png', alt='Profile Placeholder Image')
+            img#profile(
+                src='./img/application/user.png',
+                alt='Profile Placeholder Image'
+            )
         else
-            img#profile(src=`${user.profile_image}`, alt='Profile Placeholder Image')
+            img#profile(
+                src=`${user.profile_image}`,
+                alt='Profile Placeholder Image'
+            )
 
     #nav-links.navbar-menu.has-text-centered
         // right links
-        .navbar-end(style="background-color:transparent;")
+        .navbar-end(style='background-color: transparent')
             p.control
                 a.button.has-background-primary-light(href='/')
                     span.icon.has-text-link-dark
@@ -35,7 +41,10 @@ nav.navbar.is-fixed-top
                         span.has-text-link-dark Log In
             else
                 form.control(action='/account/user/logout', method='POST')
-                    button(style="width: 100%;", type="submit").button.has-background-primary-light
+                    button.button.has-background-primary-light(
+                        style='width: 100%',
+                        type='submit'
+                    )
                         span.icon.has-text-link-dark
                             i.fa-solid.fa-angles-left
                         span.has-text-link-dark Log Out

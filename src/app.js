@@ -22,9 +22,9 @@ const router = express.Router()
 app.use(cors())
 app.use(session(sessionOptions))
 app.set('view engine', 'pug')
-app.set('views', path.join(__dirname, "client", "views"))
-app.use(express.static(path.join(__dirname, "client", "public")))
-app.use(express.static(path.join(__dirname, "client", "assets")))
+app.set('views', path.join(__dirname, 'client', 'views'))
+app.use(express.static(path.join(__dirname, 'client', 'public')))
+app.use(express.static(path.join(__dirname, 'client', 'assets')))
 app.use(fileUpload(uploadConfig))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -33,18 +33,24 @@ app.use((req, res, next) => {
     next()
 })
 
-router.use('/', routes.homeRoute)
-router.use('/signin', routes.signinRoute)
-router.use('/signup', routes.signupRoute)
-router.use('/forgot-password', routes.forgotPassword)
 router.get('/signout', (req, res) => {
     req.session.auth = false
     req.session.destroy()
     res.redirect('/')
     res.end()
 })
-router.get("/forbidden", (req, res) => {
-    res.render("pages/forbidden.pug")
+
+router.get('/forbidden', (req, res) => {
+    res.render('pages/forbidden.pug')
+})
+
+router.use('/', routes.homeRoute)
+router.use('/signin', routes.signinRoute)
+router.use('/signup', routes.signupRoute)
+router.use('/forgot-password', routes.forgotPassword)
+
+router.use('/forgot-password/email-success', (req, res) => {
+    res.render('pages/email-success.pug')
 })
 router.use('/account', routes.accountRoute)
 
@@ -53,3 +59,4 @@ app.use('*', (_, res) => {
     res.render('pages/notfound.pug')
 })
 app.listen(process.env.APP_PORT, server)
+// CPassword0123#

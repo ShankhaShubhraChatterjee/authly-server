@@ -11,12 +11,12 @@ let clientErrors = {
         accountUserExists: '',
         accountEmailUsed: '',
         passwordMatch: '',
-        wrongPassword: ''
+        wrongPassword: '',
     },
     // Client Side Errors For SignIn Page
     signinErrors: {},
     signinUserExists: '',
-    
+
     // Client Side Errors For SignUp Page
     signupErrors: {},
     signUpEmailInUse: '',

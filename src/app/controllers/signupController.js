@@ -11,16 +11,13 @@ const { errorFormat } = require('./../configs/errorConfig')
 const { hashPassword } = require('../utils/hash')
 
 const sendSignUpPage = async (req, res) => {
-    res.render(
-        'pages/signup.pug', 
-        { 
-            errors: clientErrors.signupErrors,
-            userExists: clientErrors.signUpUserExists,
-            emailUsed: clientErrors.signUpEmailInUse,
-            auth: req.session.auth,
-            user: req.session.user
-        }
-    )
+    res.render('pages/signup.pug', {
+        errors: clientErrors.signupErrors,
+        userExists: clientErrors.signUpUserExists,
+        emailUsed: clientErrors.signUpEmailInUse,
+        auth: req.session.auth,
+        user: req.session.user,
+    })
     res.end()
 }
 const createUser = async (req, res) => {
@@ -30,7 +27,7 @@ const createUser = async (req, res) => {
         email: req.body.signup_email,
         pcode: req.body.signup_password,
         profile_image: undefined,
-        profile_image_id: null
+        profile_image_id: null,
     }
     let userExists = await userExistsInDb(user.uname)
     let emailUsed = await emailInUse(user.email)
@@ -39,30 +36,35 @@ const createUser = async (req, res) => {
     if (errors.isEmpty() && !userExists && !emailUsed) {
         let hashedPassword = await hashPassword(user.pcode, 10)
         client
-            .query(SQL.createNewUser, [user.fname, user.uname, user.email, hashedPassword])
+            .query(SQL.createNewUser, [
+                user.fname,
+                user.uname,
+                user.email,
+                hashedPassword,
+            ])
             .then(() => {
-                    console.log("Created New User")
-                    req.session.auth = true;
-                    req.session.user = user;
-                    req.session.user.pcode = hashedPassword;
-                    res.redirect('/account')
-                    res.end()
+                console.log('Created New User')
+                req.session.auth = true
+                req.session.user = user
+                req.session.user.pcode = hashedPassword
+                res.redirect('/account')
+                res.end()
             })
             .catch((err) => console.error(err))
-    }
-    else {
-        try { 
+    } else {
+        try {
             clientErrors.signupErrors = errors.mapped()
-            userExists ? 
-            clientErrors.signUpUserExists = "User Exists" : 
-            clientErrors.signUpUserExists = null
+            userExists
+                ? (clientErrors.signUpUserExists = 'User Exists')
+                : (clientErrors.signUpUserExists = null)
 
-            emailUsed ? 
-            clientErrors.signUpEmailInUse = "Email Already Used" :
-            clientErrors.signUpEmailInUse = null
+            emailUsed
+                ? (clientErrors.signUpEmailInUse = 'Email Already Used')
+                : (clientErrors.signUpEmailInUse = null)
+        } catch (err) {
+            console.error('No Error Occured')
         }
-        catch (err) { console.error("No Error Occured") }
-        res.redirect("/signup")
+        res.redirect('/signup')
         res.end()
     }
 }

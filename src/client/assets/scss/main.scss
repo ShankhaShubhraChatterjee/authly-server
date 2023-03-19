@@ -7,11 +7,12 @@
 @use 'components/signup';
 @use 'components/account';
 @use 'components/forgot-password';
+@use 'components/email-success';
 @use 'components/notfound';
 
 :root {
     --default-fg-color: white;
-    --default-bg-color:rgba(0,0,0,0.9);
+    --default-bg-color: rgba(0, 0, 0, 0.9);
 }
 html {
     background-color: var(--default-bg-color);
@@ -26,7 +27,8 @@ body {
     min-height: 100vh;
     flex-direction: column;
     justify-content: space-between;
-    background-image: url('./../img/application/background-1.svg'), url('./../img/application/background-2.svg');
+    background-image: url('./../img/application/background-1.svg'),
+        url('./../img/application/background-2.svg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -37,7 +39,7 @@ body {
     align-items: center;
     display: flex;
     height: inherit;
-    min-height:inherit;
+    min-height: inherit;
     flex-direction: column;
     justify-content: center;
     width: 95%;

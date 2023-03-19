@@ -8,7 +8,7 @@ const client = new Pool({
     password: process.env.DB_PASS,
     port: process.env.DB_PORT,
 })
-const connectionString = process.env.DB_CONN;
+const connectionString = process.env.DB_CONN
 // const client = new Pool({connectionString})
 
 module.exports = { client }

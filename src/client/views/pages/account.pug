@@ -6,11 +6,18 @@ block navbar
     include ../shared/navbar.pug
 block content
     .account-container 
+        |
+        |
+        |
         h1.has-text-centered.is-size-1 Your Account
         .account-sections
             .profile-info-container.account-section-cell
                 h2.is-size-3 User Profile
-                form(action="account/user/upload/profile_pic" method="POST" enctype="multipart/form-data").profile-info-container-pic
+                form.profile-info-container-pic(
+                    action='account/user/upload/profile_pic',
+                    method='POST',
+                    enctype='multipart/form-data'
+                )
                     .profile-section
                         if user === undefined || user.profile_image === null || user.profile_image === undefined
                             img(
@@ -29,25 +36,38 @@ block content
                             accept='.jpg,.jpeg,.png,.svg,.bmp,.gif,.avif',
                             name='profile_picture'
                         )
-                    if  user.profile_image === null || user.profile_image === undefined
+                    if user.profile_image === null || user.profile_image === undefined
                         p.has-text-secondary Upload Profile Picture
                         p.span-error #{ imageUploadError }
                     .profile-button-section
-                        button.button.profile-pic-upload-button.mx-1(type="submit") Upload
-                        button.button.profile-pic-delete-button.mx-1(type="submit" formaction="account/user/delete/profile_pic") Delete
-                        button.button.profile-pic-refresh-button.mx-1(type="submit" action="account" method="GET") Refresh
+                        button.button.profile-pic-upload-button.mx-1(
+                            type='submit'
+                        ) Upload
+                        button.button.profile-pic-delete-button.mx-1(
+                            type='submit',
+                            formaction='account/user/delete/profile_pic'
+                        ) Delete
+                        button.button.profile-pic-refresh-button.mx-1(
+                            type='submit',
+                            action='account',
+                            method='GET'
+                        ) Refresh
 
-                form(action="/account" method="POST" autocomplete="off").profile-info.is-size-5
+                form.profile-info.is-size-5(
+                    action='/account',
+                    method='POST',
+                    autocomplete='off'
+                )
                     if user!==undefined
                         .fname
                             h3 Name
-                            p #{user.fname}
+                            p #{ user.fname }
                         .uname
                             h3 Username
-                            p #{user.uname}
+                            p #{ user.uname }
                         .email
                             h3 Email
-                            p #{user.email}
+                            p #{ user.email }
                     else
                         .fname
                             h3 Name
@@ -60,11 +80,12 @@ block content
                             p Email Address
                 .account-page-btn-container
                     form.is-flex.flex-direction-row.is-justify-content-space-between.is-align-items-center(
-                        action='/account/user/logout',s
+                        action='/account/user/logout',
+                        s,
                         method='POST'
                     )
                         button.button.my-2.has-background-warning.has-text-white(
-                            type='submit',
+                            type='submit'
                         ) Log Out
 
                     form.is-flex.flex-direction-row.is-justify-content-space-between.is-align-items-center(
@@ -84,8 +105,8 @@ block content
                     .update-info
                         h3.is-size-5 Change Details
                         .field
-                            p.span-error.has-text-centered.has-text-danger #{errors.accountUserExists}
-                            p.span-error.has-text-centered.has-text-danger #{errors.accountEmailUsed}
+                            p.span-error.has-text-centered.has-text-danger #{ errors.accountUserExists }
+                            p.span-error.has-text-centered.has-text-danger #{ errors.accountEmailUsed }
                         .field
                             .control.has-icons-left.has-icons-right
                                 input.input(
@@ -95,7 +116,7 @@ block content
                                 )
                                 span.icon.is-left
                                     i.fa-solid.fa-signature
-                            p.span-error.has-text-danger #{errors.accountFnameError}
+                            p.span-error.has-text-danger #{ errors.accountFnameError }
 
                         .field
                             .control.has-icons-left.has-icons-right
@@ -106,7 +127,7 @@ block content
                                 )
                                 span.icon.is-left
                                     i.fa-solid.fa-user-circle
-                            p.span-error.has-text-danger #{errors.accountUnameError}
+                            p.span-error.has-text-danger #{ errors.accountUnameError }
 
                         .field
                             .control.has-icons-left.has-icons-right
@@ -117,7 +138,7 @@ block content
                                 )
                                 span.icon.is-left
                                     i.fa-solid.fa-envelope
-                            p.span-error.has-text-danger #{errors.accountEmailError}
+                            p.span-error.has-text-danger #{ errors.accountEmailError }
                         .account-submit-section
                             hr
                             input.button.has-background-info.has-text-white(
@@ -125,10 +146,13 @@ block content
                                 name='account_submit_details',
                                 value='Update Details'
                             )
-                form.update-info-container(action="/account/user/update/password", method="POST")
+                form.update-info-container(
+                    action='/account/user/update/password',
+                    method='POST'
+                )
                     h2.is-size-5 Change Password
-                    p.span-error.has-text-danger #{errors.wrongPassword}
-                    p.span-error.has-text-danger #{errors.passwordMatch}
+                    p.span-error.has-text-danger #{ errors.wrongPassword }
+                    p.span-error.has-text-danger #{ errors.passwordMatch }
                     .update-info
                         .field
                             .control.has-icons-left.has-icons-right
@@ -136,33 +160,33 @@ block content
                                     type='password',
                                     name='account_update_current_password',
                                     placeholder='Type Current Password',
-                                    required=true
+                                    required
                                 )
                                 span.icon.is-left
                                     i.fa-solid.fa-lock
-                            p.span-error.has-text-danger #{errors.accountCurrentPasswordError}
+                            p.span-error.has-text-danger #{ errors.accountCurrentPasswordError }
                         .field
                             .control.has-icons-left.has-icons-right
                                 input#new-password.input(
                                     type='password',
                                     name='account_update_new_password',
-                                    placeholder='Type New Password'
-                                    required=true
+                                    placeholder='Type New Password',
+                                    required
                                 )
                                 span.icon.is-left
                                     i.fa-solid.fa-lock
-                            p.span-error.has-text-danger #{errors.accountNewPasswordError}
+                            p.span-error.has-text-danger #{ errors.accountNewPasswordError }
                         .field
                             .control.has-icons-left.has-icons-right
                                 input#confirm-password.input(
                                     type='password',
                                     name='account_update_confirm_password',
-                                    placeholder='Confirm New Password'
-                                    required=true
+                                    placeholder='Confirm New Password',
+                                    required
                                 )
                                 span.icon.is-left
                                     i.fa-solid.fa-lock
-                            p.span-error.has-text-danger #{errors.accountConfirmPasswordError}
+                            p.span-error.has-text-danger #{ errors.accountConfirmPasswordError }
                         .account-submit-section
                             hr
                             input.button.has-background-info.has-text-white(
@@ -170,24 +194,23 @@ block content
                                 name='account_submit_password',
                                 value='Update Password'
                             )
-    script(type="text/javascript").
-        const currentEye = document.getElementById("current-eye");
-        const newEye = document.getElementById("new-eye");
-        const confirmEye = document.getElementById("confirm-eye");
+    script(type='text/javascript').
+        const currentEye = document.getElementById('current-eye')
+        const newEye = document.getElementById('new-eye')
+        const confirmEye = document.getElementById('confirm-eye')
 
-        const currentPasswordField = document.getElementById("current-password");
-        const newPasswordField = document.getElementById("new-password");
-        const confirmPasswordField = document.getElementById("confirm-password");
+        const currentPasswordField = document.getElementById('current-password')
+        const newPasswordField = document.getElementById('new-password')
+        const confirmPasswordField = document.getElementById('confirm-password')
 
-        function togglePasswordField(input, button){
-            button.addEventListener("click", () => {
-                if(input.type === "password"){
-                    input.type = "text"
-                    button.className = "fa-solid fa-eye"
-                }
-                else {
-                    input.type = "password"
-                    button.className = "fa-solid fa-eye-slash"
+        function togglePasswordField(input, button) {
+            button.addEventListener('click', () => {
+                if (input.type === 'password') {
+                    input.type = 'text'
+                    button.className = 'fa-solid fa-eye'
+                } else {
+                    input.type = 'password'
+                    button.className = 'fa-solid fa-eye-slash'
                 }
             })
         }

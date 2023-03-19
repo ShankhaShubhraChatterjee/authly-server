@@ -11,8 +11,11 @@ const sendSigninPage = (req, res) => {
         res.redirect('/account')
         res.end()
     } else {
-        res.render('pages/signin.pug', { error: clientErrors.signinErrors, userDoesntExist: clientErrors.signinUserExists })
-        clientErrors.signinUserExists = ""
+        res.render('pages/signin.pug', {
+            error: clientErrors.signinErrors,
+            userDoesntExist: clientErrors.signinUserExists,
+        })
+        clientErrors.signinUserExists = ''
         res.end()
     }
 }
@@ -20,9 +23,9 @@ const sendSigninPage = (req, res) => {
 const handleSignin = async (req, res) => {
     let user = {
         uname: req.body.signin_username,
-        pcode: req.body.signin_password
+        pcode: req.body.signin_password,
     }
-    
+
     let errors = validationResult(req).formatWith(errorFormat)
     if (errors.isEmpty()) {
         client
@@ -32,16 +35,15 @@ const handleSignin = async (req, res) => {
                     clientErrors.signinUserExists = 'User Doesnt Exist'
                     res.redirect('/signin')
                     res.end()
-                } 
-                else {
+                } else {
                     let dehashed = await dehashPassword(
                         user.pcode,
                         data.rows[0].passcode
                     )
                     if (dehashed) {
-                        req.session.auth = true;
-                        req.session.notifyLogOut = true;
-                        req.session.user = data.rows[0];
+                        req.session.auth = true
+                        req.session.notifyLogOut = true
+                        req.session.user = data.rows[0]
                         res.redirect('/account')
                         req.session.passwordChanged = false
                         res.end()
@@ -52,13 +54,13 @@ const handleSignin = async (req, res) => {
                 }
             })
             .catch((err) => console.error(err))
-    }
-    else {
-        try { 
+    } else {
+        try {
             clientErrors.signinErrors = errors.mapped()
+        } catch (err) {
+            console.error('No Error Occured')
         }
-        catch (err) { console.error("No Error Occured") }
-        res.redirect("/signin")
+        res.redirect('/signin')
         res.end()
     }
 }

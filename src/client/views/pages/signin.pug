@@ -4,16 +4,17 @@ block title
 
 block navbar
     include ../shared/navbar.pug
-    
+
 block content
     form.form-container(action='', method='POST')
         .field 
+            |
             h1.is-size-1 Sign In
             p.span-error.has-text-centered.has-text-danger= userDoesntExist
         .field
             label.label Username
             .control.has-icons-left.has-icons-right
-                input.input.is-link#username(
+                input#username.input.is-link(
                     type='text',
                     placeholder='Username',
                     name='signin_username'
@@ -34,19 +35,20 @@ block content
                 span.eye.is-small.is-right
                     i#login-eye.eye-icon.fas.fa-eye-slash
             p.span-error.has-text-danger.has-text-right= error.signin_password
-        .field.is-grouped(style="margin-top: 16px!important;")
+        .field.is-grouped(style='margin-top: 16px !important')
             .control
                 button#login.button.is-link Login
         .field.has-text-centered
             .control
                 span
-                    p.has-text-danger(style="margin-top: 16px;!")
+                    p.has-text-danger(style='margin-top: 16px')
                         | First Time Here ?
-                        a(href='/signup').mx-1.has-text-warning
+                        a.mx-1.has-text-warning(href='/signup')
                             | Register
-                    p(style="color:darkorange;")
+                    p(style='color: darkorange')
                         | Forgot Password ?
-                        a(href='/forgot-password', style="color:darkorange;") 
+                        a(href='/forgot-password', style='color: darkorange') 
+                            |
                             | Reset
 block script
-    script(src="./js/signin.js")
+    script(src='./js/signin.js')

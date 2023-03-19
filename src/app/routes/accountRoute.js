@@ -12,19 +12,18 @@ const {
     handleAccountLogOut,
     handleAccountDetails,
     handlePasswordUpdates,
-    deleteProfilePicture
+    deleteProfilePicture,
 } = require('./../controllers/accountController')
 
 router.get('/', sendAccountPage)
 router.post('/user/update/details', handleAccountDetails)
 router.post(
-    '/user/update/password', 
-     check('account_update_new_password')
-    .custom((value, { req }) => {
+    '/user/update/password',
+    check('account_update_new_password').custom((value, { req }) => {
         if (value !== req.body.account_update_confirm_password) {
-            throw new Error('Passwords Dont Match');
+            throw new Error('Passwords Dont Match')
         }
-        return true;
+        return true
     }),
     handlePasswordUpdates
 )

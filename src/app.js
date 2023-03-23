@@ -48,12 +48,8 @@ router.use('/', routes.homeRoute)
 router.use('/signin', routes.signinRoute)
 router.use('/signup', routes.signupRoute)
 router.use('/forgot-password', routes.forgotPassword)
-
-router.use('/forgot-password/email-success', (req, res) => {
-    res.render('pages/email-success.pug')
-})
 router.use('/account', routes.accountRoute)
-
+router.use('/user', routes.resetPassword)
 app.use(router)
 app.use('*', (_, res) => {
     res.render('pages/notfound.pug')

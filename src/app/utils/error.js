@@ -13,12 +13,20 @@ let clientErrors = {
         passwordMatch: '',
         wrongPassword: '',
     },
+
     // Client Side Errors For SignIn Page
     signinErrors: {},
     signinUserExists: '',
+    signinPasswordOk: '',
 
     // Client Side Errors For SignUp Page
     signupErrors: {},
+    resetErrors: {
+        newPassword: '',
+        confirmPassword: '',
+        passwordsMatches: '',
+        emailExists: ''
+    },
     signUpEmailInUse: '',
     signUpUserExists: '',
 }

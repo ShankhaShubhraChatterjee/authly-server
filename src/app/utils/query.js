@@ -21,7 +21,7 @@ var SQL = {
 
     updateEmail: 'UPDATE users SET email=$1 WHERE uname=$2',
 
-    updateUserPassword: 'UPDATE users SET passcode=$1 WHERE uname=$2',
+    updateUserPassword: 'UPDATE users SET passcode=$1 WHERE email=$2',
 
     modifyProfileImage:
         'UPDATE users SET profile_image=$1, profile_image_id=$2 WHERE uname=$3',

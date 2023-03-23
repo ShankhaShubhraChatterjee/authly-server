@@ -1,4 +1,4 @@
 {
 	"watch": ["src"],
-	"ext": "pug html js json"
+	"ext": "pug html js json env"
 }

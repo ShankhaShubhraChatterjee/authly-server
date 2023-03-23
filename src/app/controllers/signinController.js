@@ -13,9 +13,11 @@ const sendSigninPage = (req, res) => {
     } else {
         res.render('pages/signin.pug', {
             error: clientErrors.signinErrors,
+            signinPasswordOk: clientErrors.signinPasswordOk,
             userDoesntExist: clientErrors.signinUserExists,
         })
         clientErrors.signinUserExists = ''
+        clientErrors.signinPasswordOk = ''
         res.end()
     }
 }
@@ -48,6 +50,7 @@ const handleSignin = async (req, res) => {
                         req.session.passwordChanged = false
                         res.end()
                     } else {
+                        clientErrors.signinPasswordOk = 'Password Is Not Correct'
                         res.redirect('/signin')
                         res.end()
                     }

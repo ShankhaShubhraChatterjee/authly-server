@@ -31,13 +31,17 @@ async function matchCurrentPassword(password, username) {
                 .catch((err) => console.error(err))
         })
 }
+
+const matchConfirmPassword = (password1, password2) => password1 === password2 ? true: false;
+
 function validateInputsWithRegex(regex) {
     return regex
 }
 module.exports = {
+    emailInUse,
     userExistsInDb,
     inputFieldEmpty,
-    emailInUse,
     matchCurrentPassword,
-    validateInputsWithRegex,
+    matchConfirmPassword,
+    validateInputsWithRegex
 }

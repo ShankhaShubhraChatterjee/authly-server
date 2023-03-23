@@ -7,3 +7,5 @@ tmp
 coverage
 src/client/img/uploads/**
 /coverage/**
+*.key
+*.cert

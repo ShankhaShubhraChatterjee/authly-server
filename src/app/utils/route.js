@@ -4,6 +4,7 @@ const routes = {
     signinRoute: require('./../routes/signinRoute'),
     accountRoute: require('./../routes/accountRoute'),
     forgotPassword: require('./../routes/forgotPasswordRoute'),
+    resetPassword: require('./../routes/resetPasswordRoute')
 }
 
 module.exports = { routes }

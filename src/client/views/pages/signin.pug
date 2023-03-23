@@ -9,8 +9,10 @@ block content
     form.form-container(action='', method='POST')
         .field 
             |
-            h1.is-size-1 Sign In
+            |
+            h1.is-size-1.has-text-centered Sign In
             p.span-error.has-text-centered.has-text-danger= userDoesntExist
+            p.span-error.has-text-danger.has-text-right= signinPasswordOk
         .field
             label.label Username
             .control.has-icons-left.has-icons-right
@@ -21,7 +23,7 @@ block content
                 )
                 span.icon.is-small.is-left
                     i.fas.fa-user-circle
-            p.span-error.has-text-danger.has-text-right= error.signin_username
+            p.span-error.has-text-danger.has-text-right #{ error.signin_username }
         .field
             label.label Password
             .control.has-icons-left.has-icons-right
@@ -34,7 +36,7 @@ block content
                     i.bi.bi-key
                 span.eye.is-small.is-right
                     i#login-eye.eye-icon.fas.fa-eye-slash
-            p.span-error.has-text-danger.has-text-right= error.signin_password
+            p.span-error.has-text-danger.has-text-right #{ error.signin_password }
         .field.is-grouped(style='margin-top: 16px !important')
             .control
                 button#login.button.is-link Login
@@ -48,6 +50,7 @@ block content
                     p(style='color: darkorange')
                         | Forgot Password ?
                         a(href='/forgot-password', style='color: darkorange') 
+                            |
                             |
                             | Reset
 block script

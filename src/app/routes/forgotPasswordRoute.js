@@ -4,7 +4,7 @@ const router = express.Router()
 const {
     sendForgotPasswordPage,
     sendPasswordResetURL,
-    sendEmailSentPage
+    sendEmailSentPage,
 } = require('./../controllers/forgotPasswordController')
 
 router.get('/email-success', sendEmailSentPage)

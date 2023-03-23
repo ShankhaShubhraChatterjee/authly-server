@@ -4,7 +4,7 @@ nav.navbar.is-fixed-top
         a#title.navbar-item(href='/')
             img#logo(
                 style='margin: 0 10px 0 0 !important',
-                src='./img/application/authly.png',
+                src='/img/application/authly.png',
                 alt='Authly Logo'
             )
             h1.is-size-4 Authly
@@ -16,7 +16,7 @@ nav.navbar.is-fixed-top
     a.nav-item.profile(href='/account')
         if user === undefined || user.profile_image === null || user.profile_image === undefined
             img#profile(
-                src='./img/application/user.png',
+                src='/img/application/user.png',
                 alt='Profile Placeholder Image'
             )
         else

@@ -6,9 +6,6 @@ block navbar
     include ../shared/navbar.pug
 block content
     .account-container 
-        |
-        |
-        |
         h1.has-text-centered.is-size-1 Your Account
         .account-sections
             .profile-info-container.account-section-cell
@@ -140,12 +137,12 @@ block content
                                     i.fa-solid.fa-envelope
                             p.span-error.has-text-danger #{ errors.accountEmailError }
                         .account-submit-section
-                            hr
                             input.button.has-background-info.has-text-white(
                                 type='submit',
                                 name='account_submit_details',
                                 value='Update Details'
                             )
+                            hr
                 form.update-info-container(
                     action='/account/user/update/password',
                     method='POST'
@@ -188,33 +185,8 @@ block content
                                     i.fa-solid.fa-lock
                             p.span-error.has-text-danger #{ errors.accountConfirmPasswordError }
                         .account-submit-section
-                            hr
                             input.button.has-background-info.has-text-white(
                                 type='submit',
                                 name='account_submit_password',
                                 value='Update Password'
                             )
-    script(type='text/javascript').
-        const currentEye = document.getElementById('current-eye')
-        const newEye = document.getElementById('new-eye')
-        const confirmEye = document.getElementById('confirm-eye')
-
-        const currentPasswordField = document.getElementById('current-password')
-        const newPasswordField = document.getElementById('new-password')
-        const confirmPasswordField = document.getElementById('confirm-password')
-
-        function togglePasswordField(input, button) {
-            button.addEventListener('click', () => {
-                if (input.type === 'password') {
-                    input.type = 'text'
-                    button.className = 'fa-solid fa-eye'
-                } else {
-                    input.type = 'password'
-                    button.className = 'fa-solid fa-eye-slash'
-                }
-            })
-        }
-
-        togglePasswordField(currentPasswordField, currentEye)
-        togglePasswordField(newPasswordField, newEye)
-        togglePasswordField(confirmPasswordField, confirmEye)

@@ -1,4 +1,5 @@
 require('dotenv').config()
+const { hashPassword } = require('../src/app/utils/hash')
 const { regex } = require('../src/app/utils/regex')
 const { client } = require("./../src/app/utils/db")
 const { SQL } = require("./../src/app/utils/query")
@@ -22,7 +23,13 @@ const { inputFieldEmpty, updateAccountDetails, validateInputsWithRegex } = requi
 // 	expect(validateInputsWithRegex(regex.uname.test("Foster Z"))).toBeFalsy()
 // })
 
-test("Check Input Length Checker Function", () => {
-	let val = "a";
-	expect(inputFieldEmpty(val)).toBeFalsy()
+test("Check If Hash Is Working", async () => {
+	let data = await hashPassword("Password0123$", 10);
+	console.log(data)
+	expect(data).toBeDefined();
 })
+
+// test("Check Input Length Checker Function", () => {
+// 	let val = "a";
+// 	expect(inputFieldEmpty(val)).toBeFalsy()
+// })

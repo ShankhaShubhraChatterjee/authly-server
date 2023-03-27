@@ -7,7 +7,7 @@ const server = () => {
         )
     } else {
         console.log(
-            `Server Running On ${process.env.APP_HOST}:${process.env.APP_PORT}`
+            `Server Running On ${process.env.HOST}:${process.env.PORT}`
         )
     }
 

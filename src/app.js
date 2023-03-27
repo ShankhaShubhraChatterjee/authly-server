@@ -54,5 +54,5 @@ app.use(router)
 app.use('*', (_, res) => {
     res.render('pages/notfound.pug')
 })
-app.listen(process.env.APP_PORT, server)
+app.listen(process.env.PORT, server)
 // CPassword0123#

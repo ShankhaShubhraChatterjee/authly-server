@@ -1,10 +1,10 @@
 .error-page-container {
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    display: flex;
+    flex-direction: column;
     font-family: 'Source Code Pro', monospace;
+    height: 100vh;
+    justify-content: center;
 }
 
 .error-header {
@@ -15,10 +15,10 @@
 
 .error-page-link {
     background-color: lightblue;
-    text-decoration: none;
-    font-size: 1.3em;
     border-radius: 10px;
     color: white;
-    font-family: 'Verdana', monospace;
+    font-family: Verdana, monospace;
+    font-size: 1.3em;
     padding: 10px;
+    text-decoration: none;
 }

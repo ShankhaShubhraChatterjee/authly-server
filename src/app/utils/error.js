@@ -25,7 +25,7 @@ let clientErrors = {
         newPassword: '',
         confirmPassword: '',
         passwordsMatches: '',
-        emailExists: ''
+        emailExists: '',
     },
     signUpEmailInUse: '',
     signUpUserExists: '',

@@ -50,7 +50,8 @@ const handleSignin = async (req, res) => {
                         req.session.passwordChanged = false
                         res.end()
                     } else {
-                        clientErrors.signinPasswordOk = 'Password Is Not Correct'
+                        clientErrors.signinPasswordOk =
+                            'Password Is Not Correct'
                         res.redirect('/signin')
                         res.end()
                     }

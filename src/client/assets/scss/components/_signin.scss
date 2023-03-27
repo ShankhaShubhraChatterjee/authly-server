@@ -1,25 +1,25 @@
 .form-container {
-    margin: 50px 0;
     align-items: center;
+    color: var(--default-fg-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 50px 0;
     width: 100%;
-    color: var(--default-fg-color);
 }
 
 .eye {
     background: none;
     border-radius: 50%;
-    position: absolute;
-    cursor: pointer;
-    position: absolute;
-    top: 7px;
-    right: 5px;
-    z-index: 1;
-    font-size: 1.1em;
     color: black;
+    cursor: pointer;
+    font-size: 1.1em;
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    z-index: 1;
 }
+
 .label {
     color: var(--default-fg-color);
 }

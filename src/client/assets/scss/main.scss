@@ -12,8 +12,9 @@
 
 :root {
     --default-fg-color: white;
-    --default-bg-color: rgba(0, 0, 0, 0.9);
+    --default-bg-color: rgb(0 0 0 / 90%);
 }
+
 html {
     background-color: var(--default-bg-color);
     color: var(--default-fg-color);
@@ -23,24 +24,24 @@ html {
 
 body {
     align-items: center;
+    background-attachment: fixed;
+    background-image: url('../img/application/background-1.svg'),
+        url('../img/application/background-2.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
     justify-content: space-between;
-    background-image: url('/../img/application/background-1.svg'),
-        url('/../img/application/background-2.svg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
+    min-height: 100vh;
 }
 
 .container {
     align-items: center;
     display: flex;
-    height: inherit;
-    min-height: inherit;
     flex-direction: column;
+    height: inherit;
     justify-content: center;
+    min-height: inherit;
     width: 95%;
 }

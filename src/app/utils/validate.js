@@ -32,7 +32,8 @@ async function matchCurrentPassword(password, username) {
         })
 }
 
-const matchConfirmPassword = (password1, password2) => password1 === password2 ? true: false;
+const matchConfirmPassword = (password1, password2) =>
+    password1 === password2 ? true : false
 
 function validateInputsWithRegex(regex) {
     return regex
@@ -43,5 +44,5 @@ module.exports = {
     inputFieldEmpty,
     matchCurrentPassword,
     matchConfirmPassword,
-    validateInputsWithRegex
+    validateInputsWithRegex,
 }

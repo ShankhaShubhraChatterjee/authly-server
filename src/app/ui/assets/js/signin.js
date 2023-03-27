@@ -1,0 +1,2 @@
+!function(){const e=document.getElementById("username"),t=document.getElementById("login-eye"),n=document.getElementsByClassName("password-field")[0];document.getElementById("login").addEventListener("click",(()=>{localStorage.setItem("signin_username",e.value)})),window.addEventListener("load",(()=>{e.value=localStorage.getItem("signin_username")})),t.addEventListener("click",(()=>{"password"===n.type?(t.className="eye-icon fas fa-eye-slash",n.type="text"):(t.className="eye-icon fas fa-eye",n.type="password")}))}();
+//# sourceMappingURL=signin.js.map

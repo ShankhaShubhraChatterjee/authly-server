@@ -7,9 +7,9 @@
     column-gap: 10px;
     display: grid;
     grid-template-columns: 4fr 2fr;
+    height: 100%;
     row-gap: 10px;
     text-align: center;
-    height: 100%;
 }
 
 .index-header,
@@ -19,13 +19,15 @@
     flex-direction: column;
     justify-content: center;
 }
+
 .index-header {
     color: var(--default-fg-color);
 }
+
 .index-content > img {
-    max-width: 300px;
     border-radius: 50%;
     box-shadow: 0 0 10px royalblue;
+    max-width: 300px;
 }
 
 .index-content {
@@ -37,21 +39,21 @@
     border: none;
     border-radius: 5px;
     outline: none;
-    border: none;
 
     a {
-        background-color: darkorange;
         backdrop-filter: blur(2px);
+        background-color: darkorange;
         border-radius: 50px;
         box-shadow: 0 0 5px floralwhite;
         color: white;
         display: inline-block;
-        font-family: 'Verdana', sans-serif;
+        font-family: Verdana, sans-serif;
         font-size: 1.5em;
         height: 100%;
         padding: 10px;
         transition: box-shadow 200ms ease-in-out;
         width: 100%;
+
         &:hover {
             box-shadow: 0 0 10px floralwhite;
             transition: box-shadow 200ms ease-in-out;

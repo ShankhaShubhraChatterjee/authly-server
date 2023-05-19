@@ -1,22 +1,22 @@
 const bcrypt = require('bcrypt')
 
 class Hash {
-    constructor(password, salt, hash = null){
-        this.password = password
+    constructor(detail, salt, hash = null){
+        this.detail = detail
         this.salt = salt
-        this.hash = hash;
+        this.hash = hash
     }
 
-    async hashPassword() {
+    async hashInfo() {
         return await bcrypt
-            .hash(this.password, this.salt)
+            .hash(this.detail, this.salt)
             .then((data) => data)
             .catch((err) => console.error(err))
     }
 
-    async dehashPassword() {
+    async dehashInfo() {
         return await bcrypt
-            .compare(this.password, this.hash)
+            .compare(this.detail, this.hash)
             .then((data) => data)
             .catch((err) => console.error(err))
     }

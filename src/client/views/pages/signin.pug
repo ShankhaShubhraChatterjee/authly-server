@@ -8,9 +8,6 @@ block navbar
 block content
     form.form-container(action='', method='POST')
         .field 
-            |
-            |
-            |
             h1.is-size-1.has-text-centered Sign In
             p.span-error.has-text-centered.has-text-danger= userDoesntExist
             p.span-error.has-text-danger.has-text-right= signinPasswordOk
@@ -46,14 +43,9 @@ block content
                 span
                     p.has-text-danger(style='margin-top: 16px')
                         | First Time Here ?
-                        a.mx-1.has-text-warning(href='/signup')
-                            | Register
+                        a.mx-1.has-text-warning(href='/signup') Register
                     p(style='color: darkorange')
                         | Forgot Password ?
-                        a(href='/forgot-password', style='color: darkorange') 
-                            |
-                            |
-                            |
-                            | Reset
+                        a(href='/forgot-password', style='color: darkorange') Reset
 block script
     script(src='./js/signin.js')

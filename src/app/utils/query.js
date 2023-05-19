@@ -1,6 +1,5 @@
 var SQL = {
-    createNewUser:
-        'INSERT INTO users(fname, uname, email, passcode) VALUES($1, $2, $3, $4)',
+    createNewUser: 'INSERT INTO users(fname, uname, email, passcode) VALUES($1, $2, $3, $4)',
 
     getName: 'SELECT fname FROM users WHERE uname=$1',
 
@@ -12,8 +11,7 @@ var SQL = {
 
     getAllFromUsername: 'SELECT * FROM users WHERE uname=$1',
 
-    getProfileImageData:
-        'SELECT profile_image, profile_image_id FROM users WHERE uname=$1',
+    getProfileImageData: 'SELECT profile_image, profile_image_id FROM users WHERE uname=$1',
 
     updateFullname: 'UPDATE users SET fname=$1 WHERE uname=$2',
 
@@ -23,8 +21,7 @@ var SQL = {
 
     updateUserPassword: 'UPDATE users SET passcode=$1 WHERE email=$2',
 
-    modifyProfileImage:
-        'UPDATE users SET profile_image=$1, profile_image_id=$2 WHERE uname=$3',
+    modifyProfileImage: 'UPDATE users SET profile_image=$1, profile_image_id=$2 WHERE uname=$3',
 
     deleteByUsername: 'DELETE FROM users WHERE uname=$1',
 }

@@ -13,7 +13,7 @@ const sessionOptions = {
     secret: process.env.SESSION_SECRET,
     cookie: { maxAge: 1000 * 60 * 60, secure: false },
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: new pgStore({
         pool: client,
         createTableIfMissing: true,

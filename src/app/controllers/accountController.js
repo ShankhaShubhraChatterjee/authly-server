@@ -170,7 +170,7 @@ const handlePasswordUpdates = async (req, res) => {
 // Handles Profile Image Upload
 const handleProfileImage = async (req, res) => {
     let image = req.files
-    let user = req.session.user.uname
+    let user = await req.session.user.uname
     let profileImage = await fetchProfileImageData(user)
     if (req.files === null) {
         clientErrors.accountErrors.accountImageUploadError =

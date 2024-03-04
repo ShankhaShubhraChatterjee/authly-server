@@ -1,6 +1,6 @@
-const uploadConfig = {
+const UploadConfig = {
     limits: { fileSize: 10000000 },
     abortOnLimit: true,
 }
 
-module.exports = { uploadConfig }
+module.exports = { UploadConfig }

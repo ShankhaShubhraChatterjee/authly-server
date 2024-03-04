@@ -2,10 +2,12 @@ node_modules
 .env
 yarn.lock
 .vscode
+.parcel-cache
 build
 tmp
 coverage
 src/client/img/uploads/**
 /coverage/**
+*-lock
 *.key
 *.cert

@@ -2,7 +2,7 @@
 require('dotenv').config()
 
 const session = require('express-session')
-const { client } = require('./db')
+const { client } = require('../database/db')
 const { v5: uuidv5 } = require('uuid')
 const pgStore = require('connect-pg-simple')(session)
 

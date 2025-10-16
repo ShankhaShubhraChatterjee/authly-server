@@ -1,6 +1,6 @@
-const { User } = require('./../../src/app/services/userService')
-const { Hash } = require('./../../src/app/services/hashService')
-const { regex } = require('./../../src/app/utils/regex')
+const { User } = require('../../src/services/userService')
+const { Hash } = require('../../src/services/hashService')
+const { regex } = require('../../src/services/regex/regex')
 
 
 const dataSet0 = ["Foster Z", "Foster0123", "test@test.com", "Password0123#"]

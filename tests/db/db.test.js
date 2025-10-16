@@ -1,1 +1,0 @@
-const dbCon = require('./../../src/app/configs/')

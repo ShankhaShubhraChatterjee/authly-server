@@ -1,4 +1,4 @@
-const { Hash } = require('./../../src/app/services/hashService')
+const { Hash } = require('../../src/services/hashService')
 
 const dataSet = {
 	data: "Password0123#",

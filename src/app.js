@@ -1,5 +1,4 @@
 // src/app.js
-// Common Core Modules
 
 // External Modules/Dependencies
 require('dotenv').config()
@@ -9,9 +8,9 @@ const session = require('express-session')
 const fileUpload = require('express-fileupload')
 
 // Utilities
-const { UploadConfig } = require('./app/configs/upload_config')
-const { Server } = require('./app/configs/server_config')
-const { sessionOptions } = require('./app/utils/session')
+const { UploadConfig } = require('./configs/upload.config')
+const { Server } = require('./configs/server.config')
+const { sessionOptions } = require('./services/session/session')
 
 // Module Implementation
 const app = express()
@@ -19,7 +18,7 @@ const router = express.Router()
 
 // Router Imports
 
-const home_router = require('./app/routes/home_routes.js')
+const home_router = require('./routes/home_routes.js')
 
 
 // Global Config

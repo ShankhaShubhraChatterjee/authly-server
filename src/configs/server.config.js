@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const DB = require('./../utils/db')
+const DB = require('../services/database/db')
 
 const Server = () => {
     process.env.NODE_ENV === 'production' ?
